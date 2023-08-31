@@ -1,26 +1,30 @@
+import { headers } from 'next/headers'
+import { useEffect } from 'react';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
-async function getdata() {
-    // console.log(w)
-    const res = await fetch(`localhost:8000/user_status`)
-    if (!res.ok) {
-        // This will activate the closest `error.js` Error Boundary
-        throw new Error('Failed to fetch data')
-    }
-    return res.json()
+function get_header() {
+    const headersL = headers();
+    const JheadersList = {};
+    headersL.forEach((v, k) => (JheadersList[k] = v));//迭代器->JSON
+    return JheadersList
 }
-export default function login() {
-    console.log(getAuthToken())
-    
-    return (
-        <form>
+function Login({ username, passwd }) {
+    useEffect(() => {
+        const res = fetch("",{
+            method: "POST",
+            
+        })
+    }, [username, passwd]);
+}
+export default async function login() {
+    // console.log(JSON.stringify(get_header()))
 
-        </form>
-    )
-}
-export const getAuthToken = () => {
-    if (cookies.get('token') === undefined) {
-        return '1';
+    const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
+    if (res.status == 200) {
+        return (<p>登录过了DA☆ZE</p>)
+    } else if (res.status == 401) {
+        return (<p>登录</p>)
+    } else {
+        return (<p>???????{res.status}</p>)
     }
-    return cookies.get('token');
-};
+}
