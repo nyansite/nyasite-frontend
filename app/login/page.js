@@ -1,6 +1,7 @@
 import { headers } from 'next/headers'
-import { useEffect } from 'react';
 import Cookies from 'universal-cookie';
+
+import Login_c from "./login"
 const cookies = new Cookies();
 function get_header() {
     const headersL = headers();
@@ -8,14 +9,7 @@ function get_header() {
     headersL.forEach((v, k) => (JheadersList[k] = v));//迭代器->JSON
     return JheadersList
 }
-function Login({ username, passwd }) {
-    useEffect(() => {
-        const res = fetch("",{
-            method: "POST",
-            
-        })
-    }, [username, passwd]);
-}
+
 export default async function login() {
     // console.log(JSON.stringify(get_header()))
 
@@ -23,7 +17,10 @@ export default async function login() {
     if (res.status == 200) {
         return (<p>登录过了DA☆ZE</p>)
     } else if (res.status == 401) {
-        return (<p>登录</p>)
+        return (<>
+            <p>登录</p>
+            <Login_c username={1} passwd={1}></Login_c>
+        </>)
     } else {
         return (<p>???????{res.status}</p>)
     }
