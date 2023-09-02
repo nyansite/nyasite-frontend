@@ -1,7 +1,7 @@
 import { headers } from 'next/headers'
 import Cookies from 'universal-cookie';
 
-import Login_c from "./login"
+import Reg_c from "./reg"
 const cookies = new Cookies();
 function get_header() {
     const headersL = headers();
@@ -15,7 +15,7 @@ export default async function login() {
     if (res.status == 200) {
         return (<p>登录过了DA☆ZE</p>)
     } else if (res.status == 401) {
-        return (<Login_c/>)
+        return (<Reg_c/>)
     } else {
         return (<p>???????{res.status}</p>)
     }
