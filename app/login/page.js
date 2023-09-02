@@ -17,10 +17,7 @@ export default async function login() {
     if (res.status == 200) {
         return (<p>登录过了DA☆ZE</p>)
     } else if (res.status == 401) {
-        return (<>
-            <p>登录</p>
-            <Login_c username={1} passwd={1}></Login_c>
-        </>)
+        return (<Login_c/>)
     } else {
         return (<p>???????{res.status}</p>)
     }
