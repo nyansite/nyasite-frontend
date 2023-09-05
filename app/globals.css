@@ -25,3 +25,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer components {
+  .navbar_b {
+    @apply flex items-center justify-center duration-300 bg-[#bfbfbf] rounded-3xl w-20 hover:w-28;
+  }
+}

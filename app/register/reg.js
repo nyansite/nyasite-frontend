@@ -1,7 +1,7 @@
 "use client";
 
 export default function Reg_c() {
-    const handleSubmit = event => {//避免表单提交后刷新
+    const handleSubmit = event => {//避免表单提交后刷新页面
         event.preventDefault();
     };
     async function handleClick() {
