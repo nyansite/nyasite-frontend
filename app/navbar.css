@@ -1,0 +1,9 @@
+.navbar{
+    display: flex;
+    position: fixed;
+}
+.search{
+    position: absolute;
+    top: 0.2rem;
+    left: 25vw;
+}

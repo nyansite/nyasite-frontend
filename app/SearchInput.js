@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react'
-
+import "./search-input.css"
 
 
 export default function SearchInput({suggestions}){
@@ -9,14 +9,17 @@ export default function SearchInput({suggestions}){
     const [inputString,setInputString] = useState('')
     const [suggestionsShow,setSuggestionsShow] = useState([])
     let suggestionsShowList = []
+    let tagsChanged = []
     //标签部分
     const [tags,setTags] = useState([])
     function addTagbySug(event){
-        const index = event.target.dataset.index
-        alert(index)
+        let index = event.target.dataset.index
+        if (!(tags.includes(index))){
+            setTags([...tags,index])
+        }
     }
     function handleBackSpace(e){
-        if (e.keyCode === 8&& inputString == '') {
+        if (e.keyCode === 8 && inputString == '') {
             console.log("delete the lastest tag")
         }
     }
@@ -39,16 +42,26 @@ export default function SearchInput({suggestions}){
         setSuggestionsShow(suggestionsShowList)
         setInputString(e.target.value)
     }
+    function search(){
+        console.log(tags)
+    }
+    let tagsShow = tags.map(tag => <button>{tag}</button>)
     return(
-        <div>
-            <div className='taginput'>
-                <div>
-                    <div></div>
-                    <input value={inputString} onChange={e => handleUpdate(e)} onKeyDown={e =>handleBackSpace(e)}/>
-                </div>
-                <ul>{suggestionsShow}</ul>
+        <div className='all-bar bg-slate-200'>
+            <div className='tags'>{tagsShow}</div>
+            <div>
+                <input value={inputString} onChange={e => handleUpdate(e)} onKeyDown={e =>handleBackSpace(e)}/>
+                <ul className='suggestion'>{suggestionsShow}</ul>
             </div>
-            <button>搜索</button>
+            <div className='search-button-bar'>
+            <button className='search-button' onClick={search}>
+                <div className='search-button-content'>
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+                    </svg>
+                </div>
+            </button>
+            </div>   
         </div>
     )
 }

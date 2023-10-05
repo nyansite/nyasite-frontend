@@ -2,6 +2,7 @@ import { headers } from 'next/headers'
 import Cookies from 'universal-cookie';
 
 import SearchInput from "./SearchInput.js";
+import "./navbar.css"
 const cookies = new Cookies();
 function get_header() {
     const headersL = headers();
@@ -13,8 +14,8 @@ export default async function Navbar(){
     const res = await fetch("http://localhost:8000/api/search/taglist", { headers: get_header() })
     const list = await res.json()
     return(
-        <div>
-            <SearchInput suggestions={list.results}/>
+        <div className='navbar'>
+            <div className='search'><SearchInput suggestions={list.results}/></div>
         </div>
     )
 }
