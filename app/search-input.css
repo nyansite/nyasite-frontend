@@ -18,6 +18,10 @@
 .all-bar input{
     height: 3rem;
     border-radius: 10%;
+    background-color: transparent;
+}
+.all-bar input:focus{
+    outline: none;
 }
 .tags button{
     border-radius: 10%;

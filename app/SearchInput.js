@@ -17,10 +17,18 @@ export default function SearchInput({suggestions}){
         if (!(tags.includes(index))){
             setTags([...tags,index])
         }
+        setInputString('')
+        setSuggestionsShow([])
+    }
+    function DeleteTag(event){
+        let index = event.target.dataset.index
+        setTags(tags.filter(function(item){
+            return item != index
+        }))
     }
     function handleBackSpace(e){
         if (e.keyCode === 8 && inputString == '') {
-            console.log("delete the lastest tag")
+            setTags(tags.slice(0,-1))
         }
     }
     function handleUpdate(e){
@@ -28,8 +36,6 @@ export default function SearchInput({suggestions}){
         let count = 0
         let show = ''
         let inputValueList = e.target.value.split(' ')
-        console.log(e.target.value)
-        console.log(inputString)
         while(count <= 5 && i <= suggestionsUse.length-1){
             // 空格分隔的最后部分默认为新输入部分
             if(suggestionsUse[i].includes(inputValueList.slice(-1))&&inputValueList.slice(-1) != ''){
@@ -45,12 +51,12 @@ export default function SearchInput({suggestions}){
     function search(){
         console.log(tags)
     }
-    let tagsShow = tags.map(tag => <button>{tag}</button>)
+    let tagsShow = tags.map(tag => <button onClick={DeleteTag} data-index={tag}>{tag}</button>)
     return(
         <div className='all-bar bg-slate-200'>
             <div className='tags'>{tagsShow}</div>
             <div>
-                <input value={inputString} onChange={e => handleUpdate(e)} onKeyDown={e =>handleBackSpace(e)}/>
+                <input value={inputString} onChange={e => handleUpdate(e)} onKeyUpCapture={e =>handleBackSpace(e)}/>
                 <ul className='suggestion'>{suggestionsShow}</ul>
             </div>
             <div className='search-button-bar'>
