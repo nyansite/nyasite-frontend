@@ -10,8 +10,8 @@ function get_header() {
     return JheadersList
 }
 
-export default function login() {
-    const res = fetch("http://localhost:8000/api/user_status", { headers: get_header() })
+export default async function login() {
+    const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
     if (res.status == 200) {
         return (<p>登录过了DA☆ZE</p>)
     } else if (res.status == 401) {
