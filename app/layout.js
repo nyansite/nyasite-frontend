@@ -11,7 +11,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-hans">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="flex flex-nowrap h-12 fixed top-0 w-full justify-around bg-[#D3D3D3] ">
+          <a href='/' className="navbar_b ml-4 hover:px-8 hover:ml-0">首页</a>{/* 外边距变成了内边距,图标不会移动 */}
+          <a href='/1' className="navbar_b">分类</a>
+          <input href='/1' className="navbar_b w-80 hover:w-96"></input>
+          <a href='/login' className="navbar_b">登录</a>
+          <a href='/register' className="navbar_b">注册</a>
+        </div>
+        {children}</body>
     </html>
   )
 }
