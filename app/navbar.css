@@ -20,7 +20,7 @@
 
 .navbar-right{
     position: absolute;
-    left: 70vw;
+    left: 90vw;
     display: flex;
     flex-direction: row-reverse;
     align-self: center;
