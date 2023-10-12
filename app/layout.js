@@ -12,12 +12,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="zh-hans">
       <body className={inter.className}>
-        <div className="flex flex-nowrap h-12 fixed top-0 w-full justify-around bg-[#D3D3D3] ">
-          <a href='/' className="navbar_b ml-4 hover:px-8 hover:ml-0">首页</a>{/* 外边距变成了内边距,图标不会移动 */}
-          <a href='/1' className="navbar_b">分类</a>
-          <input href='/1' className="navbar_b w-80 hover:w-96"></input>
-          <a href='/login' className="navbar_b">登录</a>
-          <a href='/register' className="navbar_b">注册</a>
+        <div className="flex fixed w-full bg-white justify-center ">
+          <div className="flex flex-nowrap h-16  top-0 w-3/4 items-center">
+            <a href='/' className="navbar_b  hover:ml-0">首页</a>{/* 外边距变成了内边距,图标不会移动 */}
+            <a href='/1' className="navbar_b">分类</a>
+            <input href='/1' className="navbar_b w-80 hover:w-96" placeholder="毛玉入侵武汉"></input>
+            <a href='/login' className="navbar_b">登录</a>
+            <a href='/register' className="navbar_b hover:mr-0">注册</a>
+          </div>
         </div>
         {children}</body>
     </html>
