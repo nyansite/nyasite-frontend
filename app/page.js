@@ -3,7 +3,7 @@ import "./index.css"
 export default function Home() {
   return (
     <main>
-      <Navbar index={true}/>
+      <Navbar/>
     </main>
   )
 }

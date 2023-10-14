@@ -12,10 +12,12 @@
 }
 .tags{
     display: flex;
-    align-self: center;
+    align-self: flex-start;
     gap: 0.5rem;
 }
 .all-bar input{
+    position: relative;
+    left: 0.5rem;
     height: 3rem;
     border-radius: 10%;
     background-color: transparent;

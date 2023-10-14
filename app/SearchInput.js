@@ -54,10 +54,12 @@ export default function SearchInput({suggestions}){
     let tagsShow = tags.map(tag => <button onClick={DeleteTag} data-index={tag}>{tag}</button>)
     return(
         <div className='all-bar bg-slate-200'>
-            <div className='tags'>{tagsShow}</div>
-            <div>
-                <input value={inputString} onChange={e => handleUpdate(e)} onKeyUpCapture={e =>handleBackSpace(e)}/>
-                <ul className='suggestion'>{suggestionsShow}</ul>
+            <div className='tag-input'>
+                <div className='tags'>{tagsShow}</div>
+                <div>
+                    <input value={inputString} onChange={e => handleUpdate(e)} onKeyUpCapture={e =>handleBackSpace(e)}/>
+                    <ul className='suggestion'>{suggestionsShow}</ul>
+                </div>
             </div>
             <div className='search-button-bar'>
             <button className='search-button' onClick={search}>
