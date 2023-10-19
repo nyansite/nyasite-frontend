@@ -28,6 +28,7 @@ export default async function Navbar(){
             <div className='center-after'>
                 <a href='/login' className="navbar_b">登录</a>
                 <a href='/register' className="navbar_b hover:mr-0">注册</a>
+                <a><img/></a>
             </div>
         </div>
     )

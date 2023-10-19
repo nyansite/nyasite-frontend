@@ -26,13 +26,13 @@ export default function Reg_c() {
     }
 
     return (
-        <>
+        <main className="lr">
             <form id="freg" onSubmit={handleSubmit}>
                 <label>用户名:<input name="username" id="username" placeholder="用户名" autoComplete="username" required autoFocus /></label>
                 <label>邮箱:<input name="email" id="email" placeholder="邮箱" autoComplete="email" required/></label>
                 <label>密码:<input name="passwd" id="passwd" placeholder="密码" type="password" autoComplete="current-password" minLength="6" required /></label>
                 <button onClick={handleClick}>登录</button>
             </form>
-        </>
+        </main>
     )
 }

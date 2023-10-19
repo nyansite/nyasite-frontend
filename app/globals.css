@@ -36,3 +36,11 @@ main{
   width: 100vw;
   height: 100vh;
 }
+
+main.lr{
+  width: 100vw;
+  height: 100vh;
+  background: url("/loginBackground.webp");
+  background-size: cover;
+}
+
