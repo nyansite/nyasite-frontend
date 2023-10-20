@@ -1,4 +1,5 @@
 "use client";
+import "../loginRegister.css"
 
 export default function Reg_c() {
     const handleSubmit = event => {//避免表单提交后刷新页面

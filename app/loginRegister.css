@@ -1,0 +1,27 @@
+main.lr{
+    width: 100vw;
+    height: 100vh;
+    background: url("/loginBackground.webp");
+    background-size: cover;
+    font-size: 24px;
+}
+
+#flogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    right: 10vw;
+    gap: 0.25rem;
+    top: calc(50vh - 3.625rem);
+    height: 7.25rem;
+    width: 25rem;
+}
+.input-bar{
+    display: flex;
+    width: 25rem;
+    justify-content: end;
+}
+.input-bar input{
+    width: 20rem;
+}

@@ -1,5 +1,5 @@
 "use client";
-import {Dimensions} from "react-native-web"
+import "../loginRegister.css"
 
 export default function Login_c() {
     const handleSubmit = event => {//避免表单提交后刷新页面
@@ -33,9 +33,10 @@ export default function Login_c() {
     return (
         <main className="lr">
             <form id="flogin" onSubmit={handleSubmit}>
-                <label>用户名:<input name="username" id="username" placeholder="用户名或邮箱" autoComplete="username" required autoFocus /></label>
-                <label>密码:<input name="passwd" id="passwd" placeholder="密码" type="password" autoComplete="current-password" minLength="6" required /></label>
-                <button onClick={handleClick}>登录</button>
+                <div class="title">登录</div>
+                <label className="input-bar"><div>用户名:</div><input name="username" id="username" placeholder="用户名或邮箱" autoComplete="username" required autoFocus /></label>
+                <label className="input-bar"><div>密码:</div><input name="passwd" id="passwd" placeholder="密码" type="password" autoComplete="current-password" minLength="6" required /></label>
+                <div><button onClick={handleClick}>登录</button></div>
             </form>
         </main>     
     )
