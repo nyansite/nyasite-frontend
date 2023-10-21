@@ -1,5 +1,5 @@
 "use client";
-import "../loginRegister.css"
+import "../login.css"
 
 export default function Login_c() {
     const handleSubmit = event => {//避免表单提交后刷新页面
@@ -34,9 +34,17 @@ export default function Login_c() {
         <main className="lr">
             <form id="flogin" onSubmit={handleSubmit}>
                 <div class="title">登录</div>
-                <label className="input-bar"><div>用户名:</div><input name="username" id="username" placeholder="用户名或邮箱" autoComplete="username" required autoFocus /></label>
-                <label className="input-bar"><div>密码:</div><input name="passwd" id="passwd" placeholder="密码" type="password" autoComplete="current-password" minLength="6" required /></label>
-                <div><button onClick={handleClick}>登录</button></div>
+                <label className="input-bar"><input name="username" id="username" placeholder="用户名或邮箱" autoComplete="username" required autoFocus /></label>
+                <label className="input-bar"><input name="passwd" id="passwd" placeholder="密码" type="password" autoComplete="current-password" minLength="6" required /></label>
+                <div className="bottom-bar">
+                    <label><a href="">重置密码</a><a href="/register">注册账户</a></label>
+                    <div><button onClick={handleClick}>
+                        <svg fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </button></div>
+                </div>
+                
             </form>
         </main>     
     )

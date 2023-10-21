@@ -1,0 +1,70 @@
+main.lr{
+    width: 100vw;
+    height: 100vh;
+    background: url("/loginBackground.webp");
+    background-size: cover;
+    font-size: 28px;
+}
+
+#flogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    right: 10vw;
+    gap: 1.5rem;
+    top: calc(50vh - 10rem);
+    height: 20rem;
+    width: 32rem;
+    background-color: rgba(255, 255, 255, 0.85);;
+    border-radius: 1rem;
+}
+.title{
+    position: relative;
+    top: 0.5rem;
+    font-size: 2rem;
+}
+.input-bar{
+    display: flex;
+    width: 28rem;
+    justify-content: center;
+}
+.input-bar div{
+    color: gray;
+}
+.input-bar input{
+    width: 25rem;
+    background-color: whitesmoke;
+    opacity: 0.7;
+    border-radius: 5%;
+}
+.input-bar input::placeholder{
+    font-size: 1.5rem;
+}
+
+.bottom-bar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bottom-bar a{
+    font-size: 1.2rem;
+}
+
+.bottom-bar a:hover{
+    text-decoration: underline;
+}
+
+.bottom-bar label {
+    display: flex;
+    gap: 16rem;
+}
+
+.bottom-bar button{
+    width: 4rem;
+    height: 4rem;
+    background-color: ghostwhite;
+    border-radius: 50%;
+}
