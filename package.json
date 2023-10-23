@@ -15,7 +15,9 @@
     "next": "^13.5.4",
     "postcss": "8.4.28",
     "react": "18.2.0",
+    "react-avatar-editor": "^13.0.0",
     "react-dom": "18.2.0",
+    "react-easy-crop": "^5.0.2",
     "react-native-web": "^0.19.9",
     "universal-cookie": "^6.1.0"
   },
