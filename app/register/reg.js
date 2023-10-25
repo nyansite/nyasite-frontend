@@ -1,57 +1,57 @@
 "use client";
 
 import React from 'react'
-import { useRef, useState } from 'react'
-import AvatarEditor from 'react-avatar-editor'
 import "./reg.css"
+import { useRef, useState } from 'react'
+import Cropper, { ReactCropperElement } from "react-cropper";
+import "cropperjs/dist/cropper.css";
+
 
 function AvatarInput() {
-  const editor = useRef(null)
   const [originalImg, setOriginalImg] = useState('')
   const [AvatarImgBase64, setAvatarImgBase64] = useState('')
   function getFilds() {
-    const filedom = document.getElementById('file');
-    filedom.click()
+      const filedom = document.getElementById('file');
+      filedom.click()
   }
   function imgGet(e) {
-    const fileData = e.target.files[0]
-    let reader = new FileReader();
-    reader.onload = function (e) {
-      let base64 = e.target.result;
-      setOriginalImg(base64)
-    }
-    reader.readAsDataURL(fileData);
+      const fileData = e.target.files[0]
+      let reader = new FileReader();
+      reader.onload = function (e) {
+          let base64 = e.target.result;
+          setOriginalImg(base64)
+      }
+      reader.readAsDataURL(fileData);
   }
+  const cropperRef = React.createRef();
+  const onCrop = () => {
+      const cropper = cropperRef.current?.cropper;
+      setAvatarImgBase64(cropper.getCroppedCanvas().toDataURL("image/png",0.3));
+  };
   return (
-    <div className='avatar-edit'>
-      <div className='select-edit'>
-        <button onClick={getFilds}>
-          上传文件
-          <input id='file' accept='image' type='file' onChange={imgGet} />
-        </button>
-        <div className='avatarEditor'>
-          <AvatarEditor
-            ref={editor}
-            image={originalImg}
-            border={10}
-            style={{position:"",width:"100%",height:"100%"}}
-          />
-        </div>
+      <div className='avatar-edit'>
+          <div className='select-edit'>
+              <button onClick={getFilds}>
+                  上传文件
+                  <input id='file' accept='image' type='file' onChange={imgGet} />
+              </button>
+              <div className='avatarEditor'>
+                  <Cropper
+                      src={originalImg}
+                      style={{ height: "100%", width: "100%"}}
+                      // Cropper.js options
+                      crop={onCrop}
+                      ref={cropperRef}
+                      marginHeight={200}
+                      marginWidth={200}
+                      viewMode={2}
+                      cropBoxResizable={false}
+                      aspectRatio={1}
+                  />
+              </div>
+          </div>
+          <img className="cropper-show" src={AvatarImgBase64} />
       </div>
-      <button onClick={() => {
-        if (editor) {
-          const canvas = editor.current.getImage()
-          let resizedCanvas = document.createElement("canvas");
-          let resizedContext = resizedCanvas.getContext("2d");
-          resizedCanvas.height = 200;
-          resizedCanvas.width = 200;
-          resizedContext.drawImage(canvas, 0, 0, 200, 200);
-          resizedContext.save()
-          setAvatarImgBase64(resizedCanvas.toDataURL("image/png", 0.3))
-        }
-      }}>Save</button>
-      <img src={AvatarImgBase64} />
-    </div>
   )
 }
 
@@ -91,7 +91,7 @@ export default function Reg_c() {
           <label className='input-bar'><input name="passwd" id="passwd" placeholder="密码" type="password" autoComplete="current-password" minLength="6" required /></label>
           <button onClick={handleClick}>登录</button>
         </form>
-        <AvatarInput />
+        <AvatarInput/>
       </div>
     </main>
   )

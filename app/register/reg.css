@@ -54,7 +54,6 @@ main.lr{
     gap: 1rem;
     height: 20rem;
     width: 33rem;
-    border-radius: 1rem;
 }
 .select-edit{
     display: flex;
@@ -66,7 +65,7 @@ main.lr{
 #file{
     display: none;
 }
-.avatar-edit img{
+.cropper-show{
     height: 10rem;
     width: 10rem;
     border-radius: 50%;
