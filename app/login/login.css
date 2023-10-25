@@ -29,9 +29,6 @@ main.lr{
     width: 28rem;
     justify-content: center;
 }
-.input-bar div{
-    color: gray;
-}
 .input-bar input{
     width: 25rem;
     background-color: whitesmoke;

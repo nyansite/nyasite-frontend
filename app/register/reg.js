@@ -3,40 +3,54 @@
 import React from 'react'
 import { useRef, useState } from 'react'
 import AvatarEditor from 'react-avatar-editor'
+import "./reg.css"
 
 function AvatarInput() {
   const editor = useRef(null)
-  const [originalImgBase64,setOriginalImgBase64] = useState('')
-  const [AvatarImgBase64,setAvatarImgBase64] = useState('')
-  function imgGet(e){
+  const [originalImg, setOriginalImg] = useState('')
+  const [AvatarImgBase64, setAvatarImgBase64] = useState('')
+  function getFilds() {
+    const filedom = document.getElementById('file');
+    filedom.click()
+  }
+  function imgGet(e) {
     const fileData = e.target.files[0]
     let reader = new FileReader();
     reader.onload = function (e) {
       let base64 = e.target.result;
-      setOriginalImgBase64(base64)
+      setOriginalImg(base64)
     }
     reader.readAsDataURL(fileData);
   }
   return (
-    <div>
-      <input type='file' onChange={imgGet}/>
-      <AvatarEditor
-        ref={editor}
-        image={originalImgBase64}
-        width={250}
-        height={250}
-        border={50}
-        scale={1.2}
-      />
+    <div className='avatar-edit'>
+      <div className='select-edit'>
+        <button onClick={getFilds}>
+          上传文件
+          <input id='file' accept='image' type='file' onChange={imgGet} />
+        </button>
+        <div className='avatarEditor'>
+          <AvatarEditor
+            ref={editor}
+            image={originalImg}
+            border={10}
+            style={{position:"",width:"100%",height:"100%"}}
+          />
+        </div>
+      </div>
       <button onClick={() => {
         if (editor) {
-          // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
-          // drawn on another canvas, or added to the DOM.
-          setAvatarImgBase64(editor.current.getImage().toDataURL('image/png', 1))
-          // If you want the image resized to the canvas size (also a HTMLCanvasElement)
+          const canvas = editor.current.getImage()
+          let resizedCanvas = document.createElement("canvas");
+          let resizedContext = resizedCanvas.getContext("2d");
+          resizedCanvas.height = 200;
+          resizedCanvas.width = 200;
+          resizedContext.drawImage(canvas, 0, 0, 200, 200);
+          resizedContext.save()
+          setAvatarImgBase64(resizedCanvas.toDataURL("image/png", 0.3))
         }
       }}>Save</button>
-      <img src={AvatarImgBase64}/>
+      <img src={AvatarImgBase64} />
     </div>
   )
 }
@@ -46,9 +60,10 @@ export default function Reg_c() {
     event.preventDefault();
   };
   async function handleClick() {
+    var formData = new FormData(freg)
     let response = await fetch("/api/register", {
       method: "POST",
-      body: new FormData(freg),
+      body: formData,
       credentials: "include",
     });
     switch (response.status) {
@@ -68,13 +83,16 @@ export default function Reg_c() {
 
   return (
     <main className="lr">
-      <form id="freg" onSubmit={handleSubmit}>
-        <label>用户名:<input name="username" id="username" placeholder="用户名" autoComplete="username" required autoFocus /></label>
-        <label>邮箱:<input name="email" id="email" placeholder="邮箱" autoComplete="email" required /></label>
-        <label>密码:<input name="passwd" id="passwd" placeholder="密码" type="password" autoComplete="current-password" minLength="6" required /></label>
+      <div className='reg-pannel'>
+        <form id="freg" onSubmit={handleSubmit}>
+          <div className='title'>注册</div>
+          <label className='input-bar'><input name="username" id="username" placeholder="用户名" autoComplete="username" required autoFocus /></label>
+          <label className='input-bar'><input name="email" id="email" placeholder="邮箱" autoComplete="email" required /></label>
+          <label className='input-bar'><input name="passwd" id="passwd" placeholder="密码" type="password" autoComplete="current-password" minLength="6" required /></label>
+          <button onClick={handleClick}>登录</button>
+        </form>
         <AvatarInput />
-        <button onClick={handleClick}>登录</button>
-      </form>
+      </div>
     </main>
   )
 }

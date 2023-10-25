@@ -1,5 +1,5 @@
 "use client";
-import "../login.css"
+import "./login.css"
 
 export default function Login_c() {
     const handleSubmit = event => {//避免表单提交后刷新页面

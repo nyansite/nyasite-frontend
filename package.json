@@ -13,12 +13,13 @@
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "next": "^13.5.4",
+    "nextjs": "^0.0.3",
     "postcss": "8.4.28",
     "react": "18.2.0",
-    "react-avatar-editor": "^13.0.0",
-    "react-dom": "18.2.0",
+    "react-avatar-editor": "^14.0.0-beta.2",
+    "react-dom": "^18.2.0",
     "react-easy-crop": "^5.0.2",
-    "react-native-web": "^0.19.9",
+    "react-modal": "^3.16.1",
     "universal-cookie": "^6.1.0"
   },
   "devDependencies": {
