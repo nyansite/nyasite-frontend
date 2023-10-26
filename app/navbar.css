@@ -22,6 +22,19 @@
 }
 .center-after{
     position: absolute;
-    left: calc(40vw + 21rem);
+    top: 0rem;
+    right: 0rem;
     display: flex;
+}
+.center-after img{
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-top: 0.25rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    height: 3.5rem;
+    width: 3.5rem;
 }
