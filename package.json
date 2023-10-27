@@ -13,6 +13,7 @@
     "cropperjs": "^1.6.1",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
+    "md-editor-rt": "^4.8.2",
     "next": "^13.5.4",
     "nextjs": "^0.0.3",
     "postcss": "8.4.28",

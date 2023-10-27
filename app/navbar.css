@@ -2,6 +2,7 @@
     display: flex;
     position: fixed;
     align-items: center;
+    height: 4rem;
 }
 .navbar-ico{
     justify-self: flex-start;
@@ -25,6 +26,9 @@
     top: 0rem;
     right: 0rem;
     display: flex;
+}
+.center-after a{
+    margin-top: 0.5rem;
 }
 .center-after img{
     display: flex;

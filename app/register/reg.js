@@ -105,7 +105,7 @@ export default function Reg_c() {
           <label className='input-bar'><input name="username" id="username" placeholder="用户名" autoComplete="username" required autoFocus /></label>
           <label className='input-bar'><input name="email" id="email" placeholder="邮箱" autoComplete="email" required /></label>
           <label className='input-bar'><input name="passwd" id="passwd" placeholder="密码" type="password" autoComplete="current-password" minLength="6" required /></label>
-          <button onClick={handleClick}>登录</button>
+          <div><button onClick={handleClick}>登录</button></div>
         </form>
         <AvatarInput getImg={getImgMain} />
       </div>

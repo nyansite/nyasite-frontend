@@ -70,3 +70,9 @@ main.lr{
     width: 10rem;
     border-radius: 50%;
 }
+.bottom-bar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}

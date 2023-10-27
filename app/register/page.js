@@ -2,7 +2,6 @@ import { headers } from 'next/headers'
 import Cookies from 'universal-cookie';
 
 import Reg_c from "./reg"
-import "../Jump.js"
 import { JumpToIndex } from '../Jump.js';
 const cookies = new Cookies();
 function get_header() {
