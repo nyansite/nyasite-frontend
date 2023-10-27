@@ -2,6 +2,7 @@ import { headers } from 'next/headers'
 import Cookies from 'universal-cookie';
 
 import Login_c from "./login"
+import { JumpToIndex } from '../Jump';
 const cookies = new Cookies();
 function get_header() {
     const headersL = headers();
@@ -13,9 +14,13 @@ function get_header() {
 export default async function login() {
     const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
     if (res.status == 200) {
-        return (<p>登录过了DA☆ZE</p>)
+        return (
+            <main>
+                <JumpToIndex />
+            </main>
+        )
     } else if (res.status == 401) {
-        return (<Login_c/>)
+        return (<Login_c />)
     } else {
         return (<p>???????{res.status}</p>)
     }

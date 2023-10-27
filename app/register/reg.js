@@ -5,6 +5,7 @@ import "./reg.css"
 import { useState } from 'react'
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
+import { useRouter } from 'next/navigation';
 
 
 function AvatarInput({ getImg }) {
@@ -71,6 +72,7 @@ export default function Reg_c() {
   function getImgMain(base64) {
     setAvatar(base64)
   }
+  const router = useRouter()
   async function handleClick() {
     var formData = new FormData(freg)
     formData.append("avatar", Avatar)
@@ -82,6 +84,7 @@ export default function Reg_c() {
     switch (response.status) {
       case 200:
         alert("200注册成功");
+        router.replace("/login");
         break;
       case 601:
         alert("601用户名重复");

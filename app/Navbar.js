@@ -16,7 +16,6 @@ async function AvatarBar() {
     const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
     if (res.status == 200) {
         const list = await res.json()
-        console.log(list.avatar)
         return (
             <div className='center-after'>
                 <img src={list.avatar} alt='avatar'/>

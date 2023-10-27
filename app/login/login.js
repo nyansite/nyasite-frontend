@@ -1,10 +1,11 @@
 "use client";
+import { useRouter } from "next/navigation";
 import "./login.css"
-
 export default function Login_c() {
     const handleSubmit = event => {//避免表单提交后刷新页面
         event.preventDefault();
     };
+    const router = useRouter()
     async function handleClick() {
         let response = await fetch("/api/login", {
             method: "POST",
@@ -14,7 +15,7 @@ export default function Login_c() {
         switch (response.status) {
             case 200:
                 alert("200登录成功");
-                islogin = true;
+                router.replace("/");
                 break;
             case 611:
                 alert("611用户名或邮箱不存在");
