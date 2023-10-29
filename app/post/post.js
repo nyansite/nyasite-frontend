@@ -6,7 +6,7 @@ import "./post.css"
 import "../navbar.css"
 import { useRouter } from "next/navigation";
 
-export default function Post_c({ avatar,PostForum }) {
+export default function Post_c({ avatar, PostForum }) {
     const [postType, setPostType] = useState(0)
     return (
         <main>
@@ -29,24 +29,33 @@ export default function Post_c({ avatar,PostForum }) {
                     <img src={avatar} alt="avatar" />
                 </div>
             </div>
-            <div><PostPannel type={postType} PostForum={PostForum}/></div>
+            <div><PostPannel type={postType} PostForum={PostForum} /></div>
         </main>
     )
 }
 
-function PostPannel({ type,PostForum }) {
+function PostPannel({ type, PostForum }) {
     const [text, setText] = useState('')
     const titleInput = useRef(null)
     const router = useRouter()
-    function handleClickForum(){
+    function replyResluts(code){
+        
+    }
+    async function handleClickForum() {
         var formData = new FormData(forumpost)
         formData.append('title', titleInput.current.value)
         formData.append('text', text)
-        PostForum(formData)
+        const code = await PostForum(formData)
+        switch (code) {
+            case 200:
+                alert("发帖成功");
+                break;
+            default:
+                alert("发帖失败");
+                break;
+        }
     }
-    const handleSubmit = event => {//避免表单提交后刷新页面
-        event.preventDefault();
-    };
+    
     if (type == 0) {
         return (
             <div className="post-pannel">
@@ -55,7 +64,7 @@ function PostPannel({ type,PostForum }) {
                     <input className="border h-10 text-2xl" ref={titleInput} />
                 </div>
                 <MdEditor modelValue={text} onChange={setText} style={{ height: "70vh" }} />
-                <form id="forumpost" onSubmit={handleSubmit}>
+                <form id="forumpost">
                     <div>类型选择</div>
                     <select name="type" defaultValue="1" className="border">
                         <option value={0}>用户反馈</option>

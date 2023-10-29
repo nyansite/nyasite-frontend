@@ -9,26 +9,21 @@ function get_header() {
     const headersL = headers();
     const JheadersList = {};
     headersL.forEach((v, k) => (JheadersList[k] = v));//迭代器->JSON
-    return JheadersList
+    return JheadersList;
 }
 
 export async function handleClickForum(FormData) {
     'use server'
-    var formData = FormData
-    let response = await fetch("http://localhost:8000/uapi/add_mainforum", {
+    var postHeaders = get_header()
+    const response = await fetch("http://localhost:8000/uapi/add_mainforum", {
         method: 'POST',
-        body: formData,
+        body: FormData,
         credentials: "include",
-        headers: get_header()
+        headers:{
+            cookie: postHeaders.cookie
+        },
     })
-    
-    switch (response.status) {
-        case 200:
-            <JumpToIndex/>
-            break;
-        default:
-            break;
-    }
+    return response.status
 }
 
 export default async function Post() {

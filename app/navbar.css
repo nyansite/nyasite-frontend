@@ -1,6 +1,5 @@
 .navbar{
     display: flex;
-    position: fixed;
     align-items: center;
     height: 4rem;
 }

@@ -1,6 +1,5 @@
 .post-pannel{
     position: relative;
-    top: 4.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
