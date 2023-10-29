@@ -37,10 +37,6 @@ export default function Post_c({ avatar, PostForum }) {
 function PostPannel({ type, PostForum }) {
     const [text, setText] = useState('')
     const titleInput = useRef(null)
-    const router = useRouter()
-    function replyResluts(code){
-        
-    }
     async function handleClickForum() {
         var formData = new FormData(forumpost)
         formData.append('title', titleInput.current.value)
