@@ -4,15 +4,14 @@ import { MdEditor } from "md-editor-rt"
 import 'md-editor-rt/lib/style.css';
 import "./post.css"
 import "../navbar.css"
-import { useRouter } from "next/navigation";
 
-export default function Post_c({ avatar, PostForum }) {
+export default function Post_c({ avatar, headers}) {
     const [postType, setPostType] = useState(0)
     return (
         <main>
             <div className="navbar w-full bg-white">
                 <a className='navbar-ico' href="/">
-                    <image src='./logo.svg' alt='logo' />
+                    <img src='./logo.svg' alt='logo' />
                     <div>喵站</div>
                 </a>
                 <div className="center">
@@ -26,23 +25,30 @@ export default function Post_c({ avatar, PostForum }) {
                     >上传视频</button>
                 </div>
                 <div className="center-after">
-                    <image src={avatar} alt="avatar" />
+                    <img src={avatar} alt="avatar" />
                 </div>
             </div>
-            <div><PostPannel type={postType} PostForum={PostForum} /></div>
+            <div><PostPannel type={postType} headers={headers} /></div>
         </main>
     )
 }
 
-function PostPannel({ type, PostForum }) {
+function PostPannel({ type,headers}) {
     const [text, setText] = useState('')
     const titleInput = useRef(null)
     async function handleClickForum() {
         var formData = new FormData(forumpost)
         formData.append('title', titleInput.current.value)
         formData.append('text', text)
-        const code = await PostForum(formData)
-        switch (code) {
+        const response = await fetch("http://localhost:8000/uapi/add_mainforum", {
+            method: 'POST',
+            body: formData,
+            credentials: "include",
+            headers: {
+                cookie: headers.cookie
+            },
+        })
+        switch (response.status) {
             case 200:
                 alert("发帖成功");
                 break;
@@ -51,7 +57,7 @@ function PostPannel({ type, PostForum }) {
                 break;
         }
     }
-    
+
     if (type == 0) {
         return (
             <div className="post-pannel">

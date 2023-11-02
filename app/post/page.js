@@ -11,25 +11,15 @@ function get_header() {
     return JheadersList;
 }
 
-export async function handleClickForum(FormData) {
-    var postHeaders = get_header()
-    const response = await fetch("http://localhost:8000/uapi/add_mainforum", {
-        method: 'POST',
-        body: FormData,
-        credentials: "include",
-        headers:{
-            cookie: postHeaders.cookie
-        },
-    })
-    return response.status
-}
+
 
 export default async function Post() {
     const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
     if (res.status == 200) {
         const list = await res.json()
+        const headers = get_header()
         return (
-            <Post_c avatar={list.avatar} PostForum={PostForum}/>
+            <Post_c avatar={list.avatar} headers={headers}/>
         )
     } else if (res.status == 401) {
         return (
