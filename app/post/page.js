@@ -1,8 +1,7 @@
-"use server"
 import { headers } from 'next/headers'
 import Cookies from 'universal-cookie';
 
-import { JumpToIndex, JumpToLogin } from '../Jump.js';
+import { JumpToLogin } from '../Jump.js';
 import Post_c from './post.js';
 const cookies = new Cookies();
 function get_header() {
@@ -12,9 +11,9 @@ function get_header() {
     return JheadersList;
 }
 
-export async function handleClickForum(FormData) {
+export async function PostForum(FormData) {
     'use server'
-    var postHeaders = get_header()
+    const postHeaders = get_header()
     const response = await fetch("http://localhost:8000/uapi/add_mainforum", {
         method: 'POST',
         body: FormData,
@@ -31,7 +30,7 @@ export default async function Post() {
     if (res.status == 200) {
         const list = await res.json()
         return (
-            <Post_c avatar={list.avatar} PostForum={handleClickForum}/>
+            <Post_c avatar={list.avatar} PostForum={PostForum}/>
         )
     } else if (res.status == 401) {
         return (

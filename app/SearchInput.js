@@ -9,7 +9,6 @@ export default function SearchInput({suggestions}){
     const [inputString,setInputString] = useState('')
     const [suggestionsShow,setSuggestionsShow] = useState([])
     let suggestionsShowList = []
-    let tagsChanged = []
     //标签部分
     const [tags,setTags] = useState([])
     function addTagbySug(event){
