@@ -1,4 +1,3 @@
-"use server"
 import { headers } from 'next/headers'
 import Cookies from 'universal-cookie';
 
@@ -13,7 +12,6 @@ function get_header() {
 }
 
 export async function handleClickForum(FormData) {
-    'use server'
     var postHeaders = get_header()
     const response = await fetch("http://localhost:8000/uapi/add_mainforum", {
         method: 'POST',

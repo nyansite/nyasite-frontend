@@ -12,7 +12,7 @@ export default function Post_c({ avatar, PostForum }) {
         <main>
             <div className="navbar w-full bg-white">
                 <a className='navbar-ico' href="/">
-                    <img src='./logo.svg' alt='logo' />
+                    <image src='./logo.svg' alt='logo' />
                     <div>喵站</div>
                 </a>
                 <div className="center">
@@ -26,7 +26,7 @@ export default function Post_c({ avatar, PostForum }) {
                     >上传视频</button>
                 </div>
                 <div className="center-after">
-                    <img src={avatar} alt="avatar" />
+                    <image src={avatar} alt="avatar" />
                 </div>
             </div>
             <div><PostPannel type={postType} PostForum={PostForum} /></div>
