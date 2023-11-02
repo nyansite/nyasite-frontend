@@ -11,9 +11,8 @@ function get_header() {
     return JheadersList;
 }
 
-export async function PostForum(FormData) {
-    'use server'
-    const postHeaders = get_header()
+export async function handleClickForum(FormData) {
+    var postHeaders = get_header()
     const response = await fetch("http://localhost:8000/uapi/add_mainforum", {
         method: 'POST',
         body: FormData,

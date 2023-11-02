@@ -59,7 +59,7 @@ function AvatarInput({ getImg }) {
           />
         </div>
       </div>
-      <img className="cropper-show" src={AvatarImgBase64} />
+      <image className="cropper-show" src={AvatarImgBase64} />
     </div>
   )
 }

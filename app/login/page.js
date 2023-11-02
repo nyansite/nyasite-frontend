@@ -15,9 +15,7 @@ export default async function login() {
     const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
     if (res.status == 200) {
         return (
-            <main>
-                <JumpToIndex />
-            </main>
+            <JumpToIndex />
         )
     } else if (res.status == 401) {
         return (<Login_c />)
