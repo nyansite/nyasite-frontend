@@ -30,12 +30,12 @@ function AvatarInput({ getImg }) {
     const canvas = cropper.getCroppedCanvas()
     let resizedCanvas = document.createElement("canvas");
     let resizedContext = resizedCanvas.getContext("2d");
-    resizedCanvas.height = 200;
-    resizedCanvas.width = 200;
+    resizedCanvas.height = 160;
+    resizedCanvas.width = 160;
     resizedContext.drawImage(canvas, 0, 0, 200, 200);
     resizedContext.save()
-    setAvatarImgBase64(resizedCanvas.toDataURL("image/png", 0.1));
-    getImg(resizedCanvas.toDataURL("image/png", 0.1))
+    setAvatarImgBase64(resizedCanvas.toDataURL("image/png", 0.5));
+    getImg(resizedCanvas.toDataURL("image/png", 0.05)) //应该可以再猛点
   };
   return (
     <div className='avatar-edit'>
@@ -59,7 +59,7 @@ function AvatarInput({ getImg }) {
           />
         </div>
       </div>
-      <image className="cropper-show" src={AvatarImgBase64} />
+      <img className="cropper-show" src={AvatarImgBase64} />
     </div>
   )
 }

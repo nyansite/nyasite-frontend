@@ -48,7 +48,7 @@ function PostPannel({ type,headers}) {
                 cookie: headers.cookie
             },
         })
-        switch (response.status) {
+        switch (await response.status) {
             case 200:
                 alert("发帖成功");
                 break;
@@ -72,8 +72,9 @@ function PostPannel({ type,headers}) {
                         <option value={0}>用户反馈</option>
                         <option value={1}>Thread贴</option>
                         <option value={2}>资源帖</option>
+                        <option value={3}>灌水贴</option>
                     </select>
-                    <button onClick={handleClickForum} className=" duration-300 bg-white rounded-xl border w-16 hover:bg-[#bfbfbf]">发帖</button>
+                    <button onClick={handleClickForum} className="duration-300 bg-white rounded-xl border w-16 hover:bg-[#bfbfbf]">发帖</button>
                 </form>
             </div>
         )

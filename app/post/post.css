@@ -10,7 +10,7 @@
 .post-pannel form{
     position: relative;
     right: 0.5rem;
-    justify-self: end;
+    align-self: flex-end;
     display: flex;
     gap: 0.5rem;
     flex-direction: reverse;

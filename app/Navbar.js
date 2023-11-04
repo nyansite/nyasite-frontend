@@ -36,7 +36,7 @@ export default async function Navbar() {
     return (
         <div className='navbar w-full bg-white'>
             <a className='navbar-ico' href='/'>
-                <img src='./logo.svg' alt='logo' />
+                <img src='/logo.svg' alt='logo' />
                 <div>喵站</div>
             </a>
             <div className='center'>

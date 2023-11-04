@@ -7,7 +7,7 @@ export default function SearchInput({suggestions}){
     //补全部分
     const suggestionsUse = suggestions
     const [inputString,setInputString] = useState('')
-    const [suggestionsShow,setSuggestionsShow] = useState([])
+    const [suggestionsShow,setSuggestionsShow] = useState([]) //用于渲染的列表
     let suggestionsShowList = []
     //标签部分
     const [tags,setTags] = useState([])
