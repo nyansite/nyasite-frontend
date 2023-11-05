@@ -27,14 +27,14 @@ body {
 
 @layer components {
   .b {
-    @apply flex flex-auto items-center justify-center duration-300 bg-white rounded-xl border mx-4 h-12 w-20  hover:bg-[#bfbfbf];
+    @apply flex flex-auto items-center justify-center duration-300 rounded-xl border mx-4 h-12 w-20 bg-white  hover:bg-[#bfbfbf];
   }
 }
 
 main{
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  width: 100%;
 }
 
 

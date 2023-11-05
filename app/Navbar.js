@@ -34,7 +34,7 @@ export default async function Navbar() {
     const res = await fetch("http://localhost:8000/api/search/taglist", { headers: get_header() })
     const list = await res.json()
     return (
-        <div className='navbar w-full bg-white'>
+        <div className='navbar bg-white'>
             <a className='navbar-ico' href='/'>
                 <img src='/logo.svg' alt='logo' />
                 <div>喵站</div>
