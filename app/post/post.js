@@ -8,7 +8,7 @@ import "../navbar.css"
 export default function Post_c({ avatar, headers}) {
     const [postType, setPostType] = useState(0)
     return (
-        <main style={{rowGap:"1rem",height:"100%"}}>
+        <main style={{rowGap:"1rem"}}>
             <div className="navbar w-full bg-white">
                 <a className='navbar-ico' href="/">
                     <img src='./logo.svg' alt='logo' />
