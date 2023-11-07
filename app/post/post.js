@@ -4,7 +4,7 @@ import { MdEditor } from "md-editor-rt"
 import 'md-editor-rt/lib/style.css';
 import "./post.css"
 import "../navbar.css"
-import { useRouter } from "next/navigation";
+import Image from 'next/image'
 
 export default function Post_c({ avatar, PostForum }) {
     const [postType, setPostType] = useState(0)
@@ -12,7 +12,7 @@ export default function Post_c({ avatar, PostForum }) {
         <main style={{rowGap:"2rem"}}>
             <div className="navbar w-full bg-white">
                 <a className='navbar-ico' href="/">
-                    <img src='./logo.svg' alt='logo' />
+                    <Image src='./logo.svg' alt='logo' />
                     <div>喵站</div>
                 </a>
                 <div className="center">
@@ -26,7 +26,7 @@ export default function Post_c({ avatar, PostForum }) {
                     >上传视频</button>
                 </div>
                 <div className="center-after">
-                    <img src={avatar} alt="avatar" />
+                    <Image src={avatar} alt="avatar" />
                 </div>
             </div>
             <div><PostPannel type={postType} PostForum={PostForum} /></div>
