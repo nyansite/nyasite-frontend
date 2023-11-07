@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-    .unit-emotion {
+    .unit-emoji {
         @apply flex flex-auto items-center justify-center duration-300 rounded-xl mx-4 h-12 w-20 ;
     }
 }
@@ -46,7 +46,7 @@
     font-size: 2rem;
 }
 
-.emotion-bar {
+.emoji-bar {
     display: flex;
     align-items: center;
     height: 3rem;

@@ -1,7 +1,7 @@
 import { headers } from 'next/headers'
 import Cookies from 'universal-cookie';
 
-import { JumpToLogin } from '../Jump.js';
+import { JumpToIndex, JumpToLogin } from '../Jump.js';
 import Post_c from './post.js';
 const cookies = new Cookies();
 function get_header() {
@@ -11,15 +11,26 @@ function get_header() {
     return JheadersList;
 }
 
-
+export async function handleClickForum(FormData) {
+    'use server'
+    var postHeaders = get_header()
+    const response = await fetch("http://localhost:8000/uapi/add_mainforum", {
+        method: 'POST',
+        body: FormData,
+        credentials: "include",
+        headers:{
+            cookie: postHeaders.cookie
+        },
+    })
+    return response.status
+}
 
 export default async function Post() {
     const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
     if (res.status == 200) {
         const list = await res.json()
-        const headers = get_header()
         return (
-            <Post_c avatar={list.avatar} headers={headers}/>
+            <Post_c avatar={list.avatar} PostForum={handleClickForum}/>
         )
     } else if (res.status == 401) {
         return (

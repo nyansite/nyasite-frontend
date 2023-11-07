@@ -4,11 +4,12 @@ import { MdEditor } from "md-editor-rt"
 import 'md-editor-rt/lib/style.css';
 import "./post.css"
 import "../navbar.css"
+import { useRouter } from "next/navigation";
 
-export default function Post_c({ avatar, headers}) {
+export default function Post_c({ avatar, PostForum }) {
     const [postType, setPostType] = useState(0)
     return (
-        <main style={{rowGap:"1rem"}}>
+        <main style={{rowGap:"2rem"}}>
             <div className="navbar w-full bg-white">
                 <a className='navbar-ico' href="/">
                     <img src='./logo.svg' alt='logo' />
@@ -28,27 +29,20 @@ export default function Post_c({ avatar, headers}) {
                     <img src={avatar} alt="avatar" />
                 </div>
             </div>
-            <div><PostPannel type={postType} headers={headers} /></div>
+            <div><PostPannel type={postType} PostForum={PostForum} /></div>
         </main>
     )
 }
 
-function PostPannel({ type,headers}) {
+function PostPannel({ type, PostForum }) {
     const [text, setText] = useState('')
     const titleInput = useRef(null)
     async function handleClickForum() {
         var formData = new FormData(forumpost)
         formData.append('title', titleInput.current.value)
         formData.append('text', text)
-        const response = await fetch("http://localhost:8000/uapi/add_mainforum", {
-            method: 'POST',
-            body: formData,
-            credentials: "include",
-            headers: {
-                cookie: headers.cookie
-            },
-        })
-        switch (await response.status) {
+        const code = await PostForum(formData)
+        switch (code) {
             case 200:
                 alert("发帖成功");
                 break;
@@ -57,7 +51,7 @@ function PostPannel({ type,headers}) {
                 break;
         }
     }
-
+    
     if (type == 0) {
         return (
             <div className="post-pannel">
@@ -72,9 +66,8 @@ function PostPannel({ type,headers}) {
                         <option value={0}>用户反馈</option>
                         <option value={1}>Thread贴</option>
                         <option value={2}>资源帖</option>
-                        <option value={3}>灌水贴</option>
                     </select>
-                    <button onClick={handleClickForum} className="duration-300 bg-white rounded-xl border w-16 hover:bg-[#bfbfbf]">发帖</button>
+                    <button onClick={handleClickForum} className=" duration-300 bg-white rounded-xl border w-16 hover:bg-[#bfbfbf]">发帖</button>
                 </form>
             </div>
         )
