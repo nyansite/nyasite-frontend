@@ -11,14 +11,15 @@ function get_header() {
 }
 async function changeEmoji(cid,emoji){
     'use server'
-    var formData = new FormData(forumpost)
+    var formData = new FormData()
     formData.append("uid",cid)
     formData.append("emoji",emoji)
-    const res = await fetch("localhost:8000/uapi/add_emoji",{
+    const postHeaders = get_header()
+    const res = await fetch("http://localhost:8000/uapi/add_emoji",{
         method:'POST',
         body:formData,
         headers: {
-            cookie: get_header().cookie
+            cookie: postHeaders.cookie
         },
     })
     return res.status
@@ -38,7 +39,6 @@ async function PostCommentFourm(){
 }
 
 export default async function unitforum({ params }) {
-    const header = get_header()
     const pid = params.pid;
     const page = params.page;
     const res = await fetch("http://localhost:8000/api/browse_unitforum/"+pid+"/"+page,{ headers: get_header() })
