@@ -1,18 +1,9 @@
-.post-pannel{
-    position: relative;
+.capture{
+    width: 90vw;
+    height: 60vh;
+    background-color: whitesmoke;
+    border: 1rem solid gainsboro;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-.post-pannel input{
-    width: calc(95vw - 10rem);
-}
-.post-pannel form{
-    position: relative;
-    right: 0.5rem;
-    align-self: flex-end;
-    display: flex;
-    gap: 0.5rem;
-    flex-direction: reverse;
-    justify-content: end;
+    align-items: center;
+    justify-content: center;
 }

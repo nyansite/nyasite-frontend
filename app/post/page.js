@@ -2,7 +2,9 @@ import { headers } from 'next/headers'
 import Cookies from 'universal-cookie';
 
 import { JumpToIndex, JumpToLogin } from '../Jump.js';
-import Post_c from './post.js';
+import { PostVideo } from './post.js';
+import "./post.css"
+import "../navbar.css"
 const cookies = new Cookies();
 function get_header() {
     const headersL = headers();
@@ -30,7 +32,18 @@ export default async function Post() {
     if (res.status == 200) {
         const list = await res.json()
         return (
-            <Post_c avatar={list.avatar} PostForum={handleClickForum}/>
+            <main style={{rowGap:"2rem",height:"100vh",alignItems:"center"}}>
+            <div className="navbar w-full bg-white">
+                <a className='navbar-ico' href="/">
+                    <img src='./logo.svg' alt='logo' />
+                    <div>喵站</div>
+                </a>
+                <div className="center-after">
+                    <img src={list.avatar} alt="avatar" />
+                </div>
+            </div>
+            <div><PostVideo/></div>
+        </main>
         )
     } else if (res.status == 401) {
         return (

@@ -42,7 +42,7 @@ function AvatarInput({ getImg }) {
       <div className='select-edit'>
         <button onClick={getFilds}>
           上传文件
-          <input id='file' accept='image/*' type='file' onChange={imgGet} />
+          <input id='file' accept='image/*' type='file' onChange={imgGet} style={{display:"none"}} />
         </button>
         <div className='avatarEditor'>
           <Cropper

@@ -14,6 +14,7 @@ function get_header() {
 
 export async function AvatarBar() {
     const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
+    console.log(get_header())
     if (res.status == 200) {
         const list = await res.json()
         return (
@@ -36,7 +37,7 @@ export default async function Navbar() {
     return (
         <div className='navbar bg-white'>
             <a className='navbar-ico' href='/'>
-                <img src='/logo.svg' alt='logo' />
+                <img src='/logo.svg' alt='logo' width={"3.5rem"} height={"3.5rem"}/>
                 <div>喵站</div>
             </a>
             <div className='center'>

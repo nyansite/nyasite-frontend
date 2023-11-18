@@ -62,9 +62,6 @@ main.lr{
     align-items: center;
     width: 15rem;
 }
-#file{
-    display: none;
-}
 .cropper-show{
     height: 10rem;
     width: 10rem;
