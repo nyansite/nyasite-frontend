@@ -16,7 +16,7 @@
     "md-editor-rt": "^4.8.2",
     "next": "^13.5.4",
     "nextjs": "^0.0.3",
-    "postcss": "8.4.28",
+    "postcss": "^8.4.31",
     "react": "18.2.0",
     "react-cropper": "^2.3.3",
     "react-dom": "^18.2.0",
