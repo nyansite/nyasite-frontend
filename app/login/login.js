@@ -13,8 +13,8 @@ export default function Login_c() {
         });
         switch (response.status) {
             case 200:
-                alert("200登录成功");
-                redirect("/")
+                window.location.href="/"
+                break
             case 611:
                 alert("611用户名或邮箱不存在");
                 break;
@@ -22,7 +22,7 @@ export default function Login_c() {
                 alert("612密码错误");
                 break;
             case 613:
-                alert("613重复登录");
+                window.location.href="/"
                 break;
             default:
                 alert("未知错误");
