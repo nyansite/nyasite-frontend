@@ -1,9 +1,6 @@
 import { headers } from 'next/headers'
-import Cookies from 'universal-cookie';
 
 import Reg_c from "./reg"
-import { JumpToIndex } from '../Jump.js';
-const cookies = new Cookies();
 function get_header() {
     const headersL = headers();
     const JheadersList = {};
@@ -16,7 +13,7 @@ export default async function login() {
     if (res.status == 200) {
         return (
             <main>
-                <JumpToIndex/>
+                
             </main>
         )
     } else if (res.status == 401) {

@@ -1,5 +1,4 @@
 "use client";
-import { redirect } from 'next/navigation';
 import "./login.css"
 export default function Login_c() {
     const handleSubmit = event => {//避免表单提交后刷新页面
@@ -13,7 +12,7 @@ export default function Login_c() {
         });
         switch (response.status) {
             case 200:
-                window.location.href="/"
+                window.location.href = "/"
                 break
             case 611:
                 alert("611用户名或邮箱不存在");
@@ -22,7 +21,7 @@ export default function Login_c() {
                 alert("612密码错误");
                 break;
             case 613:
-                window.location.href="/"
+                window.location.href = "/"
                 break;
             default:
                 alert("未知错误");
@@ -44,6 +43,6 @@ export default function Login_c() {
                     </button></div>
                 </div>
             </form>
-        </main>     
+        </main>
     )
 }
