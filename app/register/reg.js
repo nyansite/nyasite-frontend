@@ -47,13 +47,7 @@ export default function Reg_c() {
 						/>
 					</label>
 					<label className="input-bar">
-						<input
-							name="email"
-							id="email"
-							placeholder="邮箱"
-							autoComplete="email"
-							required
-						/>
+						<input name="email" id="email" placeholder="邮箱" autoComplete="email" required />
 					</label>
 					<label className="input-bar">
 						<input

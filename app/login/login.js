@@ -62,12 +62,7 @@ export default function Login_c() {
 					</label>
 					<div>
 						<button onClick={handleClick} className="">
-							<Image
-								src="/chevron-right-solid.svg"
-								alt="确定"
-								width={100}
-								height={100}
-							></Image>
+							<Image src="/chevron-right-solid.svg" alt="确定" width={100} height={100}></Image>
 							{/* 必须指定宽高或填充,单位只能是px  https://nextjs.org/docs/app/api-reference/components/image#width */}
 						</button>
 					</div>

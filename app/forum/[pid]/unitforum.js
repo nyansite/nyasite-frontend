@@ -12,9 +12,7 @@ export function PostCommentFourmPannel() {
 	return (
 		<div className="post-pannel">
 			<MdEditor modelValue={text} onChange={setText} style={{ height: "30vh" }} />
-			<button className="duration-300 bg-white rounded-xl border w-16 hover:bg-[#bfbfbf]">
-				发帖
-			</button>
+			<button className="duration-300 bg-white rounded-xl border w-16 hover:bg-[#bfbfbf]">发帖</button>
 		</div>
 	);
 }
@@ -48,9 +46,7 @@ export function Unitforum_c({ content, changeEmoji }) {
 	//fmct forumcomment
 	return (
 		<>
-			<div className="title bg-white mx-4 rounded-xl duration-300">
-				{content.Origin.Title}
-			</div>
+			<div className="title bg-white mx-4 rounded-xl duration-300">{content.Origin.Title}</div>
 			<ul className="unitforum-show">{showList}</ul>
 		</>
 	);
@@ -115,65 +111,49 @@ function EmojiBar({ fmct, changeEmoji }) {
 		<form className="emoji-bar" onSubmit={handleSubmit}>
 			<button
 				onClick={() => handleClickChangeEmoji(fmct.Id, 1)}
-				className={
-					"unit-emoji " + (choose == 1 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")
-				}
+				className={"unit-emoji " + (choose == 1 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")}
 			>
 				{"👍" + (choose == 1 ? like + 1 : like)}
 			</button>
 			<button
 				onClick={() => handleClickChangeEmoji(fmct.Id, 2)}
-				className={
-					"unit-emoji " + (choose == 2 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")
-				}
+				className={"unit-emoji " + (choose == 2 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")}
 			>
 				{"👎" + (choose == 2 ? dislike + 1 : dislike)}
 			</button>
 			<button
 				onClick={() => handleClickChangeEmoji(fmct.Id, 3)}
-				className={
-					"unit-emoji " + (choose == 3 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")
-				}
+				className={"unit-emoji " + (choose == 3 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")}
 			>
 				{"😄" + (choose == 3 ? smile + 1 : smile)}
 			</button>
 			<button
 				onClick={() => handleClickChangeEmoji(fmct.Id, 4)}
-				className={
-					"unit-emoji " + (choose == 4 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")
-				}
+				className={"unit-emoji " + (choose == 4 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")}
 			>
 				{"🎉" + (choose == 4 ? celebration + 1 : celebration)}
 			</button>
 			<button
 				onClick={() => handleClickChangeEmoji(fmct.Id, 5)}
-				className={
-					"unit-emoji " + (choose == 5 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")
-				}
+				className={"unit-emoji " + (choose == 5 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")}
 			>
 				{"😕" + (choose == 5 ? confused + 1 : confused)}
 			</button>
 			<button
 				onClick={() => handleClickChangeEmoji(fmct.Id, 6)}
-				className={
-					"unit-emoji " + (choose == 6 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")
-				}
+				className={"unit-emoji " + (choose == 6 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")}
 			>
 				{"❤️" + (choose == 6 ? heart + 1 : heart)}
 			</button>
 			<button
 				onClick={() => handleClickChangeEmoji(fmct.Id, 7)}
-				className={
-					"unit-emoji " + (choose == 7 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")
-				}
+				className={"unit-emoji " + (choose == 7 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")}
 			>
 				{"🚀" + (choose == 7 ? rocket + 1 : rocket)}
 			</button>
 			<button
 				onClick={() => handleClickChangeEmoji(fmct.Id, 8)}
-				className={
-					"unit-emoji " + (choose == 8 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")
-				}
+				className={"unit-emoji " + (choose == 8 ? "bg-gray-300" : "bg-white  hover:bg-[#bfbfbf]")}
 			>
 				{"👀" + (choose == 8 ? eyes + 1 : eyes)}
 			</button>

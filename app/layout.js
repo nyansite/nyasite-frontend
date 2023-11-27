@@ -21,11 +21,7 @@ export default function RootLayout({ children }) {
 						<a href="/1" className="navbar_b">
 							分类
 						</a>
-						<input
-							href="/1"
-							className="navbar_b w-80 hover:w-96"
-							placeholder="毛玉入侵武汉"
-						></input>
+						<input href="/1" className="navbar_b w-80 hover:w-96" placeholder="毛玉入侵武汉"></input>
 						<a href="/1" className="navbar_b">
 							排行
 						</a>

@@ -38,10 +38,7 @@ export default function SearchInput({ suggestions }) {
 		let inputValueList = e.target.value.split(" ");
 		while (count <= 5 && i <= suggestionsUse.length - 1) {
 			// 空格分隔的最后部分默认为新输入部分
-			if (
-				suggestionsUse[i].includes(inputValueList.slice(-1)) &&
-				inputValueList.slice(-1) != ""
-			) {
+			if (suggestionsUse[i].includes(inputValueList.slice(-1)) && inputValueList.slice(-1) != "") {
 				show = suggestionsUse[i];
 				suggestionsShowList.push(
 					<li key={show}>
