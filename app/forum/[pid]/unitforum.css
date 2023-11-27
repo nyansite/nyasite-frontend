@@ -3,62 +3,61 @@
 @tailwind utilities;
 
 @layer components {
-    .unit-emoji {
-        @apply flex flex-auto items-center justify-center duration-300 rounded-xl mx-4 h-12 w-20 ;
-    }
+	.unit-emoji {
+		@apply flex flex-auto items-center justify-center duration-300 rounded-xl mx-4 h-12 w-20;
+	}
 }
 
-.title{
-    position: relative;
-    left: 5rem;
-    width: calc(90vw - 5rem);
-    font-size: 2.5rem;
+.title {
+	position: relative;
+	left: 5rem;
+	width: calc(90vw - 5rem);
+	font-size: 2.5rem;
 }
 
-.unitforum-show{
-    position: relative;
-    left: 5rem;
-    width: calc(90vw - 5rem);
-    display: flex;
-    flex-direction: column;
+.unitforum-show {
+	position: relative;
+	left: 5rem;
+	width: calc(90vw - 5rem);
+	display: flex;
+	flex-direction: column;
 }
-.unit {    
-    width: calc(90vw - 5rem);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.unit {
+	width: calc(90vw - 5rem);
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }
-
 
 .author-bar {
-    display: flex;
-    align-items: center;
-    height: 3rem;
-    gap: 0.5rem;
+	display: flex;
+	align-items: center;
+	height: 3rem;
+	gap: 0.5rem;
 }
 
 .author-bar img {
-    height: 3rem;
-    width: 3rem;
+	height: 3rem;
+	width: 3rem;
 }
 
 .author-bar div {
-    font-size: 2rem;
+	font-size: 2rem;
 }
 
 .emoji-bar {
-    display: flex;
-    align-items: center;
-    height: 3rem;
+	display: flex;
+	align-items: center;
+	height: 3rem;
 }
 
-.post-pannel{
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    width: 80vw;
+.post-pannel {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	width: 80vw;
 }
 
-.post-pannel button{
-    align-self: flex-end;
+.post-pannel button {
+	align-self: flex-end;
 }

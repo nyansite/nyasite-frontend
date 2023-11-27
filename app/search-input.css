@@ -1,52 +1,52 @@
-.all-bar{
-    width: 40vw;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 0.5rem;
-    border-radius: 0.5rem;
-    height: 3rem;
+.all-bar {
+	width: 40vw;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	gap: 0.5rem;
+	border-radius: 0.5rem;
+	height: 3rem;
 }
-.tag-input{
-    display: flex;
+.tag-input {
+	display: flex;
 }
-.tags{
-    display: flex;
-    align-self: flex-start;
-    gap: 0.5rem;
+.tags {
+	display: flex;
+	align-self: flex-start;
+	gap: 0.5rem;
 }
-.all-bar input{
-    position: relative;
-    left: 0.5rem;
-    height: 3rem;
-    border-radius: 10%;
-    background-color: transparent;
+.all-bar input {
+	position: relative;
+	left: 0.5rem;
+	height: 3rem;
+	border-radius: 10%;
+	background-color: transparent;
 }
-.all-bar input:focus{
-    outline: none;
+.all-bar input:focus {
+	outline: none;
 }
-.tags button{
-    border-radius: 10%;
-    height: 3rem;
+.tags button {
+	border-radius: 10%;
+	height: 3rem;
 }
-.search-button-bar{
-    position: absolute;
-    right: 0px;
-    display: flex;
-    width: 3rem;
-    height: 3rem;
-    align-items: center;
-    justify-content: center;
+.search-button-bar {
+	position: absolute;
+	right: 0px;
+	display: flex;
+	width: 3rem;
+	height: 3rem;
+	align-items: center;
+	justify-content: center;
 }
-.search-button{
-    border-radius: 10%;
-    height: 2.5rem;
-    width: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.search-button {
+	border-radius: 10%;
+	height: 2.5rem;
+	width: 2.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-.search-button-content{
-    width: 2rem;
-    height: 2rem;
+.search-button-content {
+	width: 2rem;
+	height: 2rem;
 }

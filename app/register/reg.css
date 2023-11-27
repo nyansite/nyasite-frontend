@@ -1,75 +1,75 @@
-main.lr{
-    width: 100vw;
-    height: 100vh;
-    background: url("/loginBackground.webp");
-    background-size: cover;
-    font-size: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+main.lr {
+	width: 100vw;
+	height: 100vh;
+	background: url("/loginBackground.webp");
+	background-size: cover;
+	font-size: 28px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-.reg-pannel{
-    position: absolute;
-    height: 20rem;
-    width: 65rem;
-    background-color: rgba(255, 255, 255, 0.85);
-    display: flex;
-    flex-direction: row;
+.reg-pannel {
+	position: absolute;
+	height: 20rem;
+	width: 65rem;
+	background-color: rgba(255, 255, 255, 0.85);
+	display: flex;
+	flex-direction: row;
 }
-#freg{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: fixed;
-    gap: 1.5rem;
-    height: 20rem;
-    width: 32rem;
-    border-radius: 1rem;
+#freg {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: fixed;
+	gap: 1.5rem;
+	height: 20rem;
+	width: 32rem;
+	border-radius: 1rem;
 }
-.title{
-    position: relative;
-    top: 0.5rem;
-    font-size: 2rem;
+.title {
+	position: relative;
+	top: 0.5rem;
+	font-size: 2rem;
 }
-.input-bar{
-    display: flex;
-    width: 28rem;
-    justify-content: center;
+.input-bar {
+	display: flex;
+	width: 28rem;
+	justify-content: center;
 }
-.input-bar input{
-    width: 25rem;
-    background-color: whitesmoke;
-    opacity: 0.7;
-    border-radius: 5%;
+.input-bar input {
+	width: 25rem;
+	background-color: whitesmoke;
+	opacity: 0.7;
+	border-radius: 5%;
 }
-.input-bar input::placeholder{
-    font-size: 1.5rem;
+.input-bar input::placeholder {
+	font-size: 1.5rem;
 }
-.avatar-edit{
-    position: relative;
-    left: 32rem;
-    display: flex;
-    flex-direction:row;
-    align-items: center;
-    gap: 1rem;
-    height: 20rem;
-    width: 33rem;
+.avatar-edit {
+	position: relative;
+	left: 32rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 1rem;
+	height: 20rem;
+	width: 33rem;
 }
-.select-edit{
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    width: 15rem;
+.select-edit {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	width: 15rem;
 }
-.cropper-show{
-    height: 10rem;
-    width: 10rem;
-    border-radius: 50%;
+.cropper-show {
+	height: 10rem;
+	width: 10rem;
+	border-radius: 50%;
 }
-.bottom-bar{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+.bottom-bar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
 }
