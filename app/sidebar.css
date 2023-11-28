@@ -1,23 +1,23 @@
-.sidebar{
-    position: relative;
-    width: 10rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    align-items: start;
+.sidebar {
+	position: relative;
+	width: 10rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	align-items: start;
 }
-.selection{
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.selection {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }
-.select-unit{
-    display: flex;
-    width: 10rem;
-    height: 1.5rem;
-    margin-left: 1rem;
+.select-unit {
+	display: flex;
+	width: 10rem;
+	height: 1.5rem;
+	margin-left: 1rem;
 }
-.select-unit svg{
-    width: 1.5rem;
-    height: 1.5rem;
+.select-unit svg {
+	width: 1.5rem;
+	height: 1.5rem;
 }

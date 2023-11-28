@@ -1,0 +1,3 @@
+printWidth = 120 #不换行长度
+tabWidth = 4     #制表符长度
+useTabs = true   #是否使用制表符
