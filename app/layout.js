@@ -16,7 +16,6 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="zh-hans">
 			<body className={inter.className}>
-
 				<div className="flex fixed w-full bg-white h-16 top-0 items-center">
 					<a className="justify-self-start whitespace-nowrap flex items-center" href="/">
 						<img src="/logo.svg" className=" w-16 h-16" />
