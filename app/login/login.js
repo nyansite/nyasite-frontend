@@ -2,11 +2,10 @@
 import Image from "next/image";
 
 export default function Login_c() {
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		//避免表单提交后刷新页面
 		event.preventDefault();
-	};
-	async function handleClick() {
+
 		let response = await fetch("/api/login", {
 			method: "POST",
 			body: new FormData(flogin),
@@ -28,13 +27,13 @@ export default function Login_c() {
 			default:
 				alert("未知错误");
 		}
-	}
+	};
 
 	return (
-		<main>
-			<form id="flogin" onSubmit={handleSubmit}>
+		<main className="flex justify-center items-center h-screen">
+			<form id="flogin" onSubmit={handleSubmit} className="">
 				<div>登录</div>
-				<label>
+				
 					<input
 						name="username"
 						id="username"
@@ -43,8 +42,7 @@ export default function Login_c() {
 						required
 						autoFocus
 					/>
-				</label>
-				<label>
+				
 					<input
 						name="passwd"
 						id="passwd"
@@ -54,16 +52,23 @@ export default function Login_c() {
 						minLength="6"
 						required
 					/>
-				</label>
+				
 				<div>
 					<label>
 						<a href="">重置密码</a>
 						<a href="/register">注册账户</a>
 					</label>
 					<div>
-						<button onClick={handleClick} className="">
-							<Image src="/chevron-right-solid.svg" alt="确定" width={100} height={100}></Image>
-							{/* 必须指定宽高或填充,单位只能是px  https://nextjs.org/docs/app/api-reference/components/image#width */}
+						<button type="submit">
+							<Image
+								src="/chevron-right-solid.svg"
+								alt="确定"
+								width={32}
+								height={32}
+								className="h-[2em] w-auto"
+							></Image>
+							{/* 必须指定宽高或填充,单位只能是px  https://nextjs.org/docs/app/api-reference/components/image#width
+							随便指定一个较小的值然后用css覆盖 */}
 						</button>
 					</div>
 				</div>
