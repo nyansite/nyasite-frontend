@@ -30,47 +30,44 @@ export default function Login_c() {
 	};
 
 	return (
-		<main className="flex justify-center items-center h-screen">
+		<main className="grid place-items-center h-screen">
 			<form id="flogin" onSubmit={handleSubmit} className="">
-				<div>登录</div>
-				
-					<input
-						name="username"
-						id="username"
-						placeholder="用户名或邮箱"
-						autoComplete="username"
-						required
-						autoFocus
-					/>
-				
-					<input
-						name="passwd"
-						id="passwd"
-						placeholder="密码"
-						type="password"
-						autoComplete="current-password"
-						minLength="6"
-						required
-					/>
-				
-				<div>
-					<label>
-						<a href="">重置密码</a>
-						<a href="/register">注册账户</a>
-					</label>
-					<div>
-						<button type="submit">
-							<Image
-								src="/chevron-right-solid.svg"
-								alt="确定"
-								width={32}
-								height={32}
-								className="h-[2em] w-auto"
-							></Image>
-							{/* 必须指定宽高或填充,单位只能是px  https://nextjs.org/docs/app/api-reference/components/image#width
+				<div className="flex justify-center">登录</div>
+				<input
+					className="block"
+					name="username"
+					id="username"
+					placeholder="用户名或邮箱"
+					autoComplete="username"
+					required
+					autoFocus
+				/>
+				<input
+					className="block"
+					name="passwd"
+					id="passwd"
+					placeholder="密码"
+					type="password"
+					autoComplete="current-password"
+					minLength="6"
+					required
+				/>
+				<div className="flex justify-between">
+					<a href="/register">注册账户</a>
+					<a href="">重置密码</a>
+				</div>
+				<div className="flex justify-center">
+					<button type="submit">
+						<Image
+							src="/chevron-right-solid.svg"
+							alt="确定"
+							width={32}
+							height={32}
+							className="h-[2em] w-auto"
+						></Image>
+						{/* 必须指定宽高或填充,单位只能是px  https://nextjs.org/docs/app/api-reference/components/image#width
 							随便指定一个较小的值然后用css覆盖 */}
-						</button>
-					</div>
+					</button>
 				</div>
 			</form>
 		</main>

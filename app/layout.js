@@ -30,7 +30,8 @@ export default function RootLayout({ children }) {
 						</a>
 					</div>
 				</div>
-				<div className="w-full h-16"></div>
+				{/* <div className="w-full h-16"></div> */}
+				{/* 在这里添加填充物会导致居中问题 */}
 				{children}
 			</body>
 		</html>
