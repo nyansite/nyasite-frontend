@@ -24,17 +24,4 @@ body {
 	.navbar_b {
 		@apply flex flex-auto items-center justify-center duration-300 bg-white rounded-xl border mx-4 h-12 w-20 hover:w-28 hover:bg-[#bfbfbf];
 	}
-	.img_b {
-		@apply flex flex-auto gap-2 items-center justify-center duration-500 bg-white rounded-xl border border-white mx-4 h-14 w-14 hover:bg-[#bfbfbf] hover:w-24;
-	}
-}
-
-.img_b div{
-  transition: 300ms;
-  display: none;
-}
-
-.img_b:hover div{
-  transition: 300ms;
-  display: initial;
 }

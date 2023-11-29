@@ -1,9 +1,5 @@
-import Image from "next/image";
-import SearchInput from "./SearchInput";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { ChatBubbleLeftEllipsisIcon,ArchiveBoxIcon,CloudArrowUpIcon   } from '@heroicons/react/24/solid';
-
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,25 +12,21 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="zh-hans">
 			<body className={inter.className}>
-				<div className="flex fixed w-full bg-white h-16 top-0 items-center">
-					<a className="justify-self-start whitespace-nowrap flex items-center" href="/">
-						<img src="/logo.svg" className=" w-16 h-16" />
-					</a>
-					<div className="absolute left-1/4">
-						<SearchInput />
-					</div>
-					<div className=" absolute right-0 whitespace-nowrap flex items-center">
-						<a className="img_b">
-							<ArchiveBoxIcon class="h-12 w-12 stroke-[#516e8b] text-transparent" />
-							<div>消息</div>
+				<div className="flex fixed w-full bg-white justify-center ">
+					<div className="flex flex-nowrap h-16  top-0 w-3/4 items-center">
+						<a href="/" className="navbar_b  hover:ml-0">
+							首页
 						</a>
-						<a className="img_b">
-							<ChatBubbleLeftEllipsisIcon class="h-12 w-12 stroke-[#516e8b] text-transparent" />
-							<div>论坛</div>
+						{/* 外边距变成了内边距,图标不会移动 */}
+						<a href="/1" className="navbar_b">
+							分类
 						</a>
-						<a className="img_b">
-							<CloudArrowUpIcon  class="h-12 w-12 stroke-[#516e8b] text-transparent" />
-							<div>消息</div>
+						<input href="/1" className="navbar_b w-80 hover:w-96" placeholder="毛玉入侵武汉"></input>
+						<a href="/1" className="navbar_b">
+							排行
+						</a>
+						<a href="/1" className="navbar_b hover:mr-0">
+							论坛
 						</a>
 					</div>
 				</div>
