@@ -2,7 +2,7 @@ import Image from "next/image";
 import SearchInput from "./SearchInput";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/solid';
+import { ChatBubbleLeftEllipsisIcon,ArchiveBoxIcon,CloudArrowUpIcon   } from '@heroicons/react/24/solid';
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,10 +25,16 @@ export default function RootLayout({ children }) {
 					</div>
 					<div className=" absolute right-0 whitespace-nowrap flex items-center">
 						<a className="img_b">
-							<ChatBubbleLeftEllipsisIcon class="h-12 w-12 stroke-[#516e8b] text-transparent" />
+							<ArchiveBoxIcon class="h-12 w-12 stroke-[#516e8b] text-transparent" />
+							<div>消息</div>
 						</a>
 						<a className="img_b">
-
+							<ChatBubbleLeftEllipsisIcon class="h-12 w-12 stroke-[#516e8b] text-transparent" />
+							<div>论坛</div>
+						</a>
+						<a className="img_b">
+							<CloudArrowUpIcon  class="h-12 w-12 stroke-[#516e8b] text-transparent" />
+							<div>消息</div>
 						</a>
 					</div>
 				</div>

@@ -2,9 +2,6 @@ import "./sidebar.css";
 export default function Sidebar() {
 	return (
 		<div className="sidebar">
-			<a className="b w-32" href="/post">
-				发布
-			</a>
 			<div className="selection">
 				<a className="select-unit">
 					<svg
