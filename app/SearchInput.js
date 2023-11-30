@@ -76,7 +76,7 @@ export default function SearchInput({ suggestions }) {
 				</div>
 			</div>
 			<div className="search-button-bar">
-				<button className="search-button" onClick={search}>
+				<button className="search-button duration-300 hover:bg-slate-300" onClick={search}>
 					<div className="search-button-content">
 						<svg
 							fill="none"
