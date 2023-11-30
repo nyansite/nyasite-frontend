@@ -21,7 +21,7 @@ async function AvatarBar() {
 	if (res.status == 200) {
 		const list = await res.json()
 		return (
-			<div>
+			<div className='flex items-center flex-col gap-2 w-32'>
 				<img src={list.avatar} alt='avatar' className=" h-12 w-12 rounded-full" />
 			</div>
 		)
