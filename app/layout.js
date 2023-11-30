@@ -1,5 +1,3 @@
-import Image from "next/image";
-import SearchInput from "./SearchInput";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import {ChatBubbleLeftRightIcon,ArchiveBoxIcon,CloudArrowUpIcon   } from '@heroicons/react/24/solid';
@@ -38,7 +36,8 @@ export default function RootLayout({ children }) {
 						</a>
 					</div>
 				</div>
-				<div className="w-full h-16"></div>
+				{/* <div className="w-full h-16"></div> */}
+				{/* 在这里添加填充物会导致居中问题 */}
 				{children}
 			</body>
 		</html>
