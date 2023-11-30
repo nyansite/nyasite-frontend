@@ -20,7 +20,7 @@ body {
 }
 
 @layer components {
-	.navbar_b {
+	.text_b {
 		@apply flex flex-auto items-center justify-center duration-300 bg-white rounded-xl border mx-4 h-12 w-20 hover:w-28 hover:bg-[#bfbfbf];
 	}
 	.img_b {

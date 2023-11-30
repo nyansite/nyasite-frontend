@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import {ChatBubbleLeftRightIcon,ArchiveBoxIcon,CloudArrowUpIcon   } from '@heroicons/react/24/solid';
+import SearchInput from "./SearchInput";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
 						<img src="/logo.svg" className=" w-16 h-16" />
 					</a>
 					<div className="absolute left-1/4">
-						<SearchInput />
+						<SearchInput/>
 					</div>
 					<div className=" absolute right-0 whitespace-nowrap flex items-center">
 						<a className="img_b">

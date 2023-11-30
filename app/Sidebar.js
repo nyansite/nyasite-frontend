@@ -1,9 +1,16 @@
 import "./sidebar.css";
+import { headers } from "next/headers";
+function get_header() {
+	const headersL = headers();
+	const JheadersList = {};
+	headersL.forEach((v, k) => (JheadersList[k] = v)); //迭代器->JSON
+	return JheadersList;
+}
 
 export function SidebarRight() {
 	return (
 		<div className="siderbar">
-
+			<AvatarBar/>
 		</div>
 	)
 }
@@ -15,14 +22,14 @@ async function AvatarBar() {
 		const list = await res.json()
 		return (
 			<div>
-				<img src={list.avatar} alt='avatar' />
+				<img src={list.avatar} alt='avatar' className=" h-12 w-12 rounded-full" />
 			</div>
 		)
 	} else if (res.status == 401) {
 		return (
-			<div className='flex flex-col gap-2 w-full'>
-				<a href='/login' className=" w-32 hover:w-28">登录</a>
-				<a href='/register' className="w-32 hover:w-28">注册</a>
+			<div className='flex items-center flex-col gap-2 w-full'>
+				<a href='/login' className="text_b w-32 hover:w-30">登录</a>
+				<a href='/register' className="text_b w-32 hover:w-30">注册</a>
 			</div>
 		)
 	}

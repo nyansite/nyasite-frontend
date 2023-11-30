@@ -2,6 +2,7 @@
 	width: 40vw;
 	display: flex;
 	align-items: flex-start;
+	/*从顶部开始保证补全栏正常显示*/
 	justify-content: flex-start;
 	gap: 0.5rem;
 	border-radius: 0.5rem;
