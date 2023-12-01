@@ -27,7 +27,7 @@ body {
 		@apply flex flex-auto gap-2 items-center justify-center duration-500 bg-white rounded-xl border border-white mx-4 h-14 w-14 hover:bg-[#bfbfbf] hover:w-28;
 	}
 }
-
+/*按钮的动态效果(暂时无法通过tailwind实现)*/
 .img_b div{
   transition: 500ms;
   width: 0;

@@ -1,9 +1,0 @@
-.capture {
-	width: 90vw;
-	height: 60vh;
-	background-color: whitesmoke;
-	border: 1rem solid gainsboro;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}

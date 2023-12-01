@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import Cookies from "universal-cookie";
 
-import { JumpToIndex, JumpToLogin } from "../Jump.js";
+import axios from "axios";
 import { PostVideo } from "./post.js";
 import "./post.css";
 import "../navbar.css";
@@ -13,10 +13,24 @@ function get_header() {
 	return JheadersList;
 }
 
-export async function handleClickForum(FormData) {
+export async function Upload(videoFiles) {
 	"use server";
 	var postHeaders = get_header();
-	const response = await fetch("http://localhost:8000/uapi/add_mainforum", {
+	var formData = new FormData
+	videoFiles.forEach( i => {
+		formData.append("video", i)
+	})
+	// axios for <progress/>
+	return axios.create({
+		url:"/upload_video",
+		method:"POST",
+		baseURL:"http://localhost:8000/uapi/",
+		headers: {
+			cookie: postHeaders.cookie,
+		},
+		data:formData,
+	})
+	/*const response = await fetch("http://localhost:8000/uapi/upload_video", {
 		method: "POST",
 		body: FormData,
 		credentials: "include",
@@ -24,7 +38,12 @@ export async function handleClickForum(FormData) {
 			cookie: postHeaders.cookie,
 		},
 	});
-	return response.status;
+	if (response.status==200){
+		const list = await response.json()
+		return list
+	}else{
+		return response.status
+	}*/
 }
 
 export default async function Post() {
@@ -32,16 +51,7 @@ export default async function Post() {
 	if (res.status == 200) {
 		const list = await res.json();
 		return (
-			<main style={{ rowGap: "2rem", height: "100vh", alignItems: "center" }}>
-				<div className="navbar w-full bg-white">
-					<a className="navbar-ico" href="/">
-						<img src="./logo.svg" alt="logo" />
-						<div>喵站</div>
-					</a>
-					<div className="center-after">
-						<img src={list.avatar} alt="avatar" />
-					</div>
-				</div>
+			<main>
 				<div>
 					<PostVideo />
 				</div>

@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
 							<ChatBubbleLeftRightIcon className="h-12 w-12  text-[#516e8b]" />
 							<div>论坛</div>
 						</a>
-						<a className="img_b">
+						<a className="img_b" href="/post">
 							<CloudArrowUpIcon  className="h-12 w-12 text-[#516e8b]" />
 							<div>上传</div>
 						</a>
