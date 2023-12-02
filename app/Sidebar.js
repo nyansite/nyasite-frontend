@@ -1,4 +1,5 @@
 import "./sidebar.css";
+import Image from "next/image";
 import { headers } from "next/headers";
 function get_header() {
 	const headersL = headers();
@@ -22,7 +23,7 @@ async function AvatarBar() {
 		const list = await res.json()
 		return (
 			<div className='flex items-center flex-col gap-2 w-32'>
-				<img src={list.avatar} alt='avatar' className=" h-12 w-12 rounded-full" />
+				<Image src={list.avatar} alt='avatar' className=" h-12 w-12 rounded-full" />
 			</div>
 		)
 	} else if (res.status == 401) {

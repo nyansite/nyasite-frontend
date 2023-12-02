@@ -64,7 +64,7 @@ export default function Login_c() {
 								alt="确定"
 								width={32}
 								height={32}
-								className="h-[2em] w-auto"
+								className="h-8 w-auto"
 							></Image>
 							{/* 必须指定宽高或填充,单位只能是px  https://nextjs.org/docs/app/api-reference/components/image#width
 							随便指定一个较小的值然后用css覆盖 */}
