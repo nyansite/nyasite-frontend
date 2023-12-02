@@ -10,7 +10,7 @@
 	},
 	"dependencies": {
 		"@heroicons/react": "^2.0.18",
-		"axios": "^1.6.2",
+		"alova": "^2.15.0",
 		"eslint": "8.48.0",
 		"eslint-config-next": "13.4.19",
 		"heroicons": "^2.0.18",

@@ -1,7 +1,10 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import axios from "axios";
 import { PostVideo } from "./post.js";
+import { createAlova, useRequest } from 'alova';
+import GlobalFetch from 'alova/GlobalFetch';
+import ReactHook from 'alova/react';
+
 function get_header() {
 	const headersL = headers();
 	const JheadersList = {};
@@ -16,16 +19,7 @@ export async function Upload(videoFiles) {
 	videoFiles.forEach((i) => {
 		formData.append("video", i);
 	});
-	// axios for <progress/>
-	return axios.create({
-		url: "/upload_video",
-		method: "POST",
-		baseURL: "http://localhost:8000/uapi/",
-		headers: {
-			cookie: postHeaders.cookie,
-		},
-		data: formData,
-	});
+	// alova for <progress/>
 	/*const response = await fetch("http://localhost:8000/uapi/upload_video", {
 		method: "POST",
 		body: FormData,
