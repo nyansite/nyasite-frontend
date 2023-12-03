@@ -9,6 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@alova/adapter-xhr": "^1.0.1",
 		"@heroicons/react": "^2.0.18",
 		"alova": "^2.15.0",
 		"eslint": "8.48.0",

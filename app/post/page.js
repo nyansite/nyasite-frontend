@@ -12,13 +12,26 @@ function get_header() {
 	return JheadersList;
 }
 
-export async function Upload(videoFiles) {
+export const alovaInstance = createAlova({
+	baseURL:"http://localhost:8000",
+	statesHook: ReactHook,
+	requestAdapter: xhrResponseAdapter(),
+	responded: response => response.json()
+});
+
+export async function UploadAlovaInstance(videoFiles) {
 	"use server";
 	var postHeaders = get_header();
 	var formData = new FormData();
 	videoFiles.forEach((i) => {
 		formData.append("video", i);
 	});
+	return alovaInstance.Post('/uapi/upload_video',formData,{
+		enableUpload: true,
+		headers: {
+			cookie: postHeaders.cookie,
+		},
+	})
 	// alova for <progress/>
 	/*const response = await fetch("http://localhost:8000/uapi/upload_video", {
 		method: "POST",
@@ -43,7 +56,7 @@ export default async function Post() {
 		return (
 			<main>
 				<div>
-					<PostVideo />
+					<PostVideo Upload={UploadAlovaInstance}/>
 				</div>
 			</main>
 		);
