@@ -38,7 +38,6 @@ export default function RootLayout({ children }) {
 					</div>
 				</div>
 				<div className="w-full h-16 absolute"></div>
-				{/* 在这里添加填充物会导致居中问题 */}
 				{children}
 			</body>
 		</html>

@@ -1,9 +1,6 @@
 "use client";
 
 export function PostVideo() {
-	async function uploadVideos(files) {
-		const uploadAxiosInstance = Upload(files);
-	}
 	xhr.open("POST", "/api/upload");
 	xhr.onprogress = function (event) {
 		if (event.lengthComputable) {
@@ -17,7 +14,6 @@ export function PostVideo() {
 			id="file"
 			accept="video/*"
 			type="file"
-			style={{ display: "none" }}
 			onChange={(e) => uploadVideos(e.target.files)}
 		/>
 	);
