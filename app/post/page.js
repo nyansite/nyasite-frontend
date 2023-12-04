@@ -1,9 +1,11 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { PostVideo } from "./post.js";
-
 export default async function Post() {
 	const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() });
+	const xhr = new XMLHttpRequest();
+	
+
 	if (res.status == 200) {
 		const list = await res.json();
 		return (
