@@ -1,10 +1,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import axios from "axios";
 import { PostVideo } from "./post.js";
-import { createAlova, useRequest } from 'alova';
-import GlobalFetch from 'alova/GlobalFetch';
-import ReactHook from 'alova/react';
-
 function get_header() {
 	const headersL = headers();
 	const JheadersList = {};
@@ -12,27 +9,23 @@ function get_header() {
 	return JheadersList;
 }
 
-export const alovaInstance = createAlova({
-	baseURL:"http://localhost:8000",
-	statesHook: ReactHook,
-	requestAdapter: xhrResponseAdapter(),
-	responded: response => response.json()
-});
-
-export async function UploadAlovaInstance(videoFiles) {
+export async function Upload(videoFiles) {
 	"use server";
 	var postHeaders = get_header();
 	var formData = new FormData();
 	videoFiles.forEach((i) => {
 		formData.append("video", i);
 	});
-	return alovaInstance.Post('/uapi/upload_video',formData,{
-		enableUpload: true,
+	// axios for <progress/>
+	return axios.create({
+		url: "/upload_video",
+		method: "POST",
+		baseURL: "http://localhost:8000/uapi/",
 		headers: {
 			cookie: postHeaders.cookie,
 		},
-	})
-	// alova for <progress/>
+		data: formData,
+	});
 	/*const response = await fetch("http://localhost:8000/uapi/upload_video", {
 		method: "POST",
 		body: FormData,
@@ -56,7 +49,7 @@ export default async function Post() {
 		return (
 			<main>
 				<div>
-					<PostVideo Upload={UploadAlovaInstance}/>
+					<PostVideo />
 				</div>
 			</main>
 		);

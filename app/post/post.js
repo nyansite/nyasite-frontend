@@ -1,11 +1,9 @@
 "use client";
 
-import { useRequest } from "alova";
-
 export function PostVideo({Upload}) {
 	
-	function uploadVideos(files){
-		const { uploading,data,onSuccess,onError } = useRequest(Upload(files))
+	async function uploadVideos(files){
+		const uploadAxiosInstance = Upload(files)
 		
 	}
 	if (step == 0) {
