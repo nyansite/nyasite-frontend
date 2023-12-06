@@ -12,6 +12,7 @@ export default function SearchInput({ suggestions }) {
 	const [tags, setTags] = useState([]);
 	function addTagbySug(event) {
 		let index = event.target.dataset.index;
+		console.log(index)
 		if (!tags.includes(index)) {
 			setTags([...tags, index]);
 		}

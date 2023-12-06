@@ -1,9 +1,10 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { PostVideo } from "./post.js";
-import { createAlova, useRequest } from 'alova';
-import GlobalFetch from 'alova/GlobalFetch';
+import { createAlova } from 'alova';
 import ReactHook from 'alova/react';
+import { xhrRequestAdapter } from '@alova/adapter-xhr';
+
 
 function get_header() {
 	const headersL = headers();
@@ -13,9 +14,9 @@ function get_header() {
 }
 
 export const alovaInstance = createAlova({
-	baseURL:"http://localhost:8000",
+	baseURL: "http://localhost:8000",
 	statesHook: ReactHook,
-	requestAdapter: xhrResponseAdapter(),
+	requestAdapter: xhrRequestAdapter(),
 	responded: response => response.json()
 });
 
@@ -26,7 +27,7 @@ export async function UploadAlovaInstance(videoFiles) {
 	videoFiles.forEach((i) => {
 		formData.append("video", i);
 	});
-	return alovaInstance.Post('/uapi/upload_video',formData,{
+	return alovaInstance.Post('/uapi/upload_video', formData, {
 		enableUpload: true,
 		headers: {
 			cookie: postHeaders.cookie,
@@ -54,11 +55,7 @@ export default async function Post() {
 	if (res.status == 200) {
 		const list = await res.json();
 		return (
-			<main>
-				<div>
-					<PostVideo Upload={UploadAlovaInstance}/>
-				</div>
-			</main>
+			<PostVideo Upload={UploadAlovaInstance} />
 		);
 	} else if (res.status == 401) {
 		return redirect("/login");

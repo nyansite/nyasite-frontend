@@ -52,3 +52,9 @@
 	width: 2rem;
 	height: 2rem;
 }
+.suggestion li{
+	background-color: whitesmoke;
+	display: flex;
+	gap: 0.5rem;
+	border-radius: 0.5rem;
+}
