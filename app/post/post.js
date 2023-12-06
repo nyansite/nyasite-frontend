@@ -3,9 +3,18 @@
 import { useState, } from "react";
 import Dropzone from 'react-dropzone'
 import { XMarkIcon } from "@heroicons/react/24/outline";
-
+import { XMLHttpRequest } from "xmlhttprequest";
 
 export function PostVideo({ Upload }) {
+	var xhr=new XMLHttpRequest()
+	xhr.open("POST", "/api/upload");
+	xhr.onprogress = function (event) {
+		if (event.lengthComputable) {
+			console.log(`Received ${event.loaded} of ${event.total} bytes`);
+		} else {
+			console.log(`Received ${event.loaded} bytes`); // 没有 Content-Length
+		}
+	};
 	const [step, setStep] = useState(0)
 	//0.等待拖拽,1.开始上传,2.上传完成,可以提交
 	const [videofiles, setVideofiles] = useState([])
