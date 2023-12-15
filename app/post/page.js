@@ -17,9 +17,7 @@ export default async function Post() {
 		const list = await res.json();
 		return (
 			<main>
-				<div>
-					<PostVideo />
-				</div>
+				
 			</main>
 		);
 	} else if (res.status == 401) {
