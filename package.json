@@ -10,7 +10,10 @@
 	},
 	"dependencies": {
 		"@heroicons/react": "^2.0.18",
+		"@uppy/dashboard": "^3.7.1",
+		"@uppy/drag-drop": "^3.0.3",
 		"@uppy/react": "^3.2.1",
+		"@uppy/tus": "^3.5.0",
 		"eslint": "8.48.0",
 		"eslint-config-next": "13.4.19",
 		"heroicons": "^2.0.18",
@@ -20,6 +23,7 @@
 		"react-dom": "^18.2.0",
 		"react-dropzone": "^14.2.3",
 		"swr": "^2.2.4",
+		"uppy": "^3.21.0",
 		"xmlhttprequest": "^1.8.0"
 	},
 	"devDependencies": {
