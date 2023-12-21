@@ -34,7 +34,7 @@ export default async function RootLayout({ children }) {
 	return (
 		<html lang="zh-hans">
 			<body className={inter.className}>
-				<div className="flex fixed  w-full bg-white h-16 top-0 items-center z-50">
+				<div className="flex fixed  w-full bg-white h-16 top-0 items-center z-50 shadow-md">
 					<a className="justify-self-start whitespace-nowrap flex items-center" href="/">
 						<Image alt="logo" width={32} height={32} src="/logo.svg" className=" w-16 h-16" />
 					</a>
@@ -56,8 +56,7 @@ export default async function RootLayout({ children }) {
 						</a>
 					</div>
 				</div>
-				<div className="w-full h-16 absolute"></div>
-				{children}
+				<div className=" relative top-20">{children}</div>
 			</body>
 		</html>
 	);
