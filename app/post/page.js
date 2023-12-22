@@ -9,22 +9,7 @@ function get_header() {
 	return JheadersList;
 }
 
-export async function uploadCover(formData) {
-	'use server'
-	const res = await fetch('https://picui.cn/api/v1/upload', {
-        method: 'POST',
-        credentials: 'omit',
-        headers: {
 
-        },
-        body: formData,
-    })
-	if(res.status == 200){
-		return await res.json()
-	}else{
-		return res.status
-	}
-}
 
 export default async function Post() {
 	//https://developers.cloudflare.com/stream/uploading-videos/direct-creator-uploads/#step-2-use-this-api-endpoint-with-your-tus-client
@@ -41,7 +26,7 @@ export default async function Post() {
 			const token = await resPICUItoken.text()
 			return (
 				<main>
-					<Post_c PICUItoken={token} UploadCoverFunc={uploadCover} />
+					<Post_c PICUItoken={token}/>
 				</main>
 			)
 		}

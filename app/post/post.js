@@ -9,7 +9,7 @@ import '@uppy/dashboard/dist/style.min.css'
 import '@uppy/drag-drop/dist/style.min.css'
 import Cropper from "react-cropper"
 import "cropperjs/dist/cropper.css"
-import { data } from "autoprefixer"
+import { UploadCoverFunc } from "./action.js"
 
 function UploadVideo() {
     const [uppyShow, setUppyShow] = useState(true)
@@ -46,7 +46,7 @@ function UploadVideo() {
     )
 }
 
-function UploadCover({PICUItoken,UploadCoverFunc,GetCoverUrl}) {
+function UploadCover({PICUItoken,GetCoverUrl}) {
     const [originalImg, setOriginalImg] = useState()
     const [coverImgBlob, setCoverImgBlob] = useState()
     const cropperRef = useRef()
@@ -78,9 +78,9 @@ function UploadCover({PICUItoken,UploadCoverFunc,GetCoverUrl}) {
         const canvas = cropper.getCroppedCanvas()
         let resizedCanvas = document.createElement("canvas");
         let resizedContext = resizedCanvas.getContext("2d");
-        resizedCanvas.width = 860;
-        resizedCanvas.height = 270;
-        resizedContext.drawImage(canvas, 0, 0, 860, 270);
+        resizedCanvas.width = 800;
+        resizedCanvas.height = 450;
+        resizedContext.drawImage(canvas, 0, 0, 800, 450);
         resizedContext.save()
         resizedCanvas.toBlob((blob) => {
             setCoverImgBlob(blob)
@@ -100,11 +100,11 @@ function UploadCover({PICUItoken,UploadCoverFunc,GetCoverUrl}) {
                     // Cropper.js options
                     crop={onCrop}
                     ref={cropperRef}
-                    minCropBoxWidth={860}
-                    minCropBoxHeight={270}
+                    minCropBoxWidth={800}
+                    minCropBoxHeight={450}
                     viewMode={2}
                     cropBoxResizable={false}
-                    aspectRatio={16 / 9}
+                    aspectRatio={16/9}
                 />
             </div>
             {coverImgBlob ?
@@ -114,13 +114,13 @@ function UploadCover({PICUItoken,UploadCoverFunc,GetCoverUrl}) {
     )
 }
 
-export function Post_c({ PICUItoken,UploadCoverFunc }) {
+export function Post_c({ PICUItoken}) {
     const [coverUrl,setCoverUrl] = useState('')
     return (
         <main className="flex flex-col w-full items-center">
             <div className="flex flex-col w-10/12 items-center">
                 <UploadVideo />
-                <UploadCover PICUItoken={PICUItoken} UploadCoverFunc={UploadCoverFunc} GetCoverUrl={setCoverUrl} />
+                <UploadCover PICUItoken={PICUItoken} GetCoverUrl={setCoverUrl} />
             </div>
         </main>
     )
