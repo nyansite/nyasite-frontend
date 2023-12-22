@@ -11,7 +11,7 @@ import Cropper from "react-cropper"
 import "cropperjs/dist/cropper.css"
 import { UploadCoverFunc } from "./action.js"
 
-function UploadVideo() {
+function UploadVideo({GetVideoUrl}) {
     const [uppyShow, setUppyShow] = useState(true)
     const [uppy] = useState(() => new Uppy({
         debug: true, autoProceed: true,
@@ -100,8 +100,10 @@ function UploadCover({PICUItoken,GetCoverUrl}) {
                     // Cropper.js options
                     crop={onCrop}
                     ref={cropperRef}
-                    minCropBoxWidth={800}
-                    minCropBoxHeight={450}
+                    marginWidth={800}
+                    marginHeight={450}
+                    minCropBoxWidth={400}
+                    minCropBoxHeight={225}
                     viewMode={2}
                     cropBoxResizable={false}
                     aspectRatio={16/9}
@@ -119,8 +121,11 @@ export function Post_c({ PICUItoken}) {
     return (
         <main className="flex flex-col w-full items-center">
             <div className="flex flex-col w-10/12 items-center">
-                <UploadVideo />
+                <UploadVideo/>
                 <UploadCover PICUItoken={PICUItoken} GetCoverUrl={setCoverUrl} />
+                <form>
+
+                </form>
             </div>
         </main>
     )
