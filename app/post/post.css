@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 @layer components{
-    .title{
-
+    .bar{
+        @apply flex justify-items-start text-xl gap-2 w-full
     }
-    .content{
-        
+    .title{
+        @apply font-semibold  w-20 flex justify-items-start items-center
     }
 }

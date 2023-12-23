@@ -10,8 +10,11 @@ import '@uppy/drag-drop/dist/style.min.css'
 import Cropper from "react-cropper"
 import "cropperjs/dist/cropper.css"
 import { UploadCoverFunc } from "./action.js"
+import "./post.css"
 
-function UploadVideo({GetVideoUrl}) {
+//UploadVideo
+
+function UploadVideo({ GetVideoUrl }) {
     const [uppyShow, setUppyShow] = useState(true)
     const [uppy] = useState(() => new Uppy({
         debug: true, autoProceed: true,
@@ -46,9 +49,12 @@ function UploadVideo({GetVideoUrl}) {
     )
 }
 
-function UploadCover({PICUItoken,GetCoverUrl}) {
+//uploadCover
+
+function UploadCoverContnet({ PICUItoken, GetCoverUrl,Display }) {
     const [originalImg, setOriginalImg] = useState()
     const [coverImgBlob, setCoverImgBlob] = useState()
+    const [uploadStatus, setUploadStatus] = useState('')
     const cropperRef = useRef()
     function getFilds() {
         const filedom = document.getElementById('file')
@@ -66,12 +72,22 @@ function UploadCover({PICUItoken,GetCoverUrl}) {
     async function uploadCover() {
         console.log(PICUItoken)
         var formData = new FormData()
-        var coverfile = new File([coverImgBlob],"cover.png",{type:"image/png"})
-        console.log(typeof coverfile)       
-        formData.append("file",coverfile)
+        var coverfile = new File([coverImgBlob], "cover.png", { type: "image/png" })
+        console.log(typeof coverfile)
+        formData.append("file", coverfile)
         formData.append("token", PICUItoken)
-        const json = await UploadCoverFunc(formData)
-        GetCoverUrl(json.data.links.url)
+        const result = await UploadCoverFunc(formData)
+        if (typeof result != "number") {
+            if (result.status == true) {
+                GetCoverUrl(result.data.links.url)
+                setUploadStatus("上传成功")
+            } else {
+                setUploadStatus("上传失败")
+            }
+        } else {
+            setUploadStatus("上传失败")
+        }
+
     }
     const onCrop = () => {
         const cropper = cropperRef.current?.cropper;
@@ -87,13 +103,12 @@ function UploadCover({PICUItoken,GetCoverUrl}) {
         }, "image/png", 0.75)
     }
     return (
-        <div className="flex flex-col w-9/12 items-center gap-2">
-            <div className="text-xl">封面上传</div>
-            <button className="text_b" onClick={getFilds}>
+        <>
+            <button className="text_b" onClick={getFilds} style={{display:Display?"block":"none"}}>
                 选择图片
                 <input id='file' accept="image/*" type="file" onChange={imgGet} style={{ display: "none" }} />
             </button>
-            <div className="w-full">
+            <div className="w-full" style={{display:Display?"block":"none"}}>
                 <Cropper
                     src={originalImg}
                     style={{ height: "100%", width: "100%" }}
@@ -106,25 +121,54 @@ function UploadCover({PICUItoken,GetCoverUrl}) {
                     minCropBoxHeight={225}
                     viewMode={2}
                     cropBoxResizable={false}
-                    aspectRatio={16/9}
+                    aspectRatio={16 / 9}
                 />
             </div>
-            {coverImgBlob ?
-                <button className="text_b" onClick={uploadCover}>上传</button>
-                : null}
+            <div className=" flex items-center gap-2" style={{display:Display?"block":"none"}}>
+                <button className="text_b" onClick={uploadCover} style={{ display: originalImg ? "block" : "none" }}>上传</button>
+                <div>{uploadStatus}</div>
+            </div>
+
+        </>
+    )
+}
+
+function UploadCover({ PICUItoken, GetCoverUrl }) {
+    const [uploadCoverShow, setUploadCoverShow] = useState(true)
+    function ChangeUploadCoverShowStatus() {
+        if (uploadCoverShow) {
+            setUploadCoverShow(false)
+        } else {
+            setUploadCoverShow(true)
+        }
+    }
+    return (
+        <div className="flex flex-col w-full items-center gap-2">
+            <div className="text-xl flex gap-2 items-center">
+                <div>封面上传</div>
+                <button className="img_b hover:w-14" onClick={ChangeUploadCoverShowStatus}>
+                    {uploadCoverShow ?
+                        <ArrowsPointingInIcon class="h-12 w-12 text-black" /> :
+                        <ArrowsPointingOutIcon class="h-12 w-12 text-black" />
+                    }
+                </button>
+            </div>
+            <UploadCoverContnet PICUItoken={PICUItoken} GetCoverUrl={GetCoverUrl} Display={uploadCoverShow}/>
         </div>
     )
 }
 
-export function Post_c({ PICUItoken}) {
-    const [coverUrl,setCoverUrl] = useState('')
+//body
+
+export function Post_c({ PICUItoken }) {
+    const [coverUrl, setCoverUrl] = useState('')
     return (
         <main className="flex flex-col w-full items-center">
-            <div className="flex flex-col w-10/12 items-center">
-                <UploadVideo/>
+            <div className="flex flex-col w-7/12 items-center gap-6">
+                <UploadVideo />
                 <UploadCover PICUItoken={PICUItoken} GetCoverUrl={setCoverUrl} />
-                <form>
-
+                <form className="flex flex-col w-full items-start">
+                    <div className="bar"><div className="title">标题</div><div className=" w-full"><input id="title" className=" w-full" type="text" /></div></div>
                 </form>
             </div>
         </main>
