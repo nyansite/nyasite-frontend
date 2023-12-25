@@ -4,7 +4,7 @@
 
 @layer components{
     .bar{
-        @apply flex justify-items-start text-xl gap-2 w-full
+        @apply flex justify-items-start text-xl gap-2 w-full items-start
     }
     .title{
         @apply font-semibold  w-20 flex justify-items-start items-center
