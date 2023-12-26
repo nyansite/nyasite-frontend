@@ -2,11 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-    .bar{
+@layer components {
+    .bar {
         @apply flex justify-items-start text-xl gap-2 w-full items-start
     }
-    .title{
-        @apply font-semibold  w-20 flex justify-items-start items-center
+
+    .title {
+        @apply font-semibold w-20 flex justify-items-start items-center
     }
+}
+
+.ReactTags__tagInputField {
+    /*w-full border border-gray-400  px-2 py-1 text-gray-700 in tailwind*/
+    width: 100%;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(156 163 175 / var(--tw-border-opacity));
+    padding-left: 0.5rem/* 8px */;
+    padding-right: 0.5rem/* 8px */;
+    padding-top: 0.25rem/* 4px */;
+    padding-bottom: 0.25rem/* 4px */;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.ReactTags__selected span{
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(156 163 175 / var(--tw-border-opacity));
+    padding-left: 0.5rem/* 8px */;
+    padding-right: 0.5rem/* 8px */;
 }

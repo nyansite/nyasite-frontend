@@ -134,7 +134,6 @@ function UploadCoverContnet({ PICUItoken, GetCoverUrl, Display }) {
                 <button className="text_b" onClick={uploadCover} style={{ display: originalImg ? "block" : "none" }}>上传</button>
                 <div>{uploadStatus}</div>
             </div>
-
         </>
     )
 }
@@ -204,16 +203,16 @@ export function Post_c({ PICUItoken, TagList }) {
     return (
         <main className="flex flex-col w-full items-center">
             <div className="flex flex-col w-7/12 items-center gap-6">
-                <UploadVideo />
-                <UploadCover PICUItoken={PICUItoken} GetCoverUrl={setCoverUrl} />
+                        <UploadVideo />
+                        <UploadCover PICUItoken={PICUItoken} GetCoverUrl={setCoverUrl} />
                 <form className="flex flex-col w-full gap-6">
                     <div className="bar">
                         <label className="title">标题</label>
-                        <div className="w-full"><input id="title" className="w-full border border-gray-400 round px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
+                        <div className="w-full"><input id="title" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
                     </div>
                     <div className="bar items-start">
                         <label className="title">简介</label>
-                        <div className="w-full"><textarea id="description" rows={4} className="w-full border border-gray-400 round px-2 py-1 text-gray-700" autoComplete="off" /></div>
+                        <div className="w-full"><textarea id="description" rows={4} className="w-full border border-gray-400  px-2 py-1 text-gray-700" autoComplete="off" /></div>
                     </div>
                     <div className="bar items-start">
                         <label className="title">标签</label>
@@ -232,7 +231,12 @@ export function Post_c({ PICUItoken, TagList }) {
                         </div>
                     </div>
                 </form>
-                <div className="w-full h-12"></div>
+                <div className="flex items-start justify-end w-full h-32">
+                    <div className="w-32 flex items-center justify-items-center">
+                        <button className="text_b">发布</button>
+                    </div>
+                    
+                </div>
             </div>
         </main>
     )
