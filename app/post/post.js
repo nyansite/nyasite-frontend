@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef, useState,useCallback } from "react"
+import React, { useEffect, useRef, useState, useCallback } from "react"
 import { render } from "react-dom"
 import { ArrowsPointingInIcon, ArrowsPointingOutIcon } from "@heroicons/react/24/outline"
 //Uppy
@@ -65,15 +65,15 @@ function UploadCoverContnet({ PICUItoken, GetCoverUrl, Display }) {
     const [uploadStatus, setUploadStatus] = useState('')
     const cropperRef = useRef()
     //dragzone
-    const onDrop = useCallback(acceptFiles =>{
+    const onDrop = useCallback(acceptFiles => {
         const reader = new FileReader()
         reader.onload = function (e) {
             let base64 = e.target.result
             setOriginalImg(base64)
         }
         reader.readAsDataURL(acceptFiles[0])
-    },[])
-    const {getRootProps,getInputProps} = useDropzone({onDrop})
+    }, [])
+    const { getRootProps, getInputProps } = useDropzone({ onDrop })
     function getFilds() {
         const filedom = document.getElementById('file')
         filedom.click()
@@ -180,6 +180,7 @@ function UploadCover({ PICUItoken, GetCoverUrl }) {
 
 export function Post_c({ PICUItoken, TagList }) {
     //select tags
+    const [uploadVideoStauts,setUploadVideoStauts] = useState(false)
     const [tags, setTags] = useState([])
     const suggestions = TagList.map((tag) => {
         return {
@@ -210,21 +211,40 @@ export function Post_c({ PICUItoken, TagList }) {
         console.log('The tag at index ' + index + ' was clicked');
     };
     //
-    const [coverUrl, setCoverUrl] = useState('')
 
+    const [coverUrl, setCoverUrl] = useState('')
+    async function postVideo() {
+        let formData = new FormData(video)
+        for (var pair of formData.entries()) {
+            if(pair[0]=="title"&&pair[1]==""){
+                alert("请输入标题")
+                return
+            }
+        }
+        if(coverUrl == ""){
+            alert("请上传封面")
+        }
+        formData.append("cover", coverUrl)
+        let tagString = ""
+        tags.forEach((tag) => {
+            tagString = tagString + tag.id + ";"
+        })
+        formData.append("tags", tagString)
+        console.log(formData)
+    }
     return (
         <main className="flex flex-col w-full items-center">
             <div className="flex flex-col w-7/12 items-center gap-6">
-                        <UploadVideo />
-                        <UploadCover PICUItoken={PICUItoken} GetCoverUrl={setCoverUrl} />
-                <form className="flex flex-col w-full gap-6">
+                <UploadVideo />
+                <UploadCover PICUItoken={PICUItoken} GetCoverUrl={setCoverUrl} />
+                <form id="video" className="flex flex-col w-full gap-6">
                     <div className="bar">
                         <label className="title">标题</label>
-                        <div className="w-full"><input id="title" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
+                        <div className="w-full"><input name="title" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
                     </div>
                     <div className="bar items-start">
                         <label className="title">简介</label>
-                        <div className="w-full"><textarea id="description" rows={4} className="w-full border border-gray-400  px-2 py-1 text-gray-700" autoComplete="off" /></div>
+                        <div className="w-full"><textarea name="description" rows={4} className="w-full border border-gray-400  px-2 py-1 text-gray-700" autoComplete="off" /></div>
                     </div>
                     <div className="bar items-start">
                         <label className="title">标签</label>
@@ -245,9 +265,8 @@ export function Post_c({ PICUItoken, TagList }) {
                 </form>
                 <div className="flex items-start justify-end w-full h-32">
                     <div className="w-32 flex items-center justify-items-center">
-                        <button className="text_b">发布</button>
+                        <button className="text_b" onClick={postVideo}>发布</button>
                     </div>
-                    
                 </div>
             </div>
         </main>
