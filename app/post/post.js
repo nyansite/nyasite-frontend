@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState,useCallback } from "react"
 import { render } from "react-dom"
 import { ArrowsPointingInIcon, ArrowsPointingOutIcon } from "@heroicons/react/24/outline"
 //Uppy
@@ -9,6 +9,8 @@ import { Dashboard } from "@uppy/react"
 import '@uppy/core/dist/style.min.css'
 import '@uppy/dashboard/dist/style.min.css'
 import '@uppy/drag-drop/dist/style.min.css'
+//dragzone
+import { useDropzone } from "react-dropzone"
 //cropper
 import Cropper from "react-cropper"
 import "cropperjs/dist/cropper.css"
@@ -62,6 +64,16 @@ function UploadCoverContnet({ PICUItoken, GetCoverUrl, Display }) {
     const [coverImgBlob, setCoverImgBlob] = useState()
     const [uploadStatus, setUploadStatus] = useState('')
     const cropperRef = useRef()
+    //dragzone
+    const onDrop = useCallback(acceptFiles =>{
+        const reader = new FileReader()
+        reader.onload = function (e) {
+            let base64 = e.target.result
+            setOriginalImg(base64)
+        }
+        reader.readAsDataURL(acceptFiles[0])
+    },[])
+    const {getRootProps,getInputProps} = useDropzone({onDrop})
     function getFilds() {
         const filedom = document.getElementById('file')
         filedom.click()
@@ -110,9 +122,9 @@ function UploadCoverContnet({ PICUItoken, GetCoverUrl, Display }) {
     }
     return (
         <>
-            <button className="text_b" onClick={getFilds} style={{ display: Display ? "block" : "none" }}>
-                选择图片
-                <input id='file' accept="image/*" type="file" onChange={imgGet} style={{ display: "none" }} />
+            <button className="text_b w-36 hover:w-44" onClick={getFilds} style={{ display: Display ? "block" : "none" }} {...getRootProps()}>
+                选择图片(可拖拽)
+                <input id='file' accept="image/*" type="file" onChange={imgGet} style={{ display: "none" }} {...getInputProps()} />
             </button>
             <div className="w-full" style={{ display: Display ? "block" : "none" }}>
                 <Cropper
