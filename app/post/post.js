@@ -180,12 +180,12 @@ function UploadCover({ PICUItoken, GetCoverUrl }) {
 
 export function Post_c({ PICUItoken, TagList }) {
     //select tags
-    const [uploadVideoStauts,setUploadVideoStauts] = useState(false)
+    const [uploadVideoStauts, setUploadVideoStauts] = useState(false)
     const [tags, setTags] = useState([])
     const suggestions = TagList.map((tag) => {
         return {
-            id: tag,
-            text: tag,
+            id: String(tag.Id),
+            text: tag.Text,
         }
     })
     console.log(suggestions)
@@ -216,21 +216,23 @@ export function Post_c({ PICUItoken, TagList }) {
     async function postVideo() {
         let formData = new FormData(video)
         for (var pair of formData.entries()) {
-            if(pair[0]=="title"&&pair[1]==""){
+            if (pair[0] == "title" && pair[1] == "") {
                 alert("请输入标题")
                 return
             }
         }
-        if(coverUrl == ""){
-            alert("请上传封面")
-        }
+        //if (coverUrl == "") {
+        //    alert("请上传封面")
+        //    return
+        //}
         formData.append("cover", coverUrl)
-        let tagString = ""
         tags.forEach((tag) => {
-            tagString = tagString + tag.id + ";"
+            console.log(tag)
+            formData.append("tags", tag.id)
         })
-        formData.append("tags", tagString)
-        console.log(formData)
+        for (var i of formData.entries()){
+            console.log(i[0]+" "+i[1])
+        }
     }
     return (
         <main className="flex flex-col w-full items-center">

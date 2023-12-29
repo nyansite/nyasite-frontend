@@ -32,4 +32,17 @@
     border-color: rgb(156 163 175 / var(--tw-border-opacity));
     padding-left: 0.5rem/* 8px */;
     padding-right: 0.5rem/* 8px */;
+    /*gap is not vaild*/
+    margin-right: 0.15rem;
 }
+
+
+.ReactTags__suggestions{
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(156 163 175 / var(--tw-border-opacity));
+    padding-left: 0.5rem/* 8px */;
+    padding-right: 0.5rem/* 8px */;
+}
+
+

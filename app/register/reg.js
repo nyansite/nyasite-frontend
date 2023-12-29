@@ -61,7 +61,7 @@ export default function Reg_c() {
 						/>
 					</label>
 					<div>
-						<button onClick={handleClick}>登录</button>
+						<button onClick={handleClick}>注册</button>
 					</div>
 				</form>
 			</div>
