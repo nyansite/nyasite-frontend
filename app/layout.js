@@ -56,7 +56,8 @@ export default async function RootLayout({ children }) {
 						</a>
 					</div>
 				</div>
-				<div className=" relative top-20">{children}</div>
+				<div className=" relative top-20 h-full">{children}</div>
+				<div></div>
 			</body>
 		</html>
 	);

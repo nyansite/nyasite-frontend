@@ -17,7 +17,7 @@ import "cropperjs/dist/cropper.css"
 //react-tag-input
 import { WithContext as ReactTags } from 'react-tag-input';
 //self
-import { UploadCoverFunc } from "./action.js"
+import { UploadCoverFunc,UploadVideoFunc } from "./action.js"
 import "./post.css"
 
 //UploadVideo
@@ -73,11 +73,7 @@ function UploadCoverContnet({ PICUItoken, GetCoverUrl, Display }) {
         }
         reader.readAsDataURL(acceptFiles[0])
     }, [])
-    const { getRootProps, getInputProps } = useDropzone({ onDrop })
-    function getFilds() {
-        const filedom = document.getElementById('file')
-        filedom.click()
-    }
+    const { getRootProps, getInputProps } = useDropzone({ onDrop,accept:"image/*"})
     function imgGet(e) {
         const filedata = e.target.files[0]
         let reader = new FileReader()
@@ -122,7 +118,7 @@ function UploadCoverContnet({ PICUItoken, GetCoverUrl, Display }) {
     }
     return (
         <>
-            <button className="text_b w-36 hover:w-44" onClick={getFilds} style={{ display: Display ? "block" : "none" }} {...getRootProps()}>
+            <button className="text_b w-36 hover:w-44" style={{ display: Display ? "block" : "none" }} {...getRootProps()}>
                 选择图片(可拖拽)
                 <input id='file' accept="image/*" type="file" onChange={imgGet} style={{ display: "none" }} {...getInputProps()} />
             </button>
@@ -230,8 +226,11 @@ export function Post_c({ PICUItoken, TagList }) {
             console.log(tag)
             formData.append("tags", tag.id)
         })
-        for (var i of formData.entries()){
-            console.log(i[0]+" "+i[1])
+        const resStauts = await UploadVideoFunc(formData)
+        if(resStauts == 200){
+            alert("上传成功")
+        }else{
+            alert("上传失败")
         }
     }
     return (
