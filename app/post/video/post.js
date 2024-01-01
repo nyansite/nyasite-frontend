@@ -217,10 +217,10 @@ export function Post_c({ PICUItoken, TagList }) {
                 return
             }
         }
-        //if (coverUrl == "") {
-        //    alert("请上传封面")
-        //    return
-        //}
+        if (coverUrl == "") {
+            alert("请上传封面")
+            return
+        }
         formData.append("cover", coverUrl)
         tags.forEach((tag) => {
             console.log(tag)
