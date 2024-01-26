@@ -1,6 +1,6 @@
 import { FilmIcon } from "@heroicons/react/24/outline";
 
-export default function POST() {
+export default function Page() {
     return (
         <main className="flex flex-col w-full items-center">
             <div className="flex w-10/12 justify-center items-center">

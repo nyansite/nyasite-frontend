@@ -8,7 +8,7 @@ function get_header() {
 	return JheadersList;
 }
 
-export default async function login() {
+export default async function Page() {
 	const res = await fetch("http://localhost:8000/api/user_status", {
 		headers: get_header(),
 	});

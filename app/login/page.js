@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import Login_c from "./login";
 import { redirect } from "next/navigation";
 
-export default async function login() {
+export default async function Page() {
 	const cookieStore = cookies();
 	const is_login = cookieStore.get("is_login");
 	if (!is_login) {

@@ -11,7 +11,7 @@ function get_header() {
 
 
 
-export default async function PostVideo() {
+export default async function Page() {
 	//https://developers.cloudflare.com/stream/uploading-videos/direct-creator-uploads/#step-2-use-this-api-endpoint-with-your-tus-client
 	//请使用tus客户端如uppy或tus-js-client
 	const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() });

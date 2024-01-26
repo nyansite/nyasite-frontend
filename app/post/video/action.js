@@ -22,7 +22,7 @@ export async function UploadCoverFunc(formData) {
 }
 
 export async function UploadVideoFunc(formData) {
-	const res = await fetch("http://127.0.0.1:8000/api/upload_video",{
+	const res = await fetch("http://localhost:8000/api/upload_video",{
 		method:"POST",
 		body:formData,
 		headers:{
