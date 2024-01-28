@@ -1,0 +1,22 @@
+.quantity {
+    position: relative;
+    padding: 0 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0.8;
+  }
+  .quantity:hover {
+    opacity: 1;
+  }
+  .quantity_item {
+    padding: 5px 20px;
+    font-weight: normal;
+  }
+  .quantity_item:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .quantity_item-active {
+    color: var(--theme-color);
+  }
