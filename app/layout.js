@@ -33,7 +33,7 @@ export default async function RootLayout({ children }) {
 	const list = await res.json()
 	return (
 		<html lang="zh-hans">
-			<body className={inter.className}>
+			<body className={inter.className} style={{minWidth:"800px"}}>
 				<div className="flex fixed  w-full bg-white h-16 top-0 items-center z-50 shadow-md">
 					<a className="justify-self-start whitespace-nowrap flex items-center" href="/">
 						<Image alt="logo" width={32} height={32} src="/logo.svg" className=" w-16 h-16" />

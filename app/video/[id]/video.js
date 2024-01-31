@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useRef, useEffect } from "react";
 import { NPlayer } from "./nplayer.ts";
 import { Popover } from "nplayer";
@@ -45,6 +45,7 @@ export function VideoPlayer({ VideoUrl, DanmakuOptions, Vid, SendDamaku }) {
                     alert("发送失败")
             }
         })
+        hls.current.attachMedia(player.current.video)
         hls.current.on(Hls.Events.MEDIA_ATTACHED, function () {
             hls.current.on(Hls.Events.MANIFEST_PARSED, function () {
                 //https://nplayer.js.org/docs/examples/quantity-switch
@@ -90,35 +91,59 @@ export function VideoPlayer({ VideoUrl, DanmakuOptions, Vid, SendDamaku }) {
                 Quantity.current.popover.panelEl.appendChild(frag)
                 Quantity.current.el.style.display = "block"
 
-                listener(hls.current.currentLevel)(true)
+                listener(1)(true)
                 // 初始化当前清晰度
             })
             hls.current.loadSource(VideoUrl)
+            console.log(hls.current.bandwidthEstimate)
         })
     }, [])
     return (
-        <div className=" w-10/12">
+        <div className=" w-4/5">
             <NPlayer
                 ref={player}
                 className=" w-full"
                 options={{
                     controls: [[
-                    "play",
-                    "volume",
-                    "time",
-                    "spacer",
-                    Quantity.current,
-                    "airplay",
-                    "settings",
-                    "web-fullscreen",
-                    "fullscreen",
-                    "danmaku-settings"
-                ], ['progress']],
+                        "play",
+                        "volume",
+                        "time",
+                        "spacer",
+                        Quantity.current,
+                        "airplay",
+                        "settings",
+                        "web-fullscreen",
+                        "fullscreen",
+                        "danmaku-settings"
+                    ], ['progress']],
                     plugins: [new Plugin(DanmakuOptions)],
                 }}
             />
         </div>
     )
+}
+
+export function Descrption({ Desc }) {
+    const [doesHideOverflow, setDoesHideOverflow] = useState(false)
+    const descrptionDiv = useRef()
+    const [isOverflow, setIsOverflow] = useState(true)
+    useLayoutEffect(() => {
+        console.log(descrptionDiv.current.clientHeight - descrptionDiv.current.scrollHeight)
+        setIsOverflow(descrptionDiv.current.clientHeight < descrptionDiv.current.scrollHeight)
+    }, [])
+    return (
+        <div className=" w-3/4 h-full flex flex-col items-end gap-1">
+            <div className="w-full ">
+                <div className={doesHideOverflow ? null : "line-clamp-3"} ref={descrptionDiv}>
+                    {Desc}
+                </div>
+            </div>
+            {isOverflow ? <button onClick={() => setDoesHideOverflow(!doesHideOverflow)} className=" text_b w-16 hover:w-16">
+                {doesHideOverflow ? "收起" : "展开"}
+            </button> : null}
+        </div>
+    )
+
 }
 
 export function Author({ Author, Avatar, Descrption }) {
