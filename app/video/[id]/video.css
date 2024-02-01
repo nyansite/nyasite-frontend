@@ -29,6 +29,7 @@
   color: var(--theme-color);
 }
 
+
 @layer components {
   .unit-emoji {
     @apply flex flex-auto items-center justify-center duration-300 rounded-xl mx-4 h-12 w-20 border-solid ;

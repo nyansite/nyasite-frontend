@@ -1,12 +1,42 @@
 "use client"
 import { useState } from "react"
 import ReactMarkdown from 'react-markdown'
+import Pagination from "rc-pagination"
+import "rc-pagination/assets/index.css"
 import "./video.css"
-import { TimestampToDate } from "@/app/actions"
+import { ClickEmoji, GetComments } from "./actions"
+
+
+function TimestampToDate(timestamp) {
+    const date = new Date(timestamp * 1000)
+    return date.toLocaleDateString() + " " + date.toLocaleTimeString().substring(0, 8)
+}
+
+export function CommentsEntire({Content,Vid}) {
+    const [content,setContent] = useState(Content)
+    async function onChange(current, pageSize) {
+        const res = await GetComments(Vid,current)
+        setContent(res)
+    }
+
+    return (
+        <div className=" flex flex-col items-center justify-center w-full">
+            <Comments Content={content}/>
+            <Pagination
+                showQuickJumper
+                showSizeChanger
+                defaultPageSize={20}
+                defaultCurrent={1}
+                onChange={onChange}
+                total={content.Count}
+            />
+        </div>
+    )
+}
+
 
 export function Comments({ Content }) {
-    const showData = Content.Body
-    var showList = showData.map(i =>
+    var showList = Content.Body.map(i =>
         <li className=" flex w-full gap-4" key={i.Id}>
             <div className=" w-28 flex flex-col items-center">
                 <div className=" w-full h-28 flex justify-items-center items-center">
@@ -14,33 +44,39 @@ export function Comments({ Content }) {
                 </div>
                 <div className=" w-full text-gray-600">{Content.UserShow.find(user => user.Id == i.Author).Name}</div>
             </div>
-            <div className=" flex flex-col w-full gap-2">
+            <div className=" flex flex-col gap-2 flex-auto" style={{width:"calc(100% - 8rem)"}}>
                 <ReactMarkdown className=" w-full">{i.Text}</ReactMarkdown>
                 <div className=" text-gray-500">{TimestampToDate(i.CreatedAt)}</div>
-                <EmojiBar fmct={i}/>
-                <CommentReply Replies={i.CRdisplay} Authors={Content.UserShow}/>
+                <EmojiBar fmct={i} />
+                <CommentReply Replies={i.CRdisplay} Authors={Content.UserShow} />
                 <button className=" text_b self-end">详细</button>
             </div>
         </li>
     )
-    return(
-        <ul className=" flex flex-col gap-2 w-9/12">
+    return (
+        <ul className=" flex flex-col gap-2 w-full">
             {showList}
         </ul>
     )
 }
 
 function CommentReply({ Replies, Authors }) {
-    var showList = Replies.map(i =>
-        <div className=" w-full flex h-4 gap-2">
-            <img className=" w-4 h-4 rounded-full" src={Authors.find(user => user.Id == i.Author).Avatar} />
-            <div className=" w-full truncate">{i.Text}</div>
-        </div>
-    )
-    return(
-        <>{showList}</>
-    )
+    if(Replies == null){
+        return null
+    }else{
+        var showList = Replies.map(i =>
+            <div className=" flex items-center justify-center h-5 gap-2">
+                <img className=" w-4 h-4 rounded-full" src={Authors.find(user => user.Id == i.Author).Avatar} />
+                <div className=" h-5 text-base truncate" style={{width:"calc(100% - 1.5rem)"}}>{i.Text}</div>
+            </div>
+        )
+        return (
+            <>{showList}</>
+        )
+    }
 }
+
+
 
 function EmojiBar({ fmct }) {
     const [choose, setChoose] = useState(fmct.Choose)
@@ -80,10 +116,7 @@ function EmojiBar({ fmct }) {
             break
     }
     async function handleClickChangeEmoji(cid, emoji) {
-        if (emoji == choose) {
-            return
-        }
-        //const code = await changeEmoji(cid, emoji)
+        const code = await ClickEmoji(cid, emoji)
         if (code == 200) {
             setChoose(emoji)
         } else {
@@ -94,7 +127,7 @@ function EmojiBar({ fmct }) {
     //如果被选择就显示阴影 ((choose == 1) ? 'bg-gray-300' : 'bg-white  hover:bg-[#bfbfbf]')}>{"👍" + ((choose == 1)? (like+1):like)
     //补回用户选择的表情 ((choose == 1)? (like+1):like)
     return (
-        <div className=" flex items-center gap-2 w-full justify-start flex-wrap">
+        <div className=" flex items-center gap-2 justify-start flex-wrap">
             <button onClick={() => handleClickChangeEmoji(fmct.Id, 1)} className={"unit-emoji " + ((choose == 1) ? 'bg-gray-300' : 'bg-white  hover:bg-[#bfbfbf]')}>{"👍" + ((choose == 1) ? (like + 1) : like)}</button>
             <button onClick={() => handleClickChangeEmoji(fmct.Id, 2)} className={"unit-emoji " + ((choose == 2) ? 'bg-gray-300' : 'bg-white  hover:bg-[#bfbfbf]')}>{"👎" + ((choose == 2) ? (dislike + 1) : dislike)}</button>
             <button onClick={() => handleClickChangeEmoji(fmct.Id, 3)} className={"unit-emoji " + ((choose == 3) ? 'bg-gray-300' : 'bg-white  hover:bg-[#bfbfbf]')}>{"😄" + ((choose == 3) ? (smile + 1) : smile)}</button>

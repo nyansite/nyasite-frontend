@@ -132,7 +132,7 @@ export function Descrption({ Desc }) {
         setIsOverflow(descrptionDiv.current.clientHeight < descrptionDiv.current.scrollHeight)
     }, [])
     return (
-        <div className=" w-3/4 h-full flex flex-col items-end gap-1">
+        <div className=" w-full flex flex-col items-end gap-1">
             <div className="w-full ">
                 <div className={doesHideOverflow ? null : "line-clamp-3"} ref={descrptionDiv}>
                     {Desc}
@@ -153,3 +153,4 @@ export function Author({ Author, Avatar, Descrption }) {
         </div>
     )
 }
+

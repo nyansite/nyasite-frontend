@@ -2,9 +2,9 @@ import { headers } from 'next/headers'
 import { EyeIcon, ClockIcon } from '@heroicons/react/24/outline'
 import { redirect } from "next/navigation";
 import { VideoPlayer, Author, Descrption } from './video.js';
-import { Comments } from './comment.js'
-import { SendBullet } from './actions.js'
-import { TimestampToDate } from '@/app/actions.js';
+import ReactMarkdown from 'react-markdown'
+import { GetComments, SendBullet } from './actions.js'
+import { Comments, CommentsEntire } from './comment.js';
 
 function get_header() {
     const headersL = headers();
@@ -13,7 +13,10 @@ function get_header() {
     return JheadersList;
 }
 
-
+function TimestampToDate(timestamp) {
+    const date = new Date(timestamp * 1000)
+    return date.toLocaleDateString() + " " + date.toLocaleTimeString().substring(0, 8)
+}
 
 export default async function Page({ params }) {
     const id = params.id
@@ -26,8 +29,6 @@ export default async function Page({ params }) {
         const data = await res.json()
         const danmakuRes = await fetch("http://localhost:8000/api/get_bullets/" + id, { headers: get_header() })
         const danmaku = await danmakuRes.json()
-        const commentsRes = await fetch("http://localhost:8000/api/video_comment/" + id + "/1", { headers: get_header() })
-        const comments = await commentsRes.json()
         return (
             <main className=" flex flex-col items-center gap-12">
                 <div className=" flex w-10/12 gap-4 h-8 justify-between">
@@ -45,9 +46,12 @@ export default async function Page({ params }) {
                     <Author />
                 </div>
                 <VideoPlayer VideoUrl={data.videoPath} DanmakuOptions={danmaku} Vid={params.id} SendDamaku={SendBullet} />
-                <div className='flex flex-col w-10/12 gap-16 h-8 justify-between'>
-                    <Descrption Desc={data.description} />
-                    <Comments Content={comments} />
+                <div className='flex w-10/12 justify-between'>
+                    <div className=' flex flex-col w-3/4 gap-16'>
+                        <Descrption Desc={data.description} />
+                        <CommentsDisplay Vid={id} />
+                    </div>
+
                 </div>
             </main>
         )
@@ -55,3 +59,22 @@ export default async function Page({ params }) {
         redirect("/404")
     }
 }
+
+async function CommentsDisplay({ Vid }) {
+    const content = await GetComments(Vid, 1)
+    if (typeof content == "number") {
+        if (content == 404) {
+            return null
+        } else {
+            return <div className=' w-full text-center'>获取评论出错</div>
+        }
+    } else {
+        if (content.Count > 20) {
+            return <CommentsEntire Content={content} Vid={Vid} />
+        } else {
+            return <div className=' w-full'><Comments Content={content} /></div>
+        }
+    }
+}
+
+

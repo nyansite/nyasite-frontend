@@ -23,6 +23,7 @@
 		"next": "^14.0.4",
 		"nextjs": "^0.0.3",
 		"nplayer": "^1.0.12",
+		"rc-pagination": "^4.0.4",
 		"react": "18.2.0",
 		"react-cropper": "^2.3.3",
 		"react-dom": "^18.2.0",
