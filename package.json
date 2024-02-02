@@ -15,8 +15,7 @@
 		"@uppy/drag-drop": "^3.0.3",
 		"@uppy/react": "^3.2.1",
 		"@uppy/tus": "^3.5.0",
-		"eslint": "8.48.0",
-		"eslint-config-next": "13.4.19",
+		
 		"heroicons": "^2.0.18",
 		"hls.js": "^1.5.2",
 		"md-editor-rt": "^4.11.0",
@@ -32,12 +31,14 @@
 		"react-tag-input": "^6.8.1",
 		"swr": "^2.2.4",
 		"typescript": "^5.3.3",
-		"uppy": "^3.21.0",
-		"xmlhttprequest": "^1.8.0"
+		"uppy": "^3.21.0"
 	},
 	"devDependencies": {
 		"@types/node": "20.11.6",
 		"@types/react": "18.2.48",
+		"eslint": "8.48.0",
+		"eslint-config-next": "13.4.19",
+		"typescript": "^5.3.3",
 		"autoprefixer": "^10.4.16",
 		"postcss": "^8.4.31",
 		"prettier": "3.1.0",
