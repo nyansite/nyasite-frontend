@@ -95,7 +95,6 @@ export function VideoPlayer({ VideoUrl, DanmakuOptions, Vid, SendDamaku }) {
                 // 初始化当前清晰度
             })
             hls.current.loadSource(VideoUrl)
-            console.log(hls.current.bandwidthEstimate)
         })
     }, [])
     return (
@@ -128,7 +127,6 @@ export function Descrption({ Desc }) {
     const descrptionDiv = useRef()
     const [isOverflow, setIsOverflow] = useState(true)
     useLayoutEffect(() => {
-        console.log(descrptionDiv.current.clientHeight - descrptionDiv.current.scrollHeight)
         setIsOverflow(descrptionDiv.current.clientHeight < descrptionDiv.current.scrollHeight)
     }, [])
     return (
@@ -138,7 +136,7 @@ export function Descrption({ Desc }) {
                     {Desc}
                 </div>
             </div>
-            {isOverflow ? <button onClick={() => setDoesHideOverflow(!doesHideOverflow)} className=" text_b w-16 hover:w-16">
+            {isOverflow ? <button onClick={() => setDoesHideOverflow(!doesHideOverflow)} className=" text_b w-16 h-8 hover:w-16">
                 {doesHideOverflow ? "收起" : "展开"}
             </button> : null}
         </div>

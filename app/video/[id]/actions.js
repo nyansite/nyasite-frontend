@@ -21,11 +21,28 @@ export async function SendBullet(formData) {
 }
 
 export async function ClickEmoji(formData) {
+    const res = await fetch("http://localhost:8000/api/click_video_like", {
+        method: "POST",
+        body: formData,
+        headers: {
+            cookie: get_header().cookie
+        }
+    })
+    return res.status
+}
 
+export async function SendComment(formData){
+    const res = await fetch("http://localhost:8000/api/add_video_comment", {
+        method:"POST",
+        body:formData,
+        headers:{
+			cookie:get_header().cookie
+		}
+    })
+    return res.status
 }
 
 export async function GetComments(vid, page) {
-    console.log("http://localhost:8000/api/video_comment/" + vid + "/" + page)
     const res = await fetch("http://localhost:8000/api/video_comment/" + vid + "/" + page, { headers: {cookie:get_header().cookie} })
     if(res.status == 200){
         const content = await res.json()

@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { VideoPlayer, Author, Descrption } from './video.js';
 import ReactMarkdown from 'react-markdown'
 import { GetComments, SendBullet } from './actions.js'
-import { Comments, CommentsEntire } from './comment.js';
+import { CommentPost, Comments, CommentsEntire } from './comment.js';
 
 function get_header() {
     const headersL = headers();
@@ -49,6 +49,7 @@ export default async function Page({ params }) {
                 <div className='flex w-10/12 justify-between'>
                     <div className=' flex flex-col w-3/4 gap-16'>
                         <Descrption Desc={data.description} />
+                        {userRes.status == 200?<CommentPost Vid={id} User={await userRes.json()}/>:null}
                         <CommentsDisplay Vid={id} />
                     </div>
 
