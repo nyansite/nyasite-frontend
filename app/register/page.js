@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-
+import { redirect } from "next/navigation";
 import Reg_c from "./reg";
 function get_header() {
 	const headersL = headers();
@@ -13,7 +13,7 @@ export default async function Page() {
 		headers: get_header(),
 	});
 	if (res.status == 200) {
-		return <main></main>;
+		return<main></main>
 	} else if (res.status == 401) {
 		return <Reg_c />;
 	} else {

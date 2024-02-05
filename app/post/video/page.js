@@ -30,7 +30,6 @@ export default async function Page() {
 		}else {
 			const token = await resPICUItoken.text()
 			const taglistJSON = await resTagList.json()
-			console.log(taglistJSON)
 			return (
 				<main>
 					<Post_c PICUItoken={token} TagList={taglistJSON.results} />

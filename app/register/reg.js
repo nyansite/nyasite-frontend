@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import "./reg.css";
 
 export default function Reg_c() {
 	const handleSubmit = (event) => {
@@ -10,6 +9,21 @@ export default function Reg_c() {
 	};
 	async function handleClick() {
 		var formData = new FormData(freg);
+		for (var pair of formData.entries()) {
+            if (pair[0] == "passwd") {
+				var password = pair[1]
+            }
+			if(pair[0] == "passwdCheck"){
+				if (pair[1]== password){
+					break
+				}else{
+					alert("密码不一致")
+					return
+				}
+			}
+        }
+		var date = new Date();
+		formData.append("timezone",-date.getTimezoneOffset()*60)
 		let response = await fetch("/api/register", {
 			method: "POST",
 			body: formData,
@@ -32,39 +46,26 @@ export default function Reg_c() {
 	}
 
 	return (
-		<main className="lr">
-			<div className="reg-pannel">
-				<form id="freg" onSubmit={handleSubmit}>
-					<div className="title">注册</div>
-					<label className="input-bar">
-						<input
-							name="username"
-							id="username"
-							placeholder="用户名"
-							autoComplete="username"
-							required
-							autoFocus
-						/>
-					</label>
-					<label className="input-bar">
-						<input name="email" id="email" placeholder="邮箱" autoComplete="email" required />
-					</label>
-					<label className="input-bar">
-						<input
-							name="passwd"
-							id="passwd"
-							placeholder="密码"
-							type="password"
-							autoComplete="current-password"
-							minLength="6"
-							required
-						/>
-					</label>
-					<div>
-						<button onClick={handleClick}>注册</button>
-					</div>
-				</form>
-			</div>
+		<main className=" flex flex-col w-full items-center">
+			<form id="freg" className="flex flex-col w-3/4 gap-6" onSubmit={handleClick}>
+                    <div className="bar">
+                        <label className="title">用户名</label>
+                        <div className="w-full"><input name="username" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
+                    </div>
+                    <div className="bar">
+                        <label className="title">电子邮箱</label>
+                        <div className="w-full"><input name="email" className="w-full border border-gray-400  px-2 py-1 text-gray-700"  type="email" autoComplete="off" /></div>
+                    </div>
+					<div className="bar">
+                        <label className="title">密码</label>
+                        <div className="w-full"><input name="passwd" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" autoComplete="off" /></div>
+                    </div>
+					<div className="bar">
+                        <label className="title">重复密码</label>
+                        <div className="w-full"><input name="passwdCheck" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" autoComplete="off" /></div>
+                    </div>
+					<button className=" self-end text_b">注册</button>
+                </form>
 		</main>
 	);
 }

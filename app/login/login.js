@@ -30,7 +30,7 @@ export default function Login_c() {
 	};
 
 	return (
-		<main className="grid place-items-center h-screen ">
+		<main className="flex items-center justify-center place-items-center" style={{height:"calc(100vh - 12rem)"}}>
 			<div className="shadow-md shadow-black rounded border border-black p-4 ">
 				<form id="flogin" onSubmit={handleSubmit} className="">
 					<div className="flex justify-center">登录</div>

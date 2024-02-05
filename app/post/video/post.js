@@ -17,7 +17,7 @@ import "cropperjs/dist/cropper.css"
 //react-tag-input
 import { WithContext as ReactTags } from 'react-tag-input';
 //self
-import { UploadCoverFunc,UploadVideoFunc } from "./action.js"
+import { UploadCoverFunc,UploadVideoFunc } from "./actions.js"
 import "./post.css"
 
 //UploadVideo
@@ -84,10 +84,8 @@ function UploadCoverContnet({ PICUItoken, GetCoverUrl, Display }) {
         reader.readAsDataURL(filedata)
     }
     async function uploadCover() {
-        console.log(PICUItoken)
         var formData = new FormData()
         var coverfile = new File([coverImgBlob], "cover.png", { type: "image/png" })
-        console.log(typeof coverfile)
         formData.append("file", coverfile)
         formData.append("token", PICUItoken)
         const result = await UploadCoverFunc(formData)
@@ -240,12 +238,19 @@ export function Post_c({ PICUItoken, TagList }) {
                 <UploadCover PICUItoken={PICUItoken} GetCoverUrl={setCoverUrl} />
                 <form id="video" className="flex flex-col w-full gap-6">
                     <div className="bar">
+                        <label className="title">社团</label>
+                        <select className="w-full border border-gray-400  px-2 py-1">
+                            <option value={1}>114514</option>
+                            <option value={2}>1919810</option>
+                        </select>
+                    </div>
+                    <div className="bar">
                         <label className="title">标题</label>
-                        <div className="w-full"><input name="title" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
+                        <div className="w-full"><input maxLength={20} name="title" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
                     </div>
                     <div className="bar items-start">
                         <label className="title">简介</label>
-                        <div className="w-full"><textarea name="description" rows={4} className="w-full border border-gray-400  px-2 py-1 text-gray-700" autoComplete="off" /></div>
+                        <div className="w-full"><textarea name="description" maxLength={300} rows={4} className="w-full border border-gray-400  px-2 py-1 text-gray-700" autoComplete="off" /></div>
                     </div>
                     <div className="bar items-start">
                         <label className="title">标签</label>

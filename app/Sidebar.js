@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { headers } from "next/headers";
 
 function get_header() {
@@ -21,9 +20,9 @@ async function AvatarBar() {
 	if (res.status == 200) {
 		const list = await res.json()
 		return (
-			<div className='flex items-center flex-col gap-2 w-32'>
-				<Image src={list.avatar} alt='avatar' className=" h-12 w-12 rounded-full" />
-			</div>
+			<a className='flex items-center flex-col gap-2 w-32' href="/user/self">
+				<img src={list.avatar} alt='avatar' className=" h-20 w-20 rounded-full" />
+			</a>
 		)
 	} else if (res.status == 401) {
 		return (

@@ -21,7 +21,7 @@ export async function SendBullet(formData) {
 }
 
 export async function ClickEmoji(formData) {
-    const res = await fetch("http://localhost:8000/api/click_video_like", {
+    const res = await fetch("http://localhost:8000/api/click_comment_emoji", {
         method: "POST",
         body: formData,
         headers: {
@@ -39,7 +39,12 @@ export async function SendComment(formData){
 			cookie:get_header().cookie
 		}
     })
-    return res.status
+    if(res.status == 200){
+        const cid = await res.text()
+        return cid
+    }else{
+        return res.status
+    }
 }
 
 export async function GetComments(vid, page) {

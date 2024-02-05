@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .navigation-unit{
+        @apply w-full h-12 flex items-center justify-center border border-slate-200;
+    }
+}

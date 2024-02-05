@@ -33,17 +33,19 @@ export default async function RootLayout({ children }) {
 	const list = await res.json()
 	return (
 		<html lang="zh-hans">
-			<body className={inter.className} style={{minWidth:"800px"}}>
-				<div className="flex fixed  w-full bg-white h-16 top-0 items-center z-50 shadow-md">
-					<a className="justify-self-start whitespace-nowrap flex items-center" href="/">
-						<Image alt="logo" width={32} height={32} src="/logo.svg" className=" w-16 h-16" />
-					</a>
-					<div className="absolute left-1/4">
+			<body className={inter.className+" flex flex-col gap-4 min-h-screen"} style={{ minWidth: "800px"}}>
+				<div className=" flex items-center bg-white h-16 z-50 shadow-md justify-start">
+					<div className=" w-1/5 flex justify-start items-center">
+						<a className=" whitespace-nowrap flex items-center justify-items-start w-16 h-16" href="/">
+							<Image alt="logo" width={32} height={32} src="/logo.svg" className=" w-16 h-16" />
+						</a>
+					</div>
+					<div>
 						<SearchInput suggestions={list.results} />
 					</div>
-					<div className=" absolute right-0 whitespace-nowrap flex items-center">
+					<div className=" whitespace-nowrap flex items-center overflow-hidden">
 						<a className="img_b">
-							<MessageIcon Alert={false}/>
+							<MessageIcon Alert={false} />
 							<div>消息</div>
 						</a>
 						<a className="img_b">
@@ -56,8 +58,12 @@ export default async function RootLayout({ children }) {
 						</a>
 					</div>
 				</div>
-				<div className=" relative top-24 h-full">{children}</div>
-				<div></div>
+				<div className=" flex-auto">
+					{children}
+				</div>
+				<footer className=" h-12 w-full flex flex-col justify-center items-center">
+					<div>喵站</div>
+				</footer>
 			</body>
 		</html>
 	);

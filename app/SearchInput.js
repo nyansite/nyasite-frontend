@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import "./search-input.css";
 
 export default function SearchInput({ suggestions }) {
 	//补全部分
@@ -36,12 +35,14 @@ export default function SearchInput({ suggestions }) {
 		let count = 0;
 		let show = "";
 		let inputValueList = e.target.value.split(" ");
+		console.log(inputValueList.slice(-1))
 		while (count <= 5 && i <= suggestionsUse.length - 1) {
 			// 空格分隔的最后部分默认为新输入部分
-			if (suggestionsUse[i].includes(inputValueList.slice(-1)) && inputValueList.slice(-1) != "") {
+			console.log(suggestionsUse[i].includes(inputValueList.slice(-1)))
+			if (suggestionsUse[i].includes(inputValueList.slice(-1)) && inputValueList.slice(-1)[0] != "") {
 				show = suggestionsUse[i];
 				suggestionsShowList.push(
-					<li key={show}>
+					<li key={show} className=" bg-slate-50 flex gap-2 border-b-2 border-b-gray-400" >
 						<button onClick={addTagbySug} data-index={show}>
 							{suggestionsUse[i]}
 						</button>
@@ -58,26 +59,27 @@ export default function SearchInput({ suggestions }) {
 		console.log(tags);
 	}
 	let tagsShow = tags.map((tag) => (
-		<button onClick={DeleteTag} data-index={tag}>
+		<button onClick={DeleteTag} data-index={tag} className=" text-center h-12">
 			{tag}
 		</button>
 	));
 	return (
-		<div className="all-bar bg-slate-200">
-			<div className="tag-input">
-				<div className="tags">{tagsShow}</div>
-				<div>
+		<div className="flex items-start justify-start gap-2 rounded-lg bg-slate-200 h-12" style={{width:"40vw"}}>
+			<div className=" flex gap-2 w-full mx-1">
+				<div className=" flex self-start gap-2">{tagsShow}</div>
+				<div className=" flex flex-col items-start">
 					<input
+						className=" w-full h-12 rounded-lg bg-transparent focus:outline-none"
 						value={inputString}
 						onChange={(e) => handleUpdate(e)}
 						onKeyUpCapture={(e) => handleBackSpace(e)}
 					/>
-					<ul className="suggestion">{suggestionsShow}</ul>
+					<ul className=" z-50">{suggestionsShow}</ul>
 				</div>
 			</div>
-			<div className="search-button-bar">
-				<button className="search-button duration-300 hover:bg-slate-300" onClick={search}>
-					<div className="search-button-content">
+			<div className=" flex w-12 h-12 items-center justify-center">
+				<button className="rounded-lg h-10 w-10 flex items-center justify-center  duration-300 hover:bg-slate-300" onClick={search}>
+					<div className=" w-8 h-8">
 						<svg
 							fill="none"
 							stroke="currentColor"

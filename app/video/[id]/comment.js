@@ -130,7 +130,11 @@ function EmojiBar({ fmct }) {
         formData.append("emoji",emoji)
         const code = await ClickEmoji(formData)
         if (code == 200) {
-            setChoose(emoji)
+            if(emoji == choose){
+                setChoose(0)
+            }else{
+                setChoose(emoji)
+            }
         } else {
             alert("发送表情失败")
             return
@@ -157,13 +161,15 @@ export function CommentPost({ Vid, User }) {
         var formData = new FormData()
         formData.append("vid", Vid)
         formData.append("text", text)
-        const resStauts = await SendComment(formData)
-        if (resStauts == 200) {
-            setSendText(text)
-        } else {
+        const res = await SendComment(formData)
+        if (typeof res == "number") {
             alert("发送评论出错")
+        } else {
+            setSendText(text)
+            setCid(res)
         }
     }
+    const [cid,setCid] = useState("")
     const [text, setText] = useState("")
     const [sendText, setSendText] = useState("")
     return (
@@ -173,16 +179,17 @@ export function CommentPost({ Vid, User }) {
                 editorId="mainEditor"
                 modelValue={text}
                 onChange={setText}
+                maxLength={1000}
             />
             <button className=" text_b self-end w-24 h-8 hover:w-24" onClick={handlePostComment}>
                 发送评论
             </button>
-            <CommentSingle Text={sendText} User={User}/>
+            <CommentSingle Text={sendText} User={User} Cid={cid}/>
         </div>
     )
 }
 
-function CommentSingle({ Text, User }) {
+function CommentSingle({ Text, User,Cid }) {
     if (Text == "") {
         return null
     } else {
