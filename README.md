@@ -1,9 +1,15 @@
-# react针不戳
+<h1 align="center">Cirno Web</h1>
 
-```bash
+# Dev
+```shell
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
+```
+
+# Update deps
+```shell
+npm run dep
 ```

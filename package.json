@@ -6,22 +6,22 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"dep": "taze"
 	},
 	"dependencies": {
-		"@heroicons/react": "^2.0.18",
+		"@heroicons/react": "^2.1.1",
 		"@nplayer/danmaku": "^1.0.12",
 		"@uppy/dashboard": "^3.7.1",
 		"@uppy/drag-drop": "^3.0.3",
 		"@uppy/react": "^3.2.1",
 		"@uppy/tus": "^3.5.0",
-		
-		"heroicons": "^2.0.18",
-		"hls.js": "^1.5.2",
-		"md-editor-rt": "^4.11.0",
-		"next": "^14.0.4",
+		"heroicons": "^2.1.1",
+		"hls.js": "^1.5.4",
+		"md-editor-rt": "^4.11.2",
+		"next": "^14.1.0",
 		"nextjs": "^0.0.3",
-		"nplayer": "^1.0.12",
+		"nplayer": "^1.0.15",
 		"rc-pagination": "^4.0.4",
 		"react": "18.2.0",
 		"react-cropper": "^2.3.3",
@@ -30,18 +30,18 @@
 		"react-markdown": "^9.0.1",
 		"react-tag-input": "^6.8.1",
 		"swr": "^2.2.4",
-		"typescript": "^5.3.3",
 		"uppy": "^3.21.0"
 	},
 	"devDependencies": {
 		"@types/node": "20.11.6",
 		"@types/react": "18.2.48",
+		"autoprefixer": "^10.4.17",
 		"eslint": "8.48.0",
 		"eslint-config-next": "13.4.19",
-		"typescript": "^5.3.3",
-		"autoprefixer": "^10.4.16",
-		"postcss": "^8.4.31",
+		"postcss": "^8.4.35",
 		"prettier": "3.1.0",
-		"tailwindcss": "^3.3.5"
+		"tailwindcss": "^3.4.1",
+		"taze": "^0.13.3",
+		"typescript": "^5.3.3"
 	}
 }
