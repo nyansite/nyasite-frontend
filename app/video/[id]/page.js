@@ -38,7 +38,7 @@ export default async function Page({ params }) {
                         </div>
                         <div className=" flex justify-start items-center text-slate-400 gap-2">
                             <EyeIcon className=" h-4 w-4" />
-                            <div>{data.views}</div>
+                            <div>{data.views-1}</div>
                             <ClockIcon className=" h-4 w-4" />
                             <div>{TimestampToDate(data.creatTime)}</div>
                         </div>

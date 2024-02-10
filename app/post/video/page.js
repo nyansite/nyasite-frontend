@@ -14,32 +14,32 @@ function get_header() {
 export default async function Page() {
 	//https://developers.cloudflare.com/stream/uploading-videos/direct-creator-uploads/#step-2-use-this-api-endpoint-with-your-tus-client
 	//请使用tus客户端如uppy或tus-js-client
-	const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() });
-	if (res.status == 200) {
-		const list = await res.json();
-		const resPICUItoken = await fetch("http://localhost:8000/api/get_PICUI_token", { headers: get_header() })
-		const resTagList = await fetch("http://localhost:8000/api/taglist", { headers: get_header() })
-		if (resTagList.status != 200) {
-			return (
-				<a href="/">获取标签列表出现错误</a>
-			)
-		} else if (resPICUItoken.status != 200) {
-			return (
-				<a href="/">获取图床token出现错误</a>
-			)
-		}else {
-			const token = await resPICUItoken.text()
-			const taglistJSON = await resTagList.json()
-			return (
-				<main>
-					<Post_c PICUItoken={token} TagList={taglistJSON.results} />
-				</main>
-			)
-		}
-
-	} else if (res.status == 401) {
-		return redirect("/login");
-	} else {
-		return <p>???????{res.status}</p>;
+	const res = await fetch("http://localhost:8000/api/get_available_circle/0", { headers: get_header() });
+	switch (res.status) {
+		case 200:
+			const list = await res.json();
+			const resPICUItoken = await fetch("http://localhost:8000/api/get_PICUI_token", { headers: get_header() })
+			const resTagList = await fetch("http://localhost:8000/api/taglist", { headers: get_header() })
+			if (resTagList.status != 200) {
+				return (
+					<a href="/post/video">获取标签列表出现错误</a>
+				)
+			} else if (resPICUItoken.status != 200) {
+				return (
+					<a href="/post/video">获取图床token出现错误</a>
+				)
+			} else {
+				const PICUItoken = await resPICUItoken.text()
+				const taglistJSON = await resTagList.json()
+				return (
+					<main>
+						<Post_c Token={PICUItoken} TagList={taglistJSON.results} CircleList={list.circles} />
+					</main>
+				)
+			}
+		case 401:
+			return redirect("/login");
+		default:
+			return <p>???????{res.status}</p>;
 	}
 }

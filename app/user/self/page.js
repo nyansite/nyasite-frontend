@@ -1,7 +1,6 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { UserSelf_c } from "./userself.js"
-import "../user.css"
 
 
 function get_header() {

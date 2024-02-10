@@ -1,6 +1,5 @@
 "use client"
-import { useLayoutEffect, useState } from "react";
-import { useRef, useEffect } from "react";
+import { useLayoutEffect, useState,useRef, useEffect } from "react";
 import { NPlayer } from "./nplayer.ts";
 import { Popover } from "nplayer";
 import { Plugin } from "@nplayer/danmaku";

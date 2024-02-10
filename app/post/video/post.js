@@ -19,6 +19,9 @@ import { WithContext as ReactTags } from 'react-tag-input';
 //self
 import { UploadCoverFunc,UploadVideoFunc } from "./actions.js"
 import "./post.css"
+//router
+import { useRouter } from 'next/navigation'
+
 
 //UploadVideo
 
@@ -59,7 +62,7 @@ function UploadVideo({ GetVideoUrl }) {
 
 //uploadCover
 
-function UploadCoverContnet({ PICUItoken, GetCoverUrl, Display }) {
+function UploadCoverContnet({ Token, GetCoverUrl, Display }) {
     const [originalImg, setOriginalImg] = useState()
     const [coverImgBlob, setCoverImgBlob] = useState()
     const [uploadStatus, setUploadStatus] = useState('')
@@ -87,7 +90,7 @@ function UploadCoverContnet({ PICUItoken, GetCoverUrl, Display }) {
         var formData = new FormData()
         var coverfile = new File([coverImgBlob], "cover.png", { type: "image/png" })
         formData.append("file", coverfile)
-        formData.append("token", PICUItoken)
+        formData.append("token", Token)
         const result = await UploadCoverFunc(formData)
         if (typeof result != "number") {
             if (result.status == true) {
@@ -144,7 +147,7 @@ function UploadCoverContnet({ PICUItoken, GetCoverUrl, Display }) {
     )
 }
 
-function UploadCover({ PICUItoken, GetCoverUrl }) {
+function UploadCover({ Token, GetCoverUrl }) {
     const [uploadCoverShow, setUploadCoverShow] = useState(true)
     function ChangeUploadCoverShowStatus() {
         if (uploadCoverShow) {
@@ -164,7 +167,7 @@ function UploadCover({ PICUItoken, GetCoverUrl }) {
                     }
                 </button>
             </div>
-            <UploadCoverContnet PICUItoken={PICUItoken} GetCoverUrl={GetCoverUrl} Display={uploadCoverShow} />
+            <UploadCoverContnet Token={Token} GetCoverUrl={GetCoverUrl} Display={uploadCoverShow} />
         </div>
     )
 }
@@ -172,7 +175,7 @@ function UploadCover({ PICUItoken, GetCoverUrl }) {
 
 //body
 
-export function Post_c({ PICUItoken, TagList }) {
+export function Post_c({ Token, TagList,CircleList }) {
     //select tags
     const [uploadVideoStauts, setUploadVideoStauts] = useState(false)
     const [tags, setTags] = useState([])
@@ -182,7 +185,6 @@ export function Post_c({ PICUItoken, TagList }) {
             text: tag.Text,
         }
     })
-    console.log(suggestions)
     const delimiters = [180, 20]
     const handleDelete = i => {
         setTags(tags.filter((tag, index) => index !== i));
@@ -206,8 +208,14 @@ export function Post_c({ PICUItoken, TagList }) {
     };
     //
 
+    const circles = CircleList.map(i =>
+        <option value={i.id}>{i.name}</option>
+        )
+
     const [coverUrl, setCoverUrl] = useState('')
     async function postVideo() {
+        const router = useRouter()
+
         let formData = new FormData(video)
         for (var pair of formData.entries()) {
             if (pair[0] == "title" && pair[1] == "") {
@@ -227,6 +235,7 @@ export function Post_c({ PICUItoken, TagList }) {
         const resStauts = await UploadVideoFunc(formData)
         if(resStauts == 200){
             alert("上传成功")
+            router.push("/post")
         }else{
             alert("上传失败")
         }
@@ -235,22 +244,19 @@ export function Post_c({ PICUItoken, TagList }) {
         <main className="flex flex-col w-full items-center">
             <div className="flex flex-col w-7/12 items-center gap-6">
                 <UploadVideo />
-                <UploadCover PICUItoken={PICUItoken} GetCoverUrl={setCoverUrl} />
+                <UploadCover Token={Token} GetCoverUrl={setCoverUrl} />
                 <form id="video" className="flex flex-col w-full gap-6">
                     <div className="bar">
                         <label className="title">社团</label>
-                        <select className="w-full border border-gray-400  px-2 py-1">
-                            <option value={1}>114514</option>
-                            <option value={2}>1919810</option>
-                        </select>
+                        <select className="w-full border border-gray-400  px-2 py-1">{circles}</select>
                     </div>
                     <div className="bar">
                         <label className="title">标题</label>
-                        <div className="w-full"><input maxLength={20} name="title" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
+                        <div className="w-full"><input maxLength={20} name="title" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="invaild" /></div>
                     </div>
                     <div className="bar items-start">
                         <label className="title">简介</label>
-                        <div className="w-full"><textarea name="description" maxLength={300} rows={4} className="w-full border border-gray-400  px-2 py-1 text-gray-700" autoComplete="off" /></div>
+                        <div className="w-full"><textarea name="description" maxLength={300} rows={4} className="w-full border border-gray-400  px-2 py-1 text-gray-700" autoComplete="invaild" /></div>
                     </div>
                     <div className="bar items-start">
                         <label className="title">标签</label>

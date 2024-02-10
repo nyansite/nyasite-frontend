@@ -50,3 +50,13 @@ export async function ChangeNameFunc(formData){
 	})
 	return res.status
 }
+
+export async function ChangeTimezone(formData){
+	const res = await fetch("http://localhost:8000/api/change_timezone",{
+		method:"POST",
+		credentials:'omit',
+		body:formData,
+		headers:{cookie:get_header().cookie},
+	})
+	return res.status
+}

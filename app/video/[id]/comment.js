@@ -175,7 +175,7 @@ export function CommentPost({ Vid, User }) {
     return (
         <div className=" w-full flex flex-col items-center gap-3">
             <MdEditor
-                className=" h-56 w-full"
+                className="h-56 w-full"
                 editorId="mainEditor"
                 modelValue={text}
                 onChange={setText}
