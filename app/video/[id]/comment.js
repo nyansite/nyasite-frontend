@@ -1,13 +1,29 @@
 "use client"
 import { useState } from "react"
+
 import ReactMarkdown from 'react-markdown'
+
+import Modal from 'react-modal';
+
 import { MdEditor } from "md-editor-rt"
 import 'md-editor-rt/lib/style.css'
+
 import Pagination from "rc-pagination"
 import "rc-pagination/assets/index.css"
+
 import "./video.css"
 import { ClickEmoji, GetComments, SendComment } from "./actions"
 
+const modalStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 function TimestampToDate(timestamp) {
     const date = new Date(timestamp * 1000)
@@ -58,7 +74,7 @@ export function Comments({ Content }) {
                     <div className=" text-gray-500">{TimestampToDate(i.CreatedAt)}</div>
                     <EmojiBar fmct={i} />
                     <CommentReply Replies={i.CRdisplay} Authors={Content.UserShow} />
-                    <button className=" text_b self-end">详细</button>
+                    <div className="self-end flex items-center"><ExpandComment /></div>
                 </div>
             </li>
         )
@@ -126,13 +142,13 @@ function EmojiBar({ fmct }) {
     }
     async function handleClickChangeEmoji(cid, emoji) {
         var formData = new FormData()
-        formData.append("cid",cid)
-        formData.append("emoji",emoji)
+        formData.append("cid", cid)
+        formData.append("emoji", emoji)
         const code = await ClickEmoji(formData)
         if (code == 200) {
-            if(emoji == choose){
+            if (emoji == choose) {
                 setChoose(0)
-            }else{
+            } else {
                 setChoose(emoji)
             }
         } else {
@@ -169,7 +185,7 @@ export function CommentPost({ Vid, User }) {
             setCid(res)
         }
     }
-    const [cid,setCid] = useState("")
+    const [cid, setCid] = useState("")
     const [text, setText] = useState("")
     const [sendText, setSendText] = useState("")
     return (
@@ -184,12 +200,12 @@ export function CommentPost({ Vid, User }) {
             <button className=" text_b self-end w-24 h-8 hover:w-24" onClick={handlePostComment}>
                 发送评论
             </button>
-            <CommentSingle Text={sendText} User={User} Cid={cid}/>
+            <CommentSingle Text={sendText} User={User} Cid={cid} />
         </div>
     )
 }
 
-function CommentSingle({ Text, User,Cid }) {
+function CommentSingle({ Text, User, Cid }) {
     if (Text == "") {
         return null
     } else {
@@ -214,11 +230,28 @@ function CommentSingle({ Text, User,Cid }) {
                 </div>
                 <div className=" flex flex-col gap-2 flex-auto" style={{ width: "calc(100% - 8rem)" }}>
                     <ReactMarkdown className=" w-full">{Text}</ReactMarkdown>
-                    <div className=" text-gray-500">{TimestampToDate((Date.now())/1000)}</div>
+                    <div className=" text-gray-500">{TimestampToDate((Date.now()) / 1000)}</div>
                     <EmojiBar fmct={emojiSelf} />
-                    <button className=" text_b self-end">详细</button>
+                    <div className="self-end flex items-center"><ExpandComment /></div>
                 </div>
             </div>
         )
     }
+}
+
+function ExpandComment({ cid }) {
+    const [isOpen, setIsOpen] = useState(false)
+    return (
+        <>
+            <button onClick={() => setIsOpen(true)}>详细</button>
+            <Modal
+                isOpen={isOpen}
+                onRequestClose={() => setIsOpen(false)}
+                style={modalStyles}
+            >
+                
+            </Modal>
+        </>
+    )
+
 }
