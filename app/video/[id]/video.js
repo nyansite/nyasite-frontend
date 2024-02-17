@@ -1,5 +1,5 @@
 "use client"
-import { useLayoutEffect, useState,useRef, useEffect } from "react";
+import { useLayoutEffect, useState, useRef, useEffect } from "react";
 import { NPlayer } from "./nplayer.ts";
 import { Popover } from "nplayer";
 import { Plugin } from "@nplayer/danmaku";
@@ -143,10 +143,16 @@ export function Descrption({ Desc }) {
 
 }
 
-export function Author({ Author, Avatar, Descrption }) {
+export function Author({ Author }) {
     return (
-        <div className=" flex justify-start items-center h-full">
-
+        <div className=" flex justify-start items-center h-full gap-2">
+            <img src={Author.Avatar} className=" h-full"/>
+            <div className="flex flex-col justify-between flex-nowrap h-full">
+                <a className="flex justify-start w-full text-xl">{Author.Name}</a>
+                <div className="flex justify-start items-center text-slate-400">
+                    <button>关注</button>
+                </div>
+            </div>
         </div>
     )
 }

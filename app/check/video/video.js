@@ -50,7 +50,7 @@ function VoteBar({ Avid }) {
     const router = useRouter()
     async function check(altitude) {
         var formData = new FormData()
-        formData.append("acid", Avid)
+        formData.append("vcid", Avid)
         if (altitude) {
             const resStauts = await PassVideoFunc(formData)
             if (resStauts == 200) {

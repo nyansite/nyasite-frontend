@@ -3,7 +3,7 @@ import Image from "next/image";
 import { headers } from 'next/headers'
 import { Inter } from "next/font/google";
 import { ChatBubbleLeftRightIcon, ArchiveBoxIcon, CloudArrowUpIcon, BellAlertIcon } from "@heroicons/react/24/outline";
-import SearchInput from "./SearchInput";
+import SearchInputInner from "./SearchInput";
 import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from "next/dist/shared/lib/constants";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -33,7 +33,7 @@ export default async function RootLayout({ children }) {
 	const list = await res.json()
 	return (
 		<html lang="zh-hans">
-			<body className={inter.className+" flex flex-col gap-4 min-h-screen"} style={{ minWidth: "800px"}}>
+			<body className={inter.className + " flex flex-col gap-4 min-h-screen"} style={{ minWidth: "800px" }}>
 				<div className=" flex items-center bg-white h-16 z-50 shadow-md justify-start">
 					<div className=" w-1/5 flex justify-start items-center">
 						<a className=" whitespace-nowrap flex items-center justify-items-start w-16 h-16" href="/">
@@ -41,7 +41,7 @@ export default async function RootLayout({ children }) {
 						</a>
 					</div>
 					<div>
-						<SearchInput suggestions={list.results} />
+						<SearchInputInner Suggestions={list.results} />
 					</div>
 					<div className=" whitespace-nowrap flex items-center overflow-hidden">
 						<a className="img_b">

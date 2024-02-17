@@ -1,11 +1,12 @@
 "use client"
 import { useRef, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 //dragzone
 import { useDropzone } from "react-dropzone"
 //cropper
 import Cropper from "react-cropper"
 import "cropperjs/dist/cropper.css"
-import { ChangeNameFunc, ChangeTimezone, UploadAvatar } from "./actions.js"
+import { ChangeNameFunc, ChangeTimezone, UploadAvatar, get_header } from "./actions.js"
 
 export function UserSelf_c({ data }) {
     return (
@@ -18,6 +19,7 @@ export function UserSelf_c({ data }) {
                 <div><progress max={16} value={data.level%16}/></div>
                 <div>{(parseInt(data.level/16)+1)+"级 "+((data.level%16)*10)+"/160"}</div>
             </div>
+            <Logout/>
         </div>
     )
 }
@@ -163,6 +165,29 @@ function Timezone({ TimezoneOff }){
             <div className="title">时区</div>
             <div>{"设定时间:UTF"+((TimezoneOff/3600<0?"":"+")+TimezoneOff/3600)+" 实际时间:UTF"+((date.getTimezoneOffset()/-60<0?"":"+")+date.getTimezoneOffset()/-60)}</div>
             <button className="text_b hover:w-20" onClick={setTimezone}>校准</button>
+        </div>
+    )
+}
+
+function Logout(){
+    const router = useRouter()
+    const logout = async () => {
+		//避免表单提交后刷新页面
+
+		let response = await fetch("/api/logout", {
+			method: "POST",
+			credentials: "include",
+		});
+		if(response.status == 200){
+            alert("登出成功")
+            router.push("/")
+        }else{
+            alert("登出失败")
+        }
+	};
+    return(
+        <div className="bar items-center">
+            <button className="text_b" onClick={logout}>退出登录</button>
         </div>
     )
 }
