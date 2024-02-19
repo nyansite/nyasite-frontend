@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { TagIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 
 export default function SearchInput({ Suggestions }) {
 	const searchParams = useSearchParams()
@@ -12,6 +12,7 @@ export default function SearchInput({ Suggestions }) {
 
 function SearchInputInner({ Suggestions, Tags, Text }) {
 	//补全部分
+	const router = useRouter()
 	const suggestionsUse = Suggestions;
 	const [inputString, setInputString] = useState(Text);
 	const [tags, setTags] = useState(Tags);
@@ -65,7 +66,8 @@ function SearchInputInner({ Suggestions, Tags, Text }) {
 		setInputString(e.target.value);
 	}
 	function search() {
-		console.log(tags);
+		var tagsString = tags.join(";") + ';'
+		router.push("/search?tags="+tagsString+"&text="+inputString)
 	}
 	let tagsShow = tags.map((tag) => (
 		<button onClick={DeleteTag} data-index={tag} className=" text-center h-12" key={tag}>

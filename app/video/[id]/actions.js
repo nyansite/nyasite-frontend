@@ -90,7 +90,6 @@ export async function GetCommentReplies(cid){
     const res = await fetch("http://localhost:8000/api/video_comment_reply/" + cid, { headers: {cookie:get_header().cookie} })
     if(res.status == 200){
         const content = await res.json()
-        console.log(content)
         return content
     }else{
         return res.status
