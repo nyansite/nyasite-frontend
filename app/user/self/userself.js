@@ -1,37 +1,40 @@
 "use client"
 import { useRef, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 //dragzone
 import { useDropzone } from "react-dropzone"
 //cropper
 import Cropper from "react-cropper"
 import "cropperjs/dist/cropper.css"
-import { ChangeNameFunc, UploadAvatar } from "./actions.js"
+import { ChangeNameFunc, ChangeTimezone, UploadAvatar, get_header } from "./actions.js"
 
 export function UserSelf_c({ data }) {
     return (
         <div className=" flex flex-col gap-3">
             <Avatar AvatarUrl={data.avatar} />
             <Name NameNow={data.name} />
+            <Timezone TimezoneOff={data.timezone}/>
             <div className="bar">
                 <div className="title">经验</div>
                 <div><progress max={16} value={data.level%16}/></div>
                 <div>{(parseInt(data.level/16)+1)+"级 "+((data.level%16)*10)+"/160"}</div>
             </div>
+            <Logout/>
         </div>
     )
 }
 
 function Avatar({ AvatarUrl }) {
-    const [isEdit, setIsEdit] = useState(false)
+    const [canEdit, setCanEdit] = useState(false)
     const [originalImg, setOriginalImg] = useState('')
-    const [coverImgBlob, setCoverImgBlob] = useState()
-    const [coverImgBase64, setCoverImgBase64] = useState(AvatarUrl)
+    const [avatarImgBlob, setAvatarImgBlob] = useState()
+    const [avatarImgBase64, setAvatarImgBase64] = useState(AvatarUrl)
     const cropperRef = useRef()
     const onDrop = useCallback(acceptFiles => {
         const reader = new FileReader()
         reader.onload = function (e) {
             let base64 = e.target.result
-            setIsEdit(true)
+            setCanEdit(true)
             setOriginalImg(base64)
         }
         reader.readAsDataURL(acceptFiles[0])
@@ -45,7 +48,7 @@ function Avatar({ AvatarUrl }) {
             setOriginalImg(base64)
         }
         reader.readAsDataURL(filedata)
-        setIsEdit(true)
+        setCanEdit(true)
     }
     const onCrop = () => {
         const cropper = cropperRef.current?.cropper;
@@ -56,20 +59,20 @@ function Avatar({ AvatarUrl }) {
         resizedCanvas.height = 200;
         resizedContext.drawImage(canvas, 0, 0, 200, 200);
         resizedContext.save()
-        setCoverImgBase64(resizedCanvas.toDataURL("image/png", 0.75))
+        setAvatarImgBase64(resizedCanvas.toDataURL("image/png", 0.75))
         resizedCanvas.toBlob((blob) => {
-            setCoverImgBlob(blob)
+            setAvatarImgBlob(blob)
         }, "image/png", 0.6)
     }
     async function changeAvatar() {
         var formData = new FormData()
-        var coverfile = new File([coverImgBlob], "cover.png", { type: "image/png" })
+        var coverfile = new File([avatarImgBlob], "avatar.png", { type: "image/png" })
         formData.append("file", coverfile)
         const resStautus = await UploadAvatar(formData)
         switch (resStautus) {
             case 200:
                 alert("更改头像成功")
-                setIsEdit(false)
+                setCanEdit(false)
                 return
             case 502:
                 alert("上传至图床失败")
@@ -84,14 +87,14 @@ function Avatar({ AvatarUrl }) {
             <div className="bar">
                 <div className="title">头像</div>
                 <div className="w-full flex items-center gap-2">
-                    <img src={coverImgBase64} className=" h-20 w-20 rounded-full" />
+                    <img src={avatarImgBase64} className=" h-20 w-20 rounded-full" />
                     <button className="text_b"  {...getRootProps()}>
                         导入头像
                         <input id='file' accept="image/*" type="file" onChange={imgGet} style={{ display: "none" }} {...getInputProps()} />
                     </button>
                 </div>
             </div>
-            <div className=" flex-col w-full items-start gap-2" style={{ display: (isEdit ? "flex" : "none") }}>
+            <div className=" flex-col w-full items-start gap-2" style={{ display: (canEdit ? "flex" : "none") }}>
                 <div className=" h-52">
                     <Cropper
                         src={originalImg}
@@ -141,6 +144,50 @@ function Name({ NameNow }) {
             <div className="title">昵称</div>
             <form className=" w-full" id="cn"><input name="username" defaultValue={NameNow} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></form>
             <button onClick={ChangeName} className={"text_b hover:w-20 " + (step < 2 ? null : "hover:bg-white text-slate-300")} disabled={step > 2}>更改</button>
+        </div>
+    )
+}
+
+function Timezone({ TimezoneOff }){
+    var date = new Date()
+    async function setTimezone(){
+        var formData = new FormData()
+		formData.append("timezone",-date.getTimezoneOffset()*60)
+        const res = await ChangeTimezone(formData)
+        if(res == 200){
+            alert("校准时差成功")
+        }else{
+            alert("校准时差失败")
+        }
+    }
+    return(
+        <div className="bar items-center">
+            <div className="title">时区</div>
+            <div>{"设定时间:UTF"+((TimezoneOff/3600<0?"":"+")+TimezoneOff/3600)+" 实际时间:UTF"+((date.getTimezoneOffset()/-60<0?"":"+")+date.getTimezoneOffset()/-60)}</div>
+            <button className="text_b hover:w-20" onClick={setTimezone}>校准</button>
+        </div>
+    )
+}
+
+function Logout(){
+    const router = useRouter()
+    const logout = async () => {
+		//避免表单提交后刷新页面
+
+		let response = await fetch("/api/logout", {
+			method: "POST",
+			credentials: "include",
+		});
+		if(response.status == 200){
+            alert("登出成功")
+            router.push("/")
+        }else{
+            alert("登出失败")
+        }
+	};
+    return(
+        <div className="bar items-center">
+            <button className="text_b" onClick={logout}>退出登录</button>
         </div>
     )
 }

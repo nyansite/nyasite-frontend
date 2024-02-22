@@ -21,6 +21,8 @@ body {
 	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
+
+
 @layer components {
 	.text_b {
 		@apply flex flex-auto items-center justify-center duration-300 bg-white rounded-xl border mx-4 h-12 w-20 hover:w-28 hover:bg-[#bfbfbf];
@@ -35,6 +37,9 @@ body {
 
     .title {
         @apply font-semibold w-24 flex justify-items-start items-center;
+    }
+	.navigation-unit{
+        @apply w-full h-12 flex items-center justify-center border border-slate-200;
     }
 }
 

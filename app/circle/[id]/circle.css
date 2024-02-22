@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.option {
+        @apply flex  items-center justify-center w-20 h-12 border rounded-t-xl
+    }
+}

@@ -1,14 +1,24 @@
 "use client";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-export default function SearchInput({ suggestions }) {
+export default function SearchInput({ Suggestions }) {
+	const searchParams = useSearchParams()
+	const text = (searchParams.has("text") ? searchParams.get("text") : "")
+	const tags = (searchParams.has("tags") ? searchParams.get("tags").split(';') : [])
+	return <SearchInputInner Suggestions={Suggestions} Tags={tags} Text={text} />
+}
+
+function SearchInputInner({ Suggestions, Tags, Text }) {
 	//补全部分
-	const suggestionsUse = suggestions;
-	const [inputString, setInputString] = useState("");
+	const router = useRouter()
+	const suggestionsUse = Suggestions;
+	const [inputString, setInputString] = useState(Text);
+	const [tags, setTags] = useState(Tags);
 	const [suggestionsShow, setSuggestionsShow] = useState([]); //用于渲染的列表
 	let suggestionsShowList = [];
 	//标签部分
-	const [tags, setTags] = useState([]);
 	function addTagbySug(event) {
 		let index = event.target.dataset.index;
 		if (!tags.includes(index)) {
@@ -43,7 +53,7 @@ export default function SearchInput({ suggestions }) {
 				show = suggestionsUse[i];
 				suggestionsShowList.push(
 					<li key={show} className=" bg-slate-50 flex gap-2 border-b-2 border-b-gray-400" >
-						<button onClick={addTagbySug} data-index={show}>
+						<button onClick={(e) => addTagbySug(e)} data-index={show}>
 							{suggestionsUse[i]}
 						</button>
 					</li>,
@@ -56,15 +66,16 @@ export default function SearchInput({ suggestions }) {
 		setInputString(e.target.value);
 	}
 	function search() {
-		console.log(tags);
+		var tagsString = tags.join(";") + ';'
+		router.push("/search?tags="+tagsString+"&text="+inputString)
 	}
 	let tagsShow = tags.map((tag) => (
-		<button onClick={DeleteTag} data-index={tag} className=" text-center h-12">
+		<button onClick={DeleteTag} data-index={tag} className=" text-center h-12" key={tag}>
 			{tag}
 		</button>
 	));
 	return (
-		<div className="flex items-start justify-start gap-2 rounded-lg bg-slate-200 h-12" style={{width:"40vw"}}>
+		<div className="flex items-start justify-start gap-2 rounded-lg bg-slate-200 h-12" style={{ width: "40vw" }}>
 			<div className=" flex gap-2 w-full mx-1">
 				<div className=" flex self-start gap-2">{tagsShow}</div>
 				<div className=" flex flex-col items-start">

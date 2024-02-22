@@ -2,7 +2,6 @@ import { headers } from 'next/headers'
 import { EyeIcon, ClockIcon } from '@heroicons/react/24/outline'
 import { redirect } from "next/navigation";
 import { VideoPlayer, Author, Descrption } from './video.js';
-import ReactMarkdown from 'react-markdown'
 import { GetComments, SendBullet } from './actions.js'
 import { CommentPost, Comments, CommentsEntire } from './comment.js';
 
@@ -21,47 +20,51 @@ function TimestampToDate(timestamp) {
 export default async function Page({ params }) {
     const id = params.id
     if (isNaN(Number(id))) {
-        redirect("/")
+        redirect("/404")
     }
     const res = await fetch("http://localhost:8000/api/get_video/" + id, { headers: get_header() })
     const userRes = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
-    if (res.status == 200) {
+    const user = await userRes.json()
+    switch (res.status)  {
+        case 200:
         const data = await res.json()
         const danmakuRes = await fetch("http://localhost:8000/api/get_bullets/" + id, { headers: get_header() })
         const danmaku = await danmakuRes.json()
         return (
             <main className=" flex flex-col items-center gap-12">
-                <div className=" flex w-10/12 gap-4 h-8 justify-between">
-                    <div className=" w-3/4 flex flex-col justify-between flex-nowrap h-full">
+                <div className=" flex w-10/12 gap-4 h-12 justify-between">
+                    <div className=" w-2/3 flex flex-col justify-between flex-nowrap h-full">
                         <div className=" flex justify-start w-full text-3xl">
                             <div className=" w-full truncate">{data.title}</div>
                         </div>
                         <div className=" flex justify-start items-center text-slate-400 gap-2">
                             <EyeIcon className=" h-4 w-4" />
-                            <div>{data.views}</div>
+                            <div>{data.views-1}</div>
                             <ClockIcon className=" h-4 w-4" />
                             <div>{TimestampToDate(data.creatTime)}</div>
                         </div>
                     </div>
-                    <Author />
+                    <Author Author={data.author}/>
                 </div>
                 <VideoPlayer VideoUrl={data.videoPath} DanmakuOptions={danmaku} Vid={params.id} SendDamaku={SendBullet} />
                 <div className='flex w-10/12 justify-between'>
                     <div className=' flex flex-col w-3/4 gap-16'>
                         <Descrption Desc={data.description} />
-                        {userRes.status == 200?<CommentPost Vid={id} User={await userRes.json()}/>:null}
-                        <CommentsDisplay Vid={id} />
+                        {userRes.status == 200?<CommentPost Vid={id} User={user}/>:null}
+                        <CommentsDisplay Vid={id} User={user} />
                     </div>
 
                 </div>
             </main>
         )
-    } else {
-        redirect("/404")
-    }
+        case 404:
+            return redirect("/404")
+        default:
+            return <div className=' w-full text-center'>获取视频出错</div>
+    } 
 }
 
-async function CommentsDisplay({ Vid }) {
+async function CommentsDisplay({ Vid,User }) {
     const content = await GetComments(Vid, 1)
     if (typeof content == "number") {
         if (content == 404) {
@@ -71,9 +74,9 @@ async function CommentsDisplay({ Vid }) {
         }
     } else {
         if (content.Count > 20) {
-            return <CommentsEntire Content={content} Vid={Vid} />
+            return <CommentsEntire Content={content} Vid={Vid} User={User}/>
         } else {
-            return <div className=' w-full'><Comments Content={content} /></div>
+            return <div className=' w-full'><Comments Content={content} User={User}/></div>
         }
     }
 }

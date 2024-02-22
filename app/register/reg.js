@@ -50,7 +50,7 @@ export default function Reg_c() {
 			<form id="freg" className="flex flex-col w-3/4 gap-6" onSubmit={handleClick}>
                     <div className="bar">
                         <label className="title">用户名</label>
-                        <div className="w-full"><input name="username" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
+                        <div className="w-full"><input name="username" maxLength={15} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
                     </div>
                     <div className="bar">
                         <label className="title">电子邮箱</label>
