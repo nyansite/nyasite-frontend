@@ -54,15 +54,17 @@ export function SearchVideos({Content}){
         return <div className=" w-full text-center">获取评论出错</div>
     }else{
         var showList = Content.videos.map(i =>
-            <a className=" flex h-28 w-5/12 gap-2" key={i.Id} href={"/video/"+i.Id}>
-                <img src={i.CoverPath} className="rounded"/>
+            <div className=" flex h-28 w-5/12 gap-2" key={i.Id}>
+                <a className="h-full" href={"/video/"+i.Id}>
+                    <img src={i.CoverPath} className="h-full rounded"/>
+                </a>
                 <div className=" flex flex-col flex-auto h-full">
-                    <div className=" w-full">{i.Title}</div>
-                    <div className="flex gap-1 w-full text-gray-400 items-center"><RssIcon className="h-4 w-4"/><div className=" w-full truncate">{i.Author.Name}</div></div>
+                    <a href={"/video/"+i.Id} className=" w-full">{i.Title}</a>
+                    <div className="flex gap-1 w-full text-gray-400 items-center"><RssIcon className="h-4 w-4"/><a className=" w-full truncate" href={"/circle/"+i.Author.Id}>{i.Author.Name}</a></div>
                     <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4"/><div className=" w-full truncate">{i.Views-1}</div></div>
                     <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4"/><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
                 </div>
-            </a>
+            </div>
         )
         return(
             <div className=" flex flex-auto justify-between flex-wrap gap-2">

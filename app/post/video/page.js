@@ -37,6 +37,8 @@ export default async function Page() {
 					</main>
 				)
 			}
+		case 400:
+			return <div className="flex flex-auto justify-center"><a className="flex text-gray-400 items-center" href="/user/circle">没有加入有相关资质社团</a></div>
 		case 401:
 			return redirect("/login");
 		default:

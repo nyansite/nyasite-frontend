@@ -2,7 +2,6 @@ import { headers } from 'next/headers'
 import { EyeIcon, ClockIcon } from '@heroicons/react/24/outline'
 import { redirect } from "next/navigation";
 import { VideoPlayer, Author, Descrption } from './video.js';
-import ReactMarkdown from 'react-markdown'
 import { GetComments, SendBullet } from './actions.js'
 import { CommentPost, Comments, CommentsEntire } from './comment.js';
 
@@ -21,12 +20,13 @@ function TimestampToDate(timestamp) {
 export default async function Page({ params }) {
     const id = params.id
     if (isNaN(Number(id))) {
-        redirect("/")
+        redirect("/404")
     }
     const res = await fetch("http://localhost:8000/api/get_video/" + id, { headers: get_header() })
     const userRes = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
     const user = await userRes.json()
-    if (res.status == 200) {
+    switch (res.status)  {
+        case 200:
         const data = await res.json()
         const danmakuRes = await fetch("http://localhost:8000/api/get_bullets/" + id, { headers: get_header() })
         const danmaku = await danmakuRes.json()
@@ -57,9 +57,11 @@ export default async function Page({ params }) {
                 </div>
             </main>
         )
-    } else {
-        redirect("/404")
-    }
+        case 404:
+            return redirect("/404")
+        default:
+            return <div className=' w-full text-center'>获取视频出错</div>
+    } 
 }
 
 async function CommentsDisplay({ Vid,User }) {
