@@ -37,15 +37,21 @@ export function Circle_c({ Content }) {
 }
 
 function Subscribe({ Cid, Relation }) {
+    console.log(Relation)
     const [relation, setRelation] = useState(Relation)
     async function subscribe(cid) {
         var formData = new FormData
         formData.append("cid", cid)
         const resStauts = await SubscribeFunc(cid)
         if (resStauts == 200) {
-            if (relation == -1) { setRelation(0) }
-            if (relation == 0) { setRelation(-1) }
-            alert("关注成功")
+            if (relation == -1) { 
+                setRelation(0) 
+                alert("关注成功")
+            }
+            if (relation == 0) { 
+                setRelation(-1) 
+                alert("取关成功")
+            }
             return
         } else {
             alert("关注失败")
@@ -67,7 +73,6 @@ function Subscribe({ Cid, Relation }) {
 
 function Information({ Content }) {
     var kind = ""
-    console.log(Content.kinds & (1 << 1))
     if ((Content.kinds & (1 << 0)) > 0) {
         kind += "视频/"
     }
@@ -126,7 +131,7 @@ function Members({ Content }) {
         </div>
     )
     return (
-        <div className="flex flex-auto flex-wrap">
+        <div className="flex flex-auto flex-wrap gap-4">
             {showList}
         </div>
     )
