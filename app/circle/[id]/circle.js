@@ -3,6 +3,7 @@ import { useState } from "react";
 import ReactMarkdown from 'react-markdown'
 import { PlayCircleIcon, ClockIcon } from "@heroicons/react/24/outline";
 import "./circle.css"
+import { SubscribeFunc } from "./actions";
 
 function TimestampToDate(timestamp) {
     const date = new Date(timestamp * 1000)
@@ -14,9 +15,12 @@ export function Circle_c({ Content }) {
     return (
         <main className=" flex flex-col items-center w-full">
             <div className="flex flex-col gap-4 w-10/12">
-                <div className="flex flex-auto justify-start items-end h-16 gap-4">
-                    <img className="h-12 w-12 rounded-full" src={Content.avatar} />
-                    <div>{Content.name}</div>
+                <div className="flex flex-auto justify-between items-end h-16 gap-4">
+                    <div className="flex flex-auto justify-start items-end h-full gap-4">
+                        <img className="h-12 w-12 rounded-full" src={Content.avatar} />
+                        <div>{Content.name}</div>
+                    </div>
+                    <Subscribe Cid={Content.id} Relation={Content.relation} />
                 </div>
                 <div className="flex flex-auto justify-start border-b-2 gap-2">
                     <button className={"option " + (position == 0 ? "bg-gray-300" : "hover:bg-[#bfbfbf]")} onClick={() => setPosition(0)}>信息</button>
@@ -30,6 +34,35 @@ export function Circle_c({ Content }) {
         </main>
 
     )
+}
+
+function Subscribe({ Cid, Relation }) {
+    const [relation, setRelation] = useState(Relation)
+    async function subscribe(cid) {
+        var formData = new FormData
+        formData.append("cid", cid)
+        const resStauts = await SubscribeFunc(cid)
+        if (resStauts == 200) {
+            if (relation == -1) { setRelation(0) }
+            if (relation == 0) { setRelation(-1) }
+            alert("关注成功")
+            return
+        } else {
+            alert("关注失败")
+            return
+        }
+    }
+    switch (relation) {
+        case -1:
+            return <button className="text_b" onClick={() => subscribe(Cid)}>关注</button>
+        case 0:
+            return <button className="text_b bg-gray-300 hover:bg-gray-300" onClick={() => subscribe(Cid)}>取消关注</button>
+        case 1, 2, 3, 4:
+            return <a className="text_b">管理社团</a>
+        default:
+            return <div className="flex justify-start items-center text-slate-400"><div>出错</div></div>
+
+    }
 }
 
 function Information({ Content }) {
@@ -60,12 +93,15 @@ function Information({ Content }) {
 }
 
 function Works({ Content }) {
+    if(Content.videos == null){
+        return null
+    }
     const showList = Content.videos.map(i =>
         <div className="flex flex-col w-52 gap-1">
-            <a className=" w-full rounded" href={"/video/"+i.Id}>
+            <a className=" w-full rounded" href={"/video/" + i.Id}>
                 <img src={i.CoverPath} className="w-full rounded" />
             </a>
-            <a className=" w-full" href={"/video/"+i.Id}>{i.Title}</a>
+            <a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
             <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views - 1}</div></div>
             <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4" /><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
         </div>
@@ -82,14 +118,14 @@ function Works({ Content }) {
     )
 }
 
-function Members({Content}){
+function Members({ Content }) {
     const showList = Content.members.map(i =>
         <div className="flex items-center h-16 gap-2">
-            <img src={i.Avatar} className="h-full rounded-full"/>
+            <img src={i.Avatar} className="h-full rounded-full" />
             <div>{i.Name}</div>
         </div>
     )
-    return(
+    return (
         <div className="flex flex-auto flex-wrap">
             {showList}
         </div>

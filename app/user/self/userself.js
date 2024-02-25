@@ -6,7 +6,7 @@ import { useDropzone } from "react-dropzone"
 //cropper
 import Cropper from "react-cropper"
 import "cropperjs/dist/cropper.css"
-import { ChangeNameFunc, ChangeTimezone, UploadAvatar, get_header } from "./actions.js"
+import { ChangeNameFunc, ChangeTimezone, UploadAvatar} from "./actions.js"
 
 export function UserSelf_c({ data }) {
     return (
@@ -172,8 +172,6 @@ function Timezone({ TimezoneOff }){
 function Logout(){
     const router = useRouter()
     const logout = async () => {
-		//避免表单提交后刷新页面
-
 		let response = await fetch("/api/logout", {
 			method: "POST",
 			credentials: "include",

@@ -10,13 +10,15 @@ function get_header() {
 export function SidebarRight() {
 	return (
 		<div className=" w-40 flex flex-col gap-2 items-start">
-			<AvatarBar/>
+			<AvatarBar />
 		</div>
 	)
 }
 
 async function AvatarBar() {
-	const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
+	const res = await fetch("http://localhost:8000/api/user_status", {
+		headers: get_header()
+	})
 	if (res.status == 200) {
 		const list = await res.json()
 		return (

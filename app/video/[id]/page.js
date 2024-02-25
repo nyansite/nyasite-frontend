@@ -2,7 +2,7 @@ import { headers } from 'next/headers'
 import { EyeIcon, ClockIcon } from '@heroicons/react/24/outline'
 import { redirect } from "next/navigation";
 import { VideoPlayer, Author, Descrption } from './video.js';
-import { GetComments, SendBullet } from './actions.js'
+import { GetComments } from './actions.js'
 import { CommentPost, Comments, CommentsEntire } from './comment.js';
 
 function get_header() {
@@ -46,7 +46,7 @@ export default async function Page({ params }) {
                     </div>
                     <Author Author={data.author}/>
                 </div>
-                <VideoPlayer VideoUrl={data.videoPath} DanmakuOptions={danmaku} Vid={params.id} SendDamaku={SendBullet} />
+                <VideoPlayer VideoUrl={data.videoPath} DanmakuOptions={danmaku} Vid={params.id}/>
                 <div className='flex w-10/12 justify-between'>
                     <div className=' flex flex-col w-3/4 gap-16'>
                         <Descrption Desc={data.description} />

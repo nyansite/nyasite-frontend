@@ -8,6 +8,17 @@ function get_header() {
     return JheadersList;
 }
 
+export async function SubscribeFunc(formData) {
+    const res = await fetch("http://localhost:8000/api/subscribe",{
+        method:"POST",
+        body:formData,
+        headers: {
+            cookie: get_header().cookie
+        }
+    })
+    return res.status
+}
+
 export async function SendBullet(formData) {
     const res = await fetch("http://localhost:8000/api/add_video_bullet", {
         method: "POST",

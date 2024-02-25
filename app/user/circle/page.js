@@ -23,7 +23,7 @@ export default async function Page() {
                         <div className=" text-lg">社团</div>
                     </div>
                     <a className=" navigation-unit hover:bg-[#bfbfbf] hover:border-b-[#bfbfbf] rounded-br-md" >
-                        <div className=" text-lg">作品管理</div>
+                        <div className=" text-lg">关注列表</div>
                     </a>
                 </div>
                 <div className=" w-full flex items-start justify-start">

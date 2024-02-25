@@ -5,8 +5,9 @@ import { Popover } from "nplayer";
 import { Plugin } from "@nplayer/danmaku";
 import Hls from 'hls.js'
 import "./video.css"
+import { SubscribeFunc,SendBullet } from "./actions.js";
 
-export function VideoPlayer({ VideoUrl, DanmakuOptions, Vid, SendDamaku }) {
+export function VideoPlayer({ VideoUrl, DanmakuOptions, Vid }) {
     const player = useRef();
     const hls = useRef(new Hls)
     const Quantity = useRef(
@@ -33,7 +34,7 @@ export function VideoPlayer({ VideoUrl, DanmakuOptions, Vid, SendDamaku }) {
             formData.append("color", opts.color)
             formData.append("time", opts.time)
             formData.append("type", opts.type)
-            const resStauts = await SendDamaku(formData)
+            const resStauts = await SendBullet(formData)
             switch (resStauts) {
                 case 200:
                     break
@@ -143,15 +144,44 @@ export function Descrption({ Desc }) {
 
 }
 
-export function Author({ Author }) {
+export function Author({ Author, Relation }) {
+    console.log(Author.Id)
+    const [relation,setRelation] = useState(Relation) 
+    async function subscribe(cid){
+        var formData = new FormData
+        formData.append("cid",cid)
+        const resStauts = await SubscribeFunc(formData)
+        if(resStauts == 200){
+            if(relation == -1){setRelation(0)}
+            if(relation == 0){setRelation(-1)}
+            alert("关注成功")
+            return
+        }else{
+            alert("关注失败")
+            return
+        }
+    }
+    var subscribe
+    switch (relation) {
+        case -1:
+            subscribe = <div className="flex justify-start items-center text-slate-400"><button onClick={() => subscribe(Author.Id)}>关注</button></div>;
+            break
+        case 0:
+            subscribe = <div className="flex justify-start items-center text-slate-400"><button onClick={() => subscribe(Author.Id)}>取消关注</button></div>;
+            break
+        case 1,2,3,4:
+            subscribe = <div className="flex justify-start items-center text-slate-400"><div>你已是社团成员</div></div>;
+            break
+        default:
+            subscribe = <div className="flex justify-start items-center text-slate-400"><div>出错</div></div>;
+
+    }
     return (
         <div className=" flex justify-start items-center h-full gap-2">
-            <img src={Author.Avatar} className=" h-full"/>
+            <img src={Author.Avatar} className=" h-full" />
             <div className="flex flex-col justify-between flex-nowrap h-full">
                 <a className="flex justify-start w-full text-xl">{Author.Name}</a>
-                <div className="flex justify-start items-center text-slate-400">
-                    <button>关注</button>
-                </div>
+                {subscribe}
             </div>
         </div>
     )

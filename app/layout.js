@@ -1,9 +1,9 @@
 import "./globals.css";
 import Image from "next/image";
-import { headers } from 'next/headers'
+import { headers,cookies } from 'next/headers'
 import { Inter } from "next/font/google";
 import { ChatBubbleLeftRightIcon, ArchiveBoxIcon, CloudArrowUpIcon, BellAlertIcon } from "@heroicons/react/24/outline";
-import SearchInputInner from "./SearchInput";
+import SearchInputInner from "./SearchInput.js";
 import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from "next/dist/shared/lib/constants";
 
 const inter = Inter({ subsets: ["latin"] });
