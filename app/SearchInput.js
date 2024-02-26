@@ -2,18 +2,19 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { entireTags } from "./tag.js"
 
-export default function SearchInput({ Suggestions }) {
+export default function SearchInput() {
 	const searchParams = useSearchParams()
 	const text = (searchParams.has("text") ? searchParams.get("text") : "")
 	const tags = (searchParams.has("tags") ? searchParams.get("tags").split(';') : [])
-	return <SearchInputInner Suggestions={Suggestions} Tags={tags} Text={text} />
+	return <SearchInputInner Tags={tags} Text={text} />
 }
 
-function SearchInputInner({ Suggestions, Tags, Text }) {
+function SearchInputInner({ Tags, Text }) {
 	//补全部分
 	const router = useRouter()
-	const suggestionsUse = Suggestions;
+	const suggestionsUse = entireTags;
 	const [inputString, setInputString] = useState(Text);
 	const [tags, setTags] = useState(Tags);
 	const [suggestionsShow, setSuggestionsShow] = useState([]); //用于渲染的列表

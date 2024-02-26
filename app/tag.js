@@ -1,0 +1,1 @@
+export var entireTags = ['东方project',"博丽灵梦"]
