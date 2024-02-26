@@ -29,8 +29,6 @@ function MessageIcon({ Alert }) {
 }
 
 export default async function RootLayout({ children }) {
-	const res = await fetch("http://localhost:8000/api/search/taglist", { headers: get_header() })
-	const list = await res.json()
 	return (
 		<html lang="zh-hans">
 			<body className={inter.className + " flex flex-col gap-4 min-h-screen"} style={{ minWidth: "800px" }}>
@@ -41,7 +39,7 @@ export default async function RootLayout({ children }) {
 						</a>
 					</div>
 					<div>
-						<SearchInputInner Suggestions={list.results} />
+						<SearchInputInner/>
 					</div>
 					<div className=" whitespace-nowrap flex items-center overflow-hidden">
 						<a className="img_b">
