@@ -159,7 +159,7 @@ function Avatar({ GetAvatarUrl, Token }) {
         }
     }
     return (
-        <div className=" flex flex-col gap-4 w-full">
+        <main className=" flex flex-col gap-4 w-full">
             <div className="bar w-2/3">
                 <div className="title">头像</div>
                 <div className="w-full flex items-center gap-2">
@@ -192,6 +192,6 @@ function Avatar({ GetAvatarUrl, Token }) {
                     <div>{uploadStatus}</div>
                 </div>
             </div>
-        </div>
+        </main>
     )
 }

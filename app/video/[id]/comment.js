@@ -163,8 +163,8 @@ function EmojiBar({ fmct }) {
             return
         }
     }
-    //如果被选择就显示阴影 ((choose == 1) ? 'bg-gray-300' : 'bg-white  hover:bg-[#bfbfbf]')}>{"👍" + ((choose == 1)? (like+1):like)
-    //补回用户选择的表情 ((choose == 1)? (like+1):like)
+    //如果被选择就显示阴影 ((choose == 1) ? 'bg-gray-300' : 'bg-white  hover:bg-[#bfbfbf]')}>{"👍" + ((choose == 1)? like:(like-1))
+    //补回用户选择的表情 ((choose == 1)? like:(like-1))
     return (
         <div className=" flex items-center gap-2 justify-start flex-wrap">
             <button onClick={() => handleClickChangeEmoji(fmct.Id, 1)} className={"unit-emoji " + ((choose == 1) ? 'bg-gray-300' : 'bg-white  hover:bg-[#bfbfbf]')}>{"👍" + ((choose == 1) ? like : (like - 1))}</button>
@@ -192,7 +192,7 @@ export function CommentPost({ Vid, User }) {
             setCid(Number(res))
         }
     }
-    const [cid, setCid] = useState("")
+    const [cid, setCid] = useState()
     const [text, setText] = useState("")
     const [sendText, setSendText] = useState("")
     return (
@@ -218,14 +218,14 @@ function CommentSingle({ Text, User, Cid }) {
     } else {
         const emojiSelf = {
             Choose: 0,
-            Like: 0,
-            Dislike: 0,
-            Smile: 0,
-            Celebration: 0,
-            Confused: 0,
-            Heart: 0,
-            Rocket: 0,
-            Eyes: 0,
+            Like: 1,
+            Dislike: 1,
+            Smile: 1,
+            Celebration: 1,
+            Confused: 1,
+            Heart: 1,
+            Rocket: 1,
+            Eyes: 1,
         }
         return (
             <div className=" flex w-full gap-4">
@@ -239,7 +239,7 @@ function CommentSingle({ Text, User, Cid }) {
                     <ReactMarkdown className=" w-full">{Text}</ReactMarkdown>
                     <div className=" text-gray-500">{TimestampToDate((Date.now()) / 1000)}</div>
                     <EmojiBar fmct={emojiSelf} />
-                    <div className="self-end flex items-center"><ExpandComment cid={Cid} User={User} /></div>
+                    <div className="self-end flex items-center"><ExpandComment Cid={Cid} User={User} /></div>
                 </div>
             </div>
         )
@@ -272,6 +272,7 @@ function ExpandComment({ Cid, User }) {
         }
     }
     async function OpenCommentFunc() {
+        console.log(Cid)
         var resContent = await GetCommentReplies(Cid)
         if (typeof resContent == "number") {
             alert("获取评论失败")
@@ -291,7 +292,7 @@ function ExpandComment({ Cid, User }) {
                 style={modalStyles}
             >
                 <div className="flex flex-auto flex-col gap-4 overflow-y-visible">
-                    <button className=" h-12 w-12 self-end" onClick={() => setIsOpen(false)}>
+                    <button className="h-12 w-12 self-end" onClick={() => setIsOpen(false)}>
                         <XMarkIcon className="h-10 w-10" />
                     </button>
                     <div className=" flex w-full gap-4">

@@ -14,9 +14,7 @@ export default async function Page({ params }){
     if (isNaN(Number(id))) {
         redirect("/404")
     }
-    const res = await fetch("http://localhost:8000/api/get_circle/"+id,{
-        headers:get_header()
-    })
+    const res = await fetch("http://localhost:8000/api/get_circle/"+id,{headers:get_header()})
     switch (res.status){
         case 200:
             const data = await res.json()

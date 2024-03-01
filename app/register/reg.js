@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation"
 
 export default function Reg_c() {
-	const handleSubmit = (event) => {
-		//避免表单提交后刷新页面
+	const router = useRouter()
+	async function handleClick(event) {
 		event.preventDefault();
-	};
-	async function handleClick() {
 		var formData = new FormData(freg);
 		for (var pair of formData.entries()) {
             if (pair[0] == "passwd") {
@@ -31,8 +30,7 @@ export default function Reg_c() {
 		});
 		switch (response.status) {
 			case 200:
-				alert("200注册成功");
-				window.location.href = "/login";
+				router.replace("/login")
 				break;
 			case 601:
 				alert("601用户名重复");

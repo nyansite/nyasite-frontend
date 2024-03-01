@@ -11,13 +11,9 @@ function get_header() {
 export async function GetSearch(tags,text,page,kind){
     var formData = new FormData()
 	formData.append("tags",tags)
-    console.log(tags)
 	formData.append("text",text)
-    console.log(text)
 	formData.append("page",page)
-    console.log(page)
 	formData.append("kind",kind)
-    console.log(kind)
     const res = await fetch("http://localhost:8000/api/search_video",{
         method:"POST",
         body:formData,

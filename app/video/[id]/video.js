@@ -5,7 +5,7 @@ import { Popover } from "nplayer";
 import { Plugin } from "@nplayer/danmaku";
 import Hls from 'hls.js'
 import "./video.css"
-import { SubscribeFunc,SendBullet } from "./actions.js";
+import { SubscribeFunc, SendBullet } from "./actions.js";
 
 export function VideoPlayer({ VideoUrl, DanmakuOptions, Vid }) {
     const player = useRef();
@@ -144,36 +144,43 @@ export function Descrption({ Desc }) {
 
 }
 
-export function Author({ Author, Relation }) {
-    console.log(Author.Id)
-    const [relation,setRelation] = useState(Relation) 
-    async function subscribe(cid){
+export function Author({ Author }) {
+    const [relation, setRelation] = useState(Author.Relation)
+    async function subscribe(cid) {
         var formData = new FormData
-        formData.append("cid",cid)
+        formData.append("cid", cid)
         const resStauts = await SubscribeFunc(formData)
-        if(resStauts == 200){
-            if(relation == -1){setRelation(0)}
-            if(relation == 0){setRelation(-1)}
-            alert("关注成功")
+        if (resStauts == 200) {
+            if (relation == -1) {
+                setRelation(0)
+                alert("关注成功")
+            }
+            if (relation == 0) {
+                setRelation(-1)
+                alert("取关成功")
+            }
             return
-        }else{
+        } else {
             alert("关注失败")
             return
         }
     }
-    var subscribe
+    var subscribeDisplay
     switch (relation) {
+        case -2:
+            subscribeDisplay = <div className="flex justify-start items-center text-slate-400"><div>没有登录</div></div>;
+            break
         case -1:
-            subscribe = <div className="flex justify-start items-center text-slate-400"><button onClick={() => subscribe(Author.Id)}>关注</button></div>;
+            subscribeDisplay = <div className="flex justify-start items-center text-slate-400"><button onClick={() => subscribe(Author.Id)}>关注</button></div>;
             break
         case 0:
-            subscribe = <div className="flex justify-start items-center text-slate-400"><button onClick={() => subscribe(Author.Id)}>取消关注</button></div>;
+            subscribeDisplay = <div className="flex justify-start items-center text-slate-400"><button onClick={() => subscribe(Author.Id)}>取消关注</button></div>;
             break
-        case 1,2,3,4:
-            subscribe = <div className="flex justify-start items-center text-slate-400"><div>你已是社团成员</div></div>;
+        case 1, 2, 3, 4:
+            subscribeDisplay = <a className="flex justify-start items-center text-slate-400"><div>社团管理</div></a>;
             break
         default:
-            subscribe = <div className="flex justify-start items-center text-slate-400"><div>出错</div></div>;
+            subscribeDisplay = <div className="flex justify-start items-center text-slate-400"><div>出错</div></div>;
 
     }
     return (
@@ -181,7 +188,7 @@ export function Author({ Author, Relation }) {
             <img src={Author.Avatar} className=" h-full" />
             <div className="flex flex-col justify-between flex-nowrap h-full">
                 <a className="flex justify-start w-full text-xl">{Author.Name}</a>
-                {subscribe}
+                {subscribeDisplay}
             </div>
         </div>
     )

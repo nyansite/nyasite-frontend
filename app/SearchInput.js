@@ -6,12 +6,8 @@ import { entireTags } from "./tag.js"
 
 export default function SearchInput() {
 	const searchParams = useSearchParams()
-	const text = (searchParams.has("text") ? searchParams.get("text") : "")
-	const tags = (searchParams.has("tags") ? searchParams.get("tags").split(';') : [])
-	return <SearchInputInner Tags={tags} Text={text} />
-}
-
-function SearchInputInner({ Tags, Text }) {
+	const Text = (searchParams.has("text") ? searchParams.get("text") : "")
+	const Tags = (searchParams.has("tags") ? searchParams.get("tags").split(';') : [])
 	//补全部分
 	const router = useRouter()
 	const suggestionsUse = entireTags;
@@ -46,15 +42,13 @@ function SearchInputInner({ Tags, Text }) {
 		let count = 0;
 		let show = "";
 		let inputValueList = e.target.value.split(" ");
-		console.log(inputValueList.slice(-1))
 		while (count <= 5 && i <= suggestionsUse.length - 1) {
 			// 空格分隔的最后部分默认为新输入部分
-			console.log(suggestionsUse[i].includes(inputValueList.slice(-1)))
 			if (suggestionsUse[i].includes(inputValueList.slice(-1)) && inputValueList.slice(-1)[0] != "") {
 				show = suggestionsUse[i];
 				suggestionsShowList.push(
-					<li key={show} className=" bg-slate-50 flex gap-2 border-b-2 border-b-gray-400" >
-						<button onClick={(e) => addTagbySug(e)} data-index={show}>
+					<li key={show} className=" bg-slate-50 flex gap-2 border-b border-x border-gray-400" >
+						<button onClick={(e) => addTagbySug(e)} data-index={show} className="mx-2">
 							{suggestionsUse[i]}
 						</button>
 					</li>,
@@ -76,7 +70,7 @@ function SearchInputInner({ Tags, Text }) {
 		</button>
 	));
 	return (
-		<div className="flex items-start justify-start gap-2 rounded-lg bg-slate-200 h-12" style={{ width: "40vw" }}>
+		<main className="flex items-start justify-start gap-2 rounded-lg bg-slate-200 h-12" style={{ width: "40vw" }}>
 			<div className=" flex gap-2 w-full mx-1">
 				<div className=" flex self-start gap-2">{tagsShow}</div>
 				<div className=" flex flex-col items-start">
@@ -109,6 +103,6 @@ function SearchInputInner({ Tags, Text }) {
 					</div>
 				</button>
 			</div>
-		</div>
+		</main>
 	);
 }

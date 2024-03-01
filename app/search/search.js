@@ -51,7 +51,7 @@ export function SearchVideosEntire({ Content,Tags,Text}){
 
 export function SearchVideos({Content}){
     if(Content == null){
-        return <div className=" w-full text-center">获取评论出错</div>
+        return <div className=" w-full text-center">获取视频出错</div>
     }else{
         var showList = Content.videos.map(i =>
             <div className=" flex h-28 w-5/12 gap-2" key={i.Id}>

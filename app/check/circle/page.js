@@ -22,7 +22,7 @@ export default async function Page() {
                 <main className=" w-full flex justify-between border border-white gap-20">
                     <div className=" w-1/6 flex flex-col rounded-r-md">
                         <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-b-[#bfbfbf] rounded-tr-md" href="/check/video">
-                            <div className="  text-lg">视频审核</div>
+                            <div className=" text-lg">视频审核</div>
                         </a>
                         <div className=" navigation-unit bg-slate-200 rounded-br-md" >
                             <div className=" text-lg">社团审核</div>

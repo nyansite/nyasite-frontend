@@ -1,6 +1,6 @@
 import "./globals.css";
 import Image from "next/image";
-import { headers,cookies } from 'next/headers'
+import { headers } from 'next/headers'
 import { Inter } from "next/font/google";
 import { ChatBubbleLeftRightIcon, ArchiveBoxIcon, CloudArrowUpIcon, BellAlertIcon } from "@heroicons/react/24/outline";
 import SearchInputInner from "./SearchInput.js";
@@ -39,10 +39,10 @@ export default async function RootLayout({ children }) {
 						</a>
 					</div>
 					<div>
-						<SearchInputInner/>
+						<SearchInputInner />
 					</div>
 					<div className=" whitespace-nowrap flex items-center overflow-hidden">
-						<a className="img_b">
+						<a className="img_b" href="/message/video">
 							<MessageIcon Alert={false} />
 							<div>消息</div>
 						</a>

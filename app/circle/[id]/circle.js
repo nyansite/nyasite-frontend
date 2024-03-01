@@ -42,7 +42,7 @@ function Subscribe({ Cid, Relation }) {
     async function subscribe(cid) {
         var formData = new FormData
         formData.append("cid", cid)
-        const resStauts = await SubscribeFunc(cid)
+        const resStauts = await SubscribeFunc(formData)
         if (resStauts == 200) {
             if (relation == -1) { 
                 setRelation(0) 
@@ -60,13 +60,13 @@ function Subscribe({ Cid, Relation }) {
     }
     switch (relation) {
         case -1:
-            return <button className="text_b" onClick={() => subscribe(Cid)}>关注</button>
+            return <><button className="text_b" onClick={() => subscribe(Cid)}>关注</button></>
         case 0:
-            return <button className="text_b bg-gray-300 hover:bg-gray-300" onClick={() => subscribe(Cid)}>取消关注</button>
+            return <><button className="text_b bg-gray-300 hover:bg-gray-300" onClick={() => subscribe(Cid)}>取消关注</button></>
         case 1, 2, 3, 4:
-            return <a className="text_b">管理社团</a>
+            return <><a className="text_b">管理社团</a></>
         default:
-            return <div className="flex justify-start items-center text-slate-400"><div>出错</div></div>
+            return <main className="flex justify-start items-center text-slate-400"><div>出错</div></main>
 
     }
 }
@@ -84,7 +84,7 @@ function Information({ Content }) {
     }
     kind = kind.substring(0, kind.length - 1)
     return (
-        <div className="flex flex-auto flex-col w-full">
+        <main className="flex flex-auto flex-col w-full">
             <div className="bar">
                 <div className="title">简介</div>
                 <ReactMarkdown className="w-full">{Content.descrption}</ReactMarkdown>
@@ -93,7 +93,7 @@ function Information({ Content }) {
                 <div className="title">创作类别</div>
                 <div>{kind}</div>
             </div>
-        </div>
+        </main>
     )
 }
 
@@ -131,8 +131,8 @@ function Members({ Content }) {
         </div>
     )
     return (
-        <div className="flex flex-auto flex-wrap gap-4">
+        <main className="flex flex-auto flex-wrap gap-4">
             {showList}
-        </div>
+        </main>
     )
 }

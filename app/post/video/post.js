@@ -179,6 +179,7 @@ export function Post_c({ Token, TagList,CircleList }) {
     //select tags
     const [uploadVideoStauts, setUploadVideoStauts] = useState(false)
     const [tags, setTags] = useState([])
+    const router = useRouter()
     const suggestions = TagList.map((tag) => {
         return {
             id: String(tag.Id),
@@ -209,13 +210,11 @@ export function Post_c({ Token, TagList,CircleList }) {
     //
 
     const circles = CircleList.map(i =>
-        <option value={i.id}>{i.name}</option>
+        <option value={i.id} key={i.id}>{i.name}</option>
         )
 
     const [coverUrl, setCoverUrl] = useState('')
     async function postVideo() {
-        const router = useRouter()
-
         let formData = new FormData(video)
         for (var pair of formData.entries()) {
             if (pair[0] == "title" && pair[1] == "") {

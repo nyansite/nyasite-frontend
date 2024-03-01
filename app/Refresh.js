@@ -16,5 +16,5 @@ export default function Refresh(){
         }
     }
     refresh()
-    return null
+    return <div></div>
 }
