@@ -9,10 +9,23 @@ function get_header() {
 }
 
 export async function SearchUsersFunc(clipOfName){
-    const res = await fetch("http://localhost:8000/api/search_users/"+clipOfName,{headers:get_header()})
+    const res = await fetch("http://localhost:8000/api/search_users/"+clipOfName,{headers:{
+        cookie:get_header().cookie
+    }})
     if(res.status == 200){
         return await res.json()
     }else{
         return res.status
     }
+}
+
+export async function InviteFunc(formData){
+    const res = await fetch("http://localhost:8000/api/invite_new_member",{
+        method: "POST",
+        body:formData,
+        headers:{
+            cookie:get_header().cookie
+        }
+    })
+    return res.status
 }

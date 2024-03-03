@@ -8,5 +8,13 @@ function get_header() {
 }
 
 export default async function Page(){
-    
+    const res = await fetch("http://localhost:8000/api/get_new_circle_affairs",{headers:{cookie:get_header().cookie}})
+    const data = await res.json()
+    var messages = []
+    data.messages.map((i) => {
+        switch(i.Kind){
+            
+        }
+    }
+    )
 }

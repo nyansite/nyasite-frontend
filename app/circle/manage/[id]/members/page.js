@@ -19,7 +19,6 @@ export default async function Page({ params }) {
             return redirect("/user/circle")
         case 200:
             const permission = await res.text()
-            console.log(permission);
             const resMembers = await fetch("http://localhost:8000/api/get_circle_members/" + id, { headers: get_header() })
             const members = await resMembers.json()
             return (
@@ -47,7 +46,7 @@ export default async function Page({ params }) {
                                 </div>
                             </div>
                         </div>
-                        <Invitation/>
+                        <Invitation Permission={permission} CircleId={id}/>
                     </div>
                 </main>
             )
