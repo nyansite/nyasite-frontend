@@ -41,6 +41,9 @@ body {
 	.navigation-unit{
         @apply w-full h-12 flex items-center justify-center border border-slate-200;
     }
+	.hyperlink{
+		@apply text-blue-400 hover:underline
+	}
 }
 
 /*按钮的动态效果(暂时无法通过tailwind实现)*/

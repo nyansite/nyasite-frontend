@@ -21,7 +21,7 @@ export default async function Page() {
                         <div className="text-lg text-gray-500 truncate">{i.Name}</div>
                     </div>
                     <div className="flex items-center h-full gap-2">
-                        <a className="text-lg text-blue-400 hover:underline">管理</a>
+                        <a className="text-lg text-blue-400 hover:underline" href={"/circle/manage/"+i.Id+"/members"}>管理</a>
                     </div>
                 </div>
             )
@@ -29,13 +29,13 @@ export default async function Page() {
             return (
                 <main className=" w-full flex justify-between border border-white gap-20">
                     <div className=" w-1/6 flex flex-col rounded-r-md">
-                        <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-b-[#bfbfbf] rounded-tr-md" href="/user/self">
+                        <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf] rounded-tr-md" href="/user/self">
                             <div className=" text-lg">个人中心</div>
                         </a>
                         <div className=" navigation-unit bg-slate-200" >
                             <div className=" text-lg">社团</div>
                         </div>
-                        <a className=" navigation-unit hover:bg-[#bfbfbf] hover:border-b-[#bfbfbf] rounded-br-md" href="/user/subscribe">
+                        <a className=" navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf] rounded-br-md" href="/user/subscribe">
                             <div className=" text-lg">关注列表</div>
                         </a>
                     </div>

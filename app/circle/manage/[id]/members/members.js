@@ -86,7 +86,7 @@ export function Invitation({ Permission, CircleId }) {
                             <button className="text_b" onClick={invite}>邀请</button>
                             <button className="text_b" onClick={() => setIsOpen(false)}>取消</button>
                         </div>
-                    </div> : <div />}
+                    </div> : <div/>}
                 <div className="h-12 w-32 flex items-center justify-center">
                     <button className="w-32 hover:underline text-blue-400" onClick={() => setIsOpen(true)}>邀请新成员</button>
                 </div>

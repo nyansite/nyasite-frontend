@@ -38,9 +38,9 @@ export default async function RootLayout({ children }) {
 							<Image alt="logo" width={32} height={32} src="/logo.svg" className=" w-16 h-16" />
 						</a>
 					</div>
-					<div>
+					<main>
 						<SearchInputInner />
-					</div>
+					</main>
 					<div className=" whitespace-nowrap flex items-center overflow-hidden">
 						<a className="img_b" href="/message/video">
 							<MessageIcon Alert={false} />

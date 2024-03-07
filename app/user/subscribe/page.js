@@ -21,7 +21,7 @@ export default async function Page() {
                         <div className="text-lg text-gray-500 truncate">{i.Name}</div>
                     </div>
                     <div className="flex items-center h-full gap-2">
-                        <Subscribe Cid={i.Id}/>
+                        <Subscribe Cid={i.Id} />
                     </div>
                 </div>
             )
@@ -30,9 +30,11 @@ export default async function Page() {
                 <main className=" w-full flex justify-between border border-white gap-20">
                     <div className=" w-1/6 flex flex-col rounded-r-md">
                         <a className=" rounded-tr-md" href="/user/self">
-                            <div className=" navigation-unit hover:bg-[#bfbfbf] hover:border-b-[#bfbfbf] text-lg">个人中心</div>
+                            <div className=" navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf] text-lg">
+                                <div className=" text-lg">个人中心</div>
+                            </div>
                         </a>
-                        <a className=" navigation-unit hover:bg-[#bfbfbf] hover:border-b-[#bfbfbf]" href="/user/circle">
+                        <a className=" navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf]" href="/user/circle">
                             <div className=" text-lg">社团</div>
                         </a>
                         <div className=" navigation-unit bg-slate-200 rounded-br-md" >
