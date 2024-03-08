@@ -83,7 +83,7 @@ function VoteBar({ Avid }) {
 
 function Tags({ AllTags, Tags }) {
     const tagsDisplay = Tags.map(function (i) {
-        return { id: i, text: AllTags.find(tag => tag.Id == i).Text }
+        return { id: String(i), text: AllTags.find(tag => tag.Id == i).Text }
     })
     return <ReactTags
         tags={tagsDisplay}

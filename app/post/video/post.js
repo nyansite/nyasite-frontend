@@ -247,7 +247,7 @@ export function Post_c({ Token, TagList,CircleList }) {
                 <form id="video" className="flex flex-col w-full gap-6">
                     <div className="bar">
                         <label className="title">社团</label>
-                        <select className="w-full border border-gray-400  px-2 py-1">{circles}</select>
+                        <select className="w-full border border-gray-400  px-2 py-1" name="author">{circles}</select>
                     </div>
                     <div className="bar">
                         <label className="title">标题</label>

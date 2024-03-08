@@ -53,7 +53,6 @@ export default async function Page({ params }) {
                         {userRes.status == 200?<CommentPost Vid={id} User={user}/>:null}
                         <CommentsDisplay Vid={id} User={user} />
                     </div>
-
                 </div>
             </main>
         )

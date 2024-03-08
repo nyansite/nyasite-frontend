@@ -24,7 +24,7 @@ const modalStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        height:'80vh',
+        height: '80vh',
     },
 };
 
@@ -272,7 +272,6 @@ function ExpandComment({ Cid, User }) {
         }
     }
     async function OpenCommentFunc() {
-        console.log(Cid)
         var resContent = await GetCommentReplies(Cid)
         if (typeof resContent == "number") {
             alert("获取评论失败")
@@ -280,19 +279,22 @@ function ExpandComment({ Cid, User }) {
         } else {
             SetContent(resContent)
             setIsOpen(true)
+            document.body.style.overflow = "hidden"
             return
         }
     }
+    function CloseCommentFunc(){document.body.style.overflow = "auto";setIsOpen(false)}
     return (
         <>
             <button onClick={OpenCommentFunc}>详细</button>
             <Modal
                 isOpen={isOpen}
-                onRequestClose={() => setIsOpen(false)}
+                onRequestClose={CloseCommentFunc}
                 style={modalStyles}
+                ariaHideApp={false}
             >
                 <div className="flex flex-auto flex-col gap-4 overflow-y-visible">
-                    <button className="h-12 w-12 self-end" onClick={() => setIsOpen(false)}>
+                    <button className="h-12 w-12 self-end" onClick={CloseCommentFunc}>
                         <XMarkIcon className="h-10 w-10" />
                     </button>
                     <div className=" flex w-full gap-4">
@@ -305,7 +307,6 @@ function ExpandComment({ Cid, User }) {
                         <div className=" flex flex-col gap-2 flex-auto" style={{ width: "calc(100% - 8rem)" }}>
                             <ReactMarkdown className=" w-full">{Content.Origin ? Content.Origin.Text : null}</ReactMarkdown>
                             <div className=" text-gray-500">{Content.Origin ? TimestampToDate(Content.Origin.CreatedAt) : null}</div>
-                            <EmojiBar fmct={Content.Origin} />
                             <form id="comment" className=" flex flex-auto gap-2">
                                 <div className=" w-12">回复</div>
                                 <textarea name="text" maxLength={300} rows={4} className="w-full border border-gray-400  px-2 py-1 text-gray-700" autoComplete="invaild" />
@@ -355,8 +356,6 @@ function CommentRepliesList({ Body, UserShow }) {
 function Like({ IsLiked, Crid, Count }) {
     const count = (IsLiked ? Count - 1 : Count)
     const [isLiked, setIsLiked] = useState(IsLiked)
-    console.log(isLiked)
-    console.log(isLiked ? count + 1 : count)
     async function handleClickChangeLike() {
         var formData = new FormData()
         formData.append("crid", Crid)
