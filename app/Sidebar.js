@@ -7,6 +7,19 @@ function get_header() {
 	return JheadersList;
 }
 
+async function ClockIn() {
+	var formData = new FormData()
+	var date = new Date();
+	formData.append("timezone", -date.getTimezoneOffset() * 60)
+	const res = await fetch("http://localhost:8000/api/clockin",{
+		method:"POST",
+		body:formData,
+		headers:{
+			cookie:get_header().cookie
+		}
+	})
+}
+
 export function SidebarRight() {
 	return (
 		<div className=" w-40 flex flex-col gap-2 items-start">
@@ -22,6 +35,7 @@ async function AvatarBar() {
 	switch (res.status) {
 		case 200:
 			const list = await res.json()
+			await ClockIn()
 			return (
 				<a className='flex items-center flex-col gap-2 w-32' href="/user/self">
 					<img src={list.avatar} alt='avatar' className=" h-20 w-20 rounded-full" />

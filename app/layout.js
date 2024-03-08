@@ -32,16 +32,16 @@ export default async function RootLayout({ children }) {
 	return (
 		<html lang="zh-hans">
 			<body className={inter.className + " flex flex-col gap-4 min-h-screen"} style={{ minWidth: "800px" }}>
-				<div className=" flex items-center bg-white h-16 z-50 shadow-md justify-start">
-					<div className=" w-1/5 flex justify-start items-center">
+				<main className=" flex items-center bg-white h-16 z-50 shadow-md justify-start">
+					<header className=" w-1/5 flex justify-start items-center">
 						<a className=" whitespace-nowrap flex items-center justify-items-start w-16 h-16" href="/">
 							<Image alt="logo" width={32} height={32} src="/logo.svg" className=" w-16 h-16" />
 						</a>
-					</div>
-					<main>
+					</header>
+					<header>
 						<SearchInputInner />
-					</main>
-					<div className=" whitespace-nowrap flex items-center overflow-hidden">
+					</header>
+					<header className=" whitespace-nowrap flex items-center overflow-hidden">
 						<a className="img_b" href="/message/video">
 							<MessageIcon Alert={false} />
 							<div>消息</div>
@@ -54,11 +54,11 @@ export default async function RootLayout({ children }) {
 							<CloudArrowUpIcon className="h-12 w-12 text-[#516e8b]" />
 							<div>上传</div>
 						</a>
-					</div>
-				</div>
-				<div className=" flex-auto">
+					</header>
+				</main>
+				<main className=" flex-auto">
 					{children}
-				</div>
+				</main>
 				<footer className=" h-12 w-full flex flex-col justify-center items-center">
 					<div>喵站</div>
 				</footer>

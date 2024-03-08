@@ -21,8 +21,6 @@ export default function Reg_c() {
 				}
 			}
         }
-		var date = new Date();
-		formData.append("timezone",-date.getTimezoneOffset()*60)
 		let response = await fetch("/api/register", {
 			method: "POST",
 			body: formData,

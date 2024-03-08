@@ -16,11 +16,11 @@ function TimestampToDate(timestamp) {
 
 export default async function Page() {
     const res = await fetch("http://localhost:8000/api/get_video_subscribed", { headers: get_header() })
-    const data = await res.json()
     switch (res.status) {
         case 401:
             return redirect("/login")
         case 200:
+            const data = await res.json()
             return (
                 <main className=" w-full flex justify-between border border-white gap-20">
                     <div className=" w-1/6 flex flex-col rounded-r-md">

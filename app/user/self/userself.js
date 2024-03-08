@@ -13,7 +13,6 @@ export function UserSelf_c({ data }) {
         <div className=" flex flex-col gap-3">
             <Avatar AvatarUrl={data.avatar} />
             <Name NameNow={data.name} />
-            <Timezone TimezoneOff={data.timezone}/>
             <div className="bar">
                 <div className="title">经验</div>
                 <div><progress max={16} value={data.level%16}/></div>
@@ -148,26 +147,7 @@ function Name({ NameNow }) {
     )
 }
 
-function Timezone({ TimezoneOff }){
-    var date = new Date()
-    async function setTimezone(){
-        var formData = new FormData()
-		formData.append("timezone",-date.getTimezoneOffset()*60)
-        const res = await ChangeTimezone(formData)
-        if(res == 200){
-            alert("校准时差成功")
-        }else{
-            alert("校准时差失败")
-        }
-    }
-    return(
-        <div className="bar items-center">
-            <div className="title">时区</div>
-            <div>{"设定时间:UTF"+((TimezoneOff/3600<0?"":"+")+TimezoneOff/3600)+" 实际时间:UTF"+((date.getTimezoneOffset()/-60<0?"":"+")+date.getTimezoneOffset()/-60)}</div>
-            <button className="text_b hover:w-20" onClick={setTimezone}>校准</button>
-        </div>
-    )
-}
+
 
 function Logout(){
     const router = useRouter()
