@@ -60,7 +60,15 @@ export default async function RootLayout({ children }) {
 					{children}
 				</main>
 				<footer className=" h-12 w-full flex flex-col justify-center items-center">
-					<div>喵站</div>
+					<div>
+						<span className="me-1">喵站 Nyansite | Copyright @ 2023 - 现在</span>
+						<a href="https://github.com/flyingsnoopy" target="_blank">flyingsnoopy</a>
+						, 
+						<a href="https://github.com/tksmly" target="_blank">tksmly</a>
+						, 
+						<a href="https://github.com/Vincent-the-gamer" target="_blank">Vincent-the-gamer</a>
+						.
+					</div>
 				</footer>
 			</body>
 		</html>
