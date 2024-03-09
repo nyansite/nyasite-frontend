@@ -1,4 +1,4 @@
-<h1 align="center">Nyasite Backend</h1>
+<h1 align="center">Nyasite Frontend</h1>
 
 # Dev
 ```shell
@@ -10,6 +10,10 @@ pnpm dev
 ```
 
 # Update deps
+Keep dependencies newest using taze.
+
+See: [antfu/taze](https://github.com/antfu/taze).
+
 ```shell
 npm run dep
 ```
