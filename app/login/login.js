@@ -31,11 +31,11 @@ export default function Login_c() {
 
 	return (
 		<main className="flex items-center justify-center place-items-center" style={{height:"calc(100vh - 12rem)"}}>
-			<div className="shadow-md shadow-black rounded border border-black p-4 ">
+			<div className="shadow-md shadow-black rounded border border-black p-4 w-80">
 				<form id="flogin" onSubmit={handleSubmit} className="">
 					<div className="flex justify-center">登录</div>
 					<input
-						className="block my-2 bg-transparent"
+						className="w-full border-2 border-gray rounded p-1 block my-2 bg-transparent"
 						name="username"
 						id="username"
 						placeholder="用户名或邮箱"
@@ -44,7 +44,7 @@ export default function Login_c() {
 						autoFocus
 					/>
 					<input
-						className="block my-2 bg-transparent "
+						className="w-full border-2 border-gray rounded p-1 block my-2 bg-transparent"
 						name="passwd"
 						id="passwd"
 						placeholder="密码"
@@ -57,7 +57,7 @@ export default function Login_c() {
 						<a href="/register">注册账户</a>
 						<a href="">重置密码</a>
 					</div>
-					<div className="flex justify-center">
+					<div className="flex justify-center p-5">
 						<button type="submit">
 							<Image
 								src="/chevron-right-solid.svg"
