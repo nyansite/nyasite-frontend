@@ -17,7 +17,7 @@ import "cropperjs/dist/cropper.css"
 //react-tag-input
 import { WithContext as ReactTags } from 'react-tag-input';
 //self
-import { UploadCoverFunc,UploadVideoFunc } from "./actions.js"
+import { UploadCoverFunc, UploadVideoFunc } from "./actions.js"
 import "./post.css"
 //router
 import { useRouter } from 'next/navigation'
@@ -76,7 +76,7 @@ function UploadCoverContnet({ Token, GetCoverUrl, Display }) {
         }
         reader.readAsDataURL(acceptFiles[0])
     }, [])
-    const { getRootProps, getInputProps } = useDropzone({ onDrop,accept:"image/*"})
+    const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: "image/*" })
     function imgGet(e) {
         const filedata = e.target.files[0]
         let reader = new FileReader()
@@ -175,7 +175,7 @@ function UploadCover({ Token, GetCoverUrl }) {
 
 //body
 
-export function Post_c({ Token, TagList,CircleList }) {
+export function Post_c({ Token, TagList, CircleList }) {
     //select tags
     const [uploadVideoStauts, setUploadVideoStauts] = useState(false)
     const [tags, setTags] = useState([])
@@ -211,31 +211,23 @@ export function Post_c({ Token, TagList,CircleList }) {
 
     const circles = CircleList.map(i =>
         <option value={i.id} key={i.id}>{i.name}</option>
-        )
+    )
 
     const [coverUrl, setCoverUrl] = useState('')
     async function postVideo() {
         let formData = new FormData(video)
-        for (var pair of formData.entries()) {
-            if (pair[0] == "title" && pair[1] == "") {
-                alert("请输入标题")
-                return
-            }
-        }
-        if (coverUrl == "") {
-            alert("请上传封面")
-            return
-        }
+        if (formData.get("title") = "") { alert("请输入标题"); return }
+        if (coverUrl == "") { alert("请上传封面"); return }
         formData.append("cover", coverUrl)
         tags.forEach((tag) => {
             console.log(tag)
             formData.append("tags", tag.id)
         })
         const resStauts = await UploadVideoFunc(formData)
-        if(resStauts == 200){
+        if (resStauts == 200) {
             alert("上传成功")
             router.push("/post")
-        }else{
+        } else {
             alert("上传失败")
         }
     }

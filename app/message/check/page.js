@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { Reason } from "./check.js"
 
 function get_header() {
     const headersL = headers();
@@ -30,8 +31,9 @@ export default async function Page() {
                             <div className="h-full rounded">
                                 <img src={i.Image} className="h-full rounded" />
                             </div>
-                            <div className="flex items-center gap-1">
+                            <div className="flex flex-col justify-center gap-1">
                                 <div>{"视频" + i.Name + "没有通过审核"}</div>
+                                <Reason Reason={i.Reason} Id={i.DBId}/>
                             </div>
                         </div>
                     )
