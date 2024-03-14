@@ -70,12 +70,12 @@ export default function SearchInput() {
 		</button>
 	));
 	return (
-		<main className="flex items-start justify-start gap-2 rounded-lg bg-slate-200 h-12" style={{ width: "40vw" }}>
+		<div className="flex items-start justify-start gap-2 rounded-lg bg-crystal h-12" style={{ width: "40vw" }}>
 			<div className=" flex gap-2 w-full mx-1">
 				<div className=" flex self-start gap-2">{tagsShow}</div>
-				<div className=" flex flex-col items-start">
+				<div className=" flex flex-col items-start w-full">
 					<input
-						className=" w-full h-12 rounded-lg bg-transparent focus:outline-none"
+						className="relative w-full h-12 rounded-lg bg-transparent focus:outline-none"
 						value={inputString}
 						onChange={(e) => handleUpdate(e)}
 						onKeyUpCapture={(e) => handleBackSpace(e)}
@@ -103,6 +103,6 @@ export default function SearchInput() {
 					</div>
 				</button>
 			</div>
-		</main>
+		</div>
 	);
 }

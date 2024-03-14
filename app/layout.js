@@ -32,30 +32,30 @@ export default async function RootLayout({ children }) {
 	return (
 		<html lang="zh-hans">
 			<body className={inter.className + " flex flex-col gap-4 min-h-screen"} style={{ minWidth: "800px" }}>
-				<main className=" flex items-center bg-white h-16 z-50 shadow-md justify-start">
-					<header className=" w-1/5 flex justify-start items-center">
+				<header className="full-header flex items-center h-16 z-50 shadow-md justify-center">
+					<div className=" w-1/5 flex justify-start items-center">
 						<a className=" whitespace-nowrap flex items-center justify-items-start w-16 h-16" href="/">
 							<Image alt="logo" width={32} height={32} src="/logo.svg" className=" w-16 h-16" />
 						</a>
-					</header>
-					<header>
+					</div>
+					<div>
 						<SearchInputInner />
-					</header>
-					<header className=" whitespace-nowrap flex items-center overflow-hidden">
+					</div>
+					<div className=" whitespace-nowrap flex items-center overflow-hidden">
 						<a className="img_b" href="/message/video">
 							<MessageIcon Alert={false} />
 							<div>消息</div>
 						</a>
 						<a className="img_b">
-							<ChatBubbleLeftRightIcon className="h-12 w-12  text-[#516e8b]" />
+							<ChatBubbleLeftRightIcon className="h-12 w-12 text-[#516e8b]" />
 							<div>论坛</div>
 						</a>
 						<a className="img_b" href="/post">
 							<CloudArrowUpIcon className="h-12 w-12 text-[#516e8b]" />
 							<div>上传</div>
 						</a>
-					</header>
-				</main>
+					</div>
+				</header>
 				<main className=" flex-auto">
 					{children}
 				</main>
