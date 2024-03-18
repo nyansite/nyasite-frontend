@@ -31,7 +31,7 @@ function MessageIcon({ Alert }) {
 export default async function RootLayout({ children }) {
 	return (
 		<html lang="zh-hans">
-			<body className={inter.className + " flex flex-col gap-4 min-h-screen"} style={{ minWidth: "800px" }}>
+			<body className={inter.className + " flex flex-col gap-4 min-h-screen"} style={{ minWidth: "1250px" }}>
 				<header className="full-header flex items-center h-16 z-50 shadow-md justify-center">
 					<div className=" w-1/5 flex justify-start items-center">
 						<a className=" whitespace-nowrap flex items-center justify-items-start w-16 h-16" href="/">

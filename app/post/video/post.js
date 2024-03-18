@@ -216,7 +216,7 @@ export function Post_c({ Token, TagList, CircleList }) {
     const [coverUrl, setCoverUrl] = useState('')
     async function postVideo() {
         let formData = new FormData(video)
-        if (formData.get("title") = "") { alert("请输入标题"); return }
+        if (formData.get("title") == "") { alert("请输入标题"); return }
         if (coverUrl == "") { alert("请上传封面"); return }
         formData.append("cover", coverUrl)
         tags.forEach((tag) => {

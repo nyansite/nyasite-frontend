@@ -1,20 +1,26 @@
 "use client"
 import { useState } from "react";
+
 import ReactMarkdown from 'react-markdown'
+
 import { PlayCircleIcon, ClockIcon } from "@heroicons/react/24/outline";
+
+import Pagination from "rc-pagination"
+import "rc-pagination/assets/index.css"
+
 import "./circle.css"
-import { SubscribeFunc } from "./actions";
+import { SubscribeFunc,GetWorks } from "./actions.js";
 
 function TimestampToDate(timestamp) {
     const date = new Date(timestamp * 1000)
     return date.toLocaleDateString()
 }
 
-export function Circle_c({ Content }) {
+export function Circle_c({ Content, VideoInitialDisplay }) {
     const [position, setPosition] = useState(0)
     return (
         <main className=" flex flex-col items-center w-full">
-            <div className="flex flex-col gap-4 w-10/12">
+            <div className="flex flex-auto flex-col gap-4 w-10/12">
                 <div className="flex flex-auto justify-between items-end h-16 gap-4">
                     <div className="flex flex-auto justify-start items-end h-full gap-4">
                         <img className="h-12 w-12 rounded-full" src={Content.avatar} />
@@ -28,7 +34,7 @@ export function Circle_c({ Content }) {
                     <button className={"option " + (position == 2 ? "bg-gray-300" : "hover:bg-[#bfbfbf]")} onClick={() => setPosition(2)}>成员</button>
                 </div>
                 {position == 0 ? <Information Content={Content} /> : null}
-                {position == 1 ? <Works Content={Content} /> : null}
+                {position == 1 ? <Works Content={VideoInitialDisplay} Id={Content.id} /> : null}
                 {position == 2 ? <Members Content={Content} /> : null}
             </div>
         </main>
@@ -44,12 +50,12 @@ function Subscribe({ Cid, Relation }) {
         formData.append("cid", cid)
         const resStauts = await SubscribeFunc(formData)
         if (resStauts == 200) {
-            if (relation == -1) { 
-                setRelation(0) 
+            if (relation == -1) {
+                setRelation(0)
                 alert("关注成功")
             }
-            if (relation == 0) { 
-                setRelation(-1) 
+            if (relation == 0) {
+                setRelation(-1)
                 alert("取关成功")
             }
             return
@@ -97,30 +103,86 @@ function Information({ Content }) {
     )
 }
 
-function Works({ Content }) {
-    if(Content.videos == null){
+function Works({ Content,Id }) {
+    if (Content.count == 0) {
         return null
+    } else if (Content.count <= 20) {
+        const showList = Content.content.map(i =>
+            <div className="flex flex-col w-52 gap-1">
+                <a className=" w-full rounded" href={"/video/" + i.Id}>
+                    <img src={i.CoverPath} className="w-full rounded" />
+                </a>
+                <a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views - 1}</div></div>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4" /><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
+            </div>
+        )
+        return (
+            <div className="flex flex-auto w-full flex-col" >
+                <div className="flex flex-auto w-full flex-col">
+                    <div className="justify-self-start items-start font-semibold text-xl">视频</div>
+                </div>
+                <div className="flex flex-auto w-full gap-12">
+                    <div className="flex justify-start items-start">
+                        <div className="flex flex-col gap-2">
+                            <button className="text_b w-32">播放量排序</button>
+                            <button className="text_b w-32">时间排序</button>
+                        </div>
+                    </div>
+                    <div className="flex flex-wrap gap-4" style={{ width: "70rem" }}>
+                        {showList}
+                    </div>
+                </div>
+            </div>
+        )
+    } else if (Content.count > 20) {
+        const [videos, setVideos] = useState(Content.content)
+        async function onChange(current,pageSize){
+            const res = await GetWorks(Id,current,0)
+            if (typeof res == "number"){
+                setVideos(null)
+            }else{
+                setVideos(res.content)
+            }
+        }
+        const showList = videos.map(i =>
+            <div className="flex flex-col w-52 gap-1">
+                <a className=" w-full rounded" href={"/video/" + i.Id}>
+                    <img src={i.CoverPath} className="w-full rounded" />
+                </a>
+                <a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views - 1}</div></div>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4" /><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
+            </div>
+        )
+        return (
+            <div className="flex flex-col flex-auto w-full " >
+                <div className="flex flex-auto w-full flex-col">
+                    <div className="justify-self-start items-start font-semibold text-xl">视频</div>
+                </div>
+                <div className="flex flex-auto w-full gap-2">
+                    <div className="flex justify-start items-start">
+                        <div className="flex flex-col gap-2">
+                            <button className="text_b w-28">播放量排序</button>
+                            <button className="text_b w-28">时间排序</button>
+                        </div>
+                    </div>
+                    <div className="flex flex-wrap gap-4" style={{ width: "69rem" }}>
+                        {showList}
+                    </div>
+                </div>
+                    <Pagination
+                        className="self-center"
+                        showQuickJumper
+                        showSizeChanger
+                        defaultPageSize={20}
+                        defaultCurrent={1}
+                        onChange={onChange}
+                        total={Content.count}
+                    />
+            </div>
+        )
     }
-    const showList = Content.videos.map(i =>
-        <div className="flex flex-col w-52 gap-1">
-            <a className=" w-full rounded" href={"/video/" + i.Id}>
-                <img src={i.CoverPath} className="w-full rounded" />
-            </a>
-            <a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
-            <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views - 1}</div></div>
-            <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4" /><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
-        </div>
-    )
-    return (
-        <div className="flex flex-auto flex-col w-full">
-            <div className="flex flex-auto w-full flex-col">
-                <div className="justify-self-start items-start font-semibold text-xl">视频</div>
-            </div>
-            <div className="flex gap-4 w-full h-52 flex-wrap overflow-hidden">
-                {showList}
-            </div>
-        </div>
-    )
 }
 
 function Members({ Content }) {

@@ -15,10 +15,12 @@ export default async function Page({ params }){
         redirect("/404")
     }
     const res = await fetch("http://localhost:8000/api/get_circle/"+id,{headers:get_header()})
+    const resVideo = await fetch("http://localhost:8000/api/get_circle_video/"+id+"/1/0",{headers:get_header()})
+    if(resVideo.status != 200){var videoData = {count:0}}else{var videoData = await resVideo.json()}
     switch (res.status){
         case 200:
             const data = await res.json()
-            return <Circle_c Content={data}/>
+            return <Circle_c Content={data} VideoInitialDisplay={videoData}/>
         case 404:
             return redirect("/404")
         default:
