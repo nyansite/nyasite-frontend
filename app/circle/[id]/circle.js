@@ -9,7 +9,7 @@ import Pagination from "rc-pagination"
 import "rc-pagination/assets/index.css"
 
 import "./circle.css"
-import { SubscribeFunc,GetWorks } from "./actions.js";
+import { SubscribeFunc, GetVideos } from "./actions.js";
 
 function TimestampToDate(timestamp) {
     const date = new Date(timestamp * 1000)
@@ -19,7 +19,7 @@ function TimestampToDate(timestamp) {
 export function Circle_c({ Content, VideoInitialDisplay }) {
     const [position, setPosition] = useState(0)
     return (
-        <main className=" flex flex-col items-center w-full">
+        <main className=" flex flex-col items-center w-full" style={{ minWidth: "1250px" }}>
             <div className="flex flex-auto flex-col gap-4 w-10/12">
                 <div className="flex flex-auto justify-between items-end h-16 gap-4">
                     <div className="flex flex-auto justify-start items-end h-full gap-4">
@@ -103,7 +103,7 @@ function Information({ Content }) {
     )
 }
 
-function Works({ Content,Id }) {
+function Works({ Content, Id }) {
     if (Content.count == 0) {
         return null
     } else if (Content.count <= 20) {
@@ -137,11 +137,12 @@ function Works({ Content,Id }) {
         )
     } else if (Content.count > 20) {
         const [videos, setVideos] = useState(Content.content)
-        async function onChange(current,pageSize){
-            const res = await GetWorks(Id,current,0)
-            if (typeof res == "number"){
+        async function onChange(current, pageSize) {
+            const res = await GetVideos(Id, current, 0)
+            if (typeof res == "number") {
+                alert("获取作品失败")
                 setVideos(null)
-            }else{
+            } else {
                 setVideos(res.content)
             }
         }
@@ -171,15 +172,15 @@ function Works({ Content,Id }) {
                         {showList}
                     </div>
                 </div>
-                    <Pagination
-                        className="self-center"
-                        showQuickJumper
-                        showSizeChanger
-                        defaultPageSize={20}
-                        defaultCurrent={1}
-                        onChange={onChange}
-                        total={Content.count}
-                    />
+                <Pagination
+                    className="self-center"
+                    showQuickJumper
+                    showSizeChanger
+                    defaultPageSize={20}
+                    defaultCurrent={1}
+                    onChange={onChange}
+                    total={Content.count}
+                />
             </div>
         )
     }

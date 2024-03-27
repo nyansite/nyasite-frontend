@@ -1,6 +1,39 @@
 "use client"
 import { useState } from "react"
-import { InviteFunc, SearchUsersFunc } from "./actions.js";
+import { useRouter } from "next/navigation";
+import { InviteFunc, SearchUsersFunc,KickOutFunc } from "./actions.js";
+
+export function Quit({Cid}){
+    const router = useRouter()
+    async function quit(){
+        var formData = new FormData()
+        formData.append("uid",0)
+        formData.append("cid",Cid)
+        const resStauts = await KickOutFunc(formData)
+        if (resStauts == 200){
+            router.replace("/user/circle")
+        }else{
+            alert("退出失败")
+        }
+    }
+    return <button className="text-lg hyperlink" onClick={quit}>退出社团</button>
+}
+
+export function KickOut({Cid,Uid}){
+    const router = useRouter()
+    async function kickOut(){
+        var formData = new FormData()
+        formData.append("uid",Uid)
+        formData.append("cid",Cid)
+        const resStauts = await KickOutFunc(formData)
+        if(resStauts == 200){
+            router.refresh()
+        }else{
+            alert("踢出失败")
+        }
+    }
+    return <button className="text-lg hyperlink" onClick={kickOut}>踢出社团</button>
+}
 
 export function Invitation({ Permission, CircleId }) {
     const [isOpen, setIsOpen] = useState(false)

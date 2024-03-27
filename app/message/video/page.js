@@ -47,7 +47,7 @@ export default async function Page() {
 
 }
 
-export function DisplayVideos({ Content }) {
+function DisplayVideos({ Content }) {
     if (Content == null) {
         return <div className=" w-full text-center">获取视频出错</div>
     } else if (Content.videos == null) {

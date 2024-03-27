@@ -8,6 +8,15 @@ function get_header() {
     return JheadersList;
 }
 
+export async function KickOutFunc(formData){
+    const res = await fetch("http://localhost:8000/api/kick_out",{
+        method:"POST",
+        body:formData,
+        headers:{cookie:get_header().cookie}
+    })
+    return res.status
+}
+
 export async function SearchUsersFunc(clipOfName){
     const res = await fetch("http://localhost:8000/api/search_users/"+clipOfName,{headers:{
         cookie:get_header().cookie
