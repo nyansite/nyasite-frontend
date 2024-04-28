@@ -25,6 +25,7 @@ const modalStyles = {
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         height: '80vh',
+        width: '80vw'
     },
 };
 
@@ -283,7 +284,7 @@ function ExpandComment({ Cid, User }) {
             return
         }
     }
-    function CloseCommentFunc(){document.body.style.overflow = "auto";setIsOpen(false)}
+    function CloseCommentFunc() { document.body.style.overflow = "auto"; setIsOpen(false) }
     return (
         <>
             <button onClick={OpenCommentFunc}>详细</button>
@@ -323,7 +324,7 @@ function ExpandComment({ Cid, User }) {
                             <div className=" w-full">{newText}</div>
                             <div className="w-full flex gap-2 items-center text-gray-400">
                                 <div>{TimestampToDate((Date.now()) / 1000)}</div>
-                                <Like IsLiked={false} Crid={crid} />
+                                <Like IsLiked={false} Crid={crid} Count={0} />
                             </div>
                         </li> : null}
                         {Content.Body ? <CommentRepliesList Body={Content.Body} UserShow={Content.UserShow} /> : null}
@@ -353,7 +354,7 @@ function CommentRepliesList({ Body, UserShow }) {
     )
 }
 
-function Like({ IsLiked, Crid, Count }) {
+function Like({ Crid, IsLiked, Count }) {
     const count = (IsLiked ? Count - 1 : Count)
     const [isLiked, setIsLiked] = useState(IsLiked)
     async function handleClickChangeLike() {
@@ -362,14 +363,17 @@ function Like({ IsLiked, Crid, Count }) {
         const code = await ClickCRLike(formData)
         if (code == 200) {
             setIsLiked(!isLiked)
+            return
         } else {
             alert("发送点赞失败")
             return
         }
     }
     return (
-        <div className=" h-6 w-6 flex justify-center items-center gap-1">
-            <button className="h-5 w-5 flex items-center justify-center" onClick={handleClickChangeLike}><HandThumbUpIcon className={"h-4 w-4 " + (isLiked ? "fill-gray-400" : null)} /></button>
+        <div className=" h-6 flex justify-start items-center gap-1">
+            <button className="h-5 w-5 flex items-center justify-center" onClick={handleClickChangeLike}>
+                <HandThumbUpIcon className={"h-4 w-4 " + (isLiked ? "fill-gray-400" : null)} />
+            </button>
             <div>{isLiked ? count + 1 : count}</div>
         </div>
     )

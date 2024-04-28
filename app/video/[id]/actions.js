@@ -30,6 +30,17 @@ export async function SendBullet(formData) {
     return res.status
 }
 
+export async function LikeVideo(formData){
+    const res = await fetch("http://localhost:8000/api/like_video",{
+        method:"POST",
+        body: formData,
+        headers: {
+            cookie: get_header().cookie
+        }
+    })
+    return res.status
+}
+
 export async function ClickEmoji(formData) {
     const res = await fetch("http://localhost:8000/api/click_comment_emoji", {
         method: "POST",
