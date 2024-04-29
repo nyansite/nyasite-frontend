@@ -39,7 +39,7 @@ export default async function Page({ params }) {
                             </div>
                             <div className=" flex justify-start items-center text-slate-400 gap-2">
                                 <EyeIcon className=" h-4 w-4" />
-                                <div>{data.views - 1}</div>
+                                <div>{data.views}</div>
                                 <ClockIcon className=" h-4 w-4" />
                                 <div>{TimestampToDate(data.creatTime)}</div>
                             </div>
@@ -49,7 +49,7 @@ export default async function Page({ params }) {
                     <VideoPlayer VideoUrl={data.videoPath} DanmakuOptions={danmaku} Vid={params.id} />
                     <div className='flex w-10/12 justify-between my-6'>
                         <div className=' flex flex-col w-3/4 gap-8'>
-                            <LikeBar Vid={id} Likes={data.likes - 1} IsLiked={data.isLiked} />
+                            <LikeBar Vid={id} Likes={data.likes} IsLiked={data.isLiked} />
                             <Descrption Desc={data.description} />
                             {userRes.status == 200 ? <CommentPost Vid={id} User={user} /> : null}
                             <CommentsDisplay Vid={id} User={user} />
