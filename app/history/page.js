@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { HistoryVideos } from "./history";
+import { HistoryVideos, HistoryVideosEntire } from "./history";
+import { ShieldExclamationIcon } from "@heroicons/react/24/outline";
 
 function get_header() {
     const headersL = headers();
@@ -9,10 +10,6 @@ function get_header() {
     return JheadersList;
 }
 
-function TimestampToDate(timestamp) {
-    const date = new Date(timestamp * 1000)
-    return date.toLocaleDateString()
-}
 
 export default async function Page() {
     const res = await fetch("http://localhost:8000/api/history/1", { headers: { cookie: get_header().cookie } })
@@ -24,7 +21,7 @@ export default async function Page() {
         case 200:
             const data = await res.json()
             if (data.count > 20) {
-                return <></>
+                return <HistoryVideosEntire Content={data}/>
             } else {
                 return (
                     <main className="flex flex-col items-center">

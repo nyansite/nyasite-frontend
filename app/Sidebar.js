@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { CalendarDaysIcon } from "@heroicons/react/24/outline";
+import { CalendarDaysIcon,BookmarkIcon } from "@heroicons/react/24/outline";
 
 function get_header() {
 	const headersL = headers();
@@ -12,7 +12,7 @@ async function ClockIn() {
 	var formData = new FormData()
 	var date = new Date();
 	formData.append("timezone", -date.getTimezoneOffset() * 60)
-	const res = await fetch("http://localhost:8000/api/clockin", {
+	await fetch("http://localhost:8000/api/clockin", {
 		method: "POST",
 		body: formData,
 		headers: {
@@ -24,11 +24,14 @@ async function ClockIn() {
 export async function SidebarRight() {
 	const res = await fetch("http://localhost:8000/api/user_status", { headers: get_header() })
 	return (
-		<div className=" w-40 flex flex-col gap-2 items-start">
+		<div className=" w-40 flex flex-col gap-2 items-center">
 			<AvatarBar Res={res} />
 			<div className="flex items-center flex-col gap-2 w-full">
 				{res.status == 200 ?
-					<a href="/history" className="text_b w-32 hover:w-30"><CalendarDaysIcon className="w-4 h-4" />历史</a> 
+					<>
+						<a href="/history" className="text_b w-32 hover:w-30"><CalendarDaysIcon className="w-4 h-4" />历史</a>
+						<a href="/mark" className="text_b w-32 hover:w-30"><BookmarkIcon className="w-4 h-4" />收藏</a>
+					</>
 					: null
 				}
 			</div>

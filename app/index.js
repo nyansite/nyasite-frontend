@@ -44,7 +44,7 @@ export function Trending({ trending }){
                     <img src={i.CoverPath} className="h-full rounded" />
                 </a>
                 <a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
-                <div className="flex gap-1 w-full text-gray-400 items-center"><a src={"/circle/"+i.Author.Id}>{i.Author.Name}</a><PlayCircleIcon className="h-5 w-5" /><div className=" w-full truncate">{i.Views - 1}</div></div>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><a src={"/circle/"+i.Author.Id}>{i.Author.Name}</a><PlayCircleIcon className="h-5 w-5" /><div className=" w-full truncate">{i.Views}</div></div>
             </div>
         )
     }else if(type == 1){
@@ -54,7 +54,7 @@ export function Trending({ trending }){
                     <img src={i.CoverPath} className="h-full rounded" />
                 </a>
                 <a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
-                <div className="flex gap-1 w-full text-gray-400 items-center"><a src={"/circle/"+i.Author.Id}>{i.Author.Name}</a><PlayCircleIcon className="h-5 w-5" /><div className=" w-full truncate">{i.Views - 1}</div></div>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><a src={"/circle/"+i.Author.Id}>{i.Author.Name}</a><PlayCircleIcon className="h-5 w-5" /><div className=" w-full truncate">{i.Views}</div></div>
             </div>
         )
     }else if(type == 2){
@@ -64,7 +64,7 @@ export function Trending({ trending }){
                     <img src={i.CoverPath} className="h-full rounded" />
                 </a>
                 <a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
-                <div className="flex gap-1 w-full text-gray-400 items-center"><a src={"/circle/"+i.Author.Id}>{i.Author.Name}</a><PlayCircleIcon className="h-5 w-5" /><div className=" w-full truncate">{i.Views - 1}</div></div>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><a src={"/circle/"+i.Author.Id}>{i.Author.Name}</a><PlayCircleIcon className="h-5 w-5" /><div className=" w-full truncate">{i.Views}</div></div>
             </div>
         )
     }

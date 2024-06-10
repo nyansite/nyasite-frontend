@@ -1,7 +1,7 @@
 "use client"
 import { useLayoutEffect, useState, useRef, useEffect } from "react";
 
-import { HandThumbUpIcon } from "@heroicons/react/24/outline";
+import { HandThumbUpIcon,BookmarkIcon } from "@heroicons/react/24/outline";
 
 import { NPlayer } from "./nplayer.ts";
 import { Popover } from "nplayer";
@@ -9,7 +9,7 @@ import { Plugin } from "@nplayer/danmaku";
 import Hls from 'hls.js'
 import "./video.css"
 
-import { SubscribeFunc, SendBullet, LikeVideo } from "./actions.js";
+import { SubscribeFunc, SendBullet, LikeVideo, MarkVideo } from "./actions.js";
 
 export function VideoPlayer({ VideoUrl, DanmakuOptions, Vid }) {
     const player = useRef();
@@ -126,9 +126,11 @@ export function VideoPlayer({ VideoUrl, DanmakuOptions, Vid }) {
     )
 }
 
-export function LikeBar({ Vid, Likes, IsLiked }) {
-    const count = (IsLiked ? Likes - 1 : Likes)
+export function LikeBar({ Vid, Likes, IsLiked, Marks, IsMarked }) {
+    const countLike = (IsLiked ? Likes - 1 : Likes)
+    const countMark = (IsMarked ? Marks - 1 : Marks)
     const [isLiked, setIsLiked] = useState(IsLiked)
+    const [isMarked, setIsMarkded] = useState(IsMarked)
     async function handleLikeVideo() {
         var formData = new FormData()
         formData.append("vid", Vid)
@@ -141,13 +143,35 @@ export function LikeBar({ Vid, Likes, IsLiked }) {
             return
         }
     }
+    async function handleMarkVideo(){
+        var formData = new FormData()
+        formData.append("vid",Vid)
+        const code = await MarkVideo(formData)
+        if (code == 200){
+            setIsMarkded(!isMarked)
+            return
+        }else{
+            alert("收藏失败")
+            return
+        }
+    }
     return (
         <div className=" h-12 flex justify-start items-center gap-1 text-[#516e8b]">
-            <button className=" h-11 w-11 flex justify-center items-center" onClick={handleLikeVideo}>
-                <HandThumbUpIcon className={"h-10 w-10 " + (isLiked ? "fill-[#516e8b]" : null)} />
-            </button>
-            <div className="text-4xl">
-                {isLiked ? count + 1 : count}
+            <div className="flex justify-start items-center gap-1">
+                <button className=" h-11 w-11 flex justify-center items-center" onClick={handleLikeVideo}>
+                    <HandThumbUpIcon className={"h-10 w-10 " + (isLiked ? "fill-[#516e8b]" : null)} />
+                </button>
+                <div className="text-4xl">
+                    {isLiked ? countLike + 1 : countLike}
+                </div>
+            </div>
+            <div className="flex justify-start items-center gap-1">
+                <button className=" h-11 w-11 flex justify-center items-center" onClick={handleMarkVideo}>
+                    <BookmarkIcon className={"h-10 w-10 " + (isMarked ? "fill-[#516e8b]" : null)} />
+                </button>
+                <div className="text-4xl">
+                    {isMarked ? countMark + 1 : countMark}
+                </div>
             </div>
         </div>
     )

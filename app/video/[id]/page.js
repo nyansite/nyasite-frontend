@@ -49,7 +49,7 @@ export default async function Page({ params }) {
                     <VideoPlayer VideoUrl={data.videoPath} DanmakuOptions={danmaku} Vid={params.id} />
                     <div className='flex w-10/12 justify-between my-6'>
                         <div className=' flex flex-col w-3/4 gap-8'>
-                            <LikeBar Vid={id} Likes={data.likes} IsLiked={data.isLiked} />
+                            <LikeBar Vid={id} Likes={data.likes} IsLiked={data.isLiked} Marks={data.marks} IsMarked={data.isMarked} />
                             <Descrption Desc={data.description} />
                             {userRes.status == 200 ? <CommentPost Vid={id} User={user} /> : null}
                             <CommentsDisplay Vid={id} User={user} />
