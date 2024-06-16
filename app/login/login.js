@@ -15,13 +15,12 @@ export default function Login_c() {
 			case 200:
 				window.location.href = "/";
 				break;
-			case 611:
-				alert("611用户名或邮箱不存在");
+			case 400:
+				alert("有未填入的项")
+			case 401:
+				alert("用户名或密码错误");
 				break;
-			case 612:
-				alert("612密码错误");
-				break;
-			case 613:
+			case 403:
 				window.location.href = "/";
 				break;
 			default:

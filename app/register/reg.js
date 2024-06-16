@@ -28,14 +28,19 @@ export default function Reg_c() {
 		});
 		switch (response.status) {
 			case 200:
+				const resString = await response.text()
 				router.replace("/login")
 				break;
-			case 601:
-				alert("601用户名重复");
-				break;
-			case 602:
-				alert("602邮箱重复");
-				break;
+			case 409:
+				switch (resString) {
+					case "NameUsed":
+						alert("重复的用户名")
+						break
+					case "EmailAddressUsed":
+						alert("重复的邮箱")
+						break
+				}
+				break
 			default:
 				alert("未知错误");
 		}
@@ -48,19 +53,19 @@ export default function Reg_c() {
 				<form id="freg" className="flex flex-col w-3/4 gap-6 p-10" onSubmit={handleClick}>
 					<div className="bar">
 						<label className="title">用户名</label>
-						<div className="w-full"><input name="username" maxLength={15} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></div>
+						<div className="w-full"><input name="username" maxLength={15} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" required /></div>
 					</div>
 					<div className="bar">
 						<label className="title">电子邮箱</label>
-						<div className="w-full"><input name="email" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="email" autoComplete="off" /></div>
+						<div className="w-full"><input name="email" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="email" autoComplete="off" required /></div>
 					</div>
 					<div className="bar">
 						<label className="title">密码</label>
-						<div className="w-full"><input name="passwd" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" autoComplete="off" /></div>
+						<div className="w-full"><input name="passwd" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" autoComplete="off" required /></div>
 					</div>
 					<div className="bar">
 						<label className="title">重复密码</label>
-						<div className="w-full"><input name="passwdCheck" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" autoComplete="off" /></div>
+						<div className="w-full"><input name="passwdCheck" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" autoComplete="off" required /></div>
 					</div>
 					<button className=" self-end text_b">注册</button>
 				</form>
