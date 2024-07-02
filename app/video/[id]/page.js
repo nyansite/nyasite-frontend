@@ -30,6 +30,8 @@ export default async function Page({ params }) {
             const data = await res.json()
             const danmakuRes = await fetch("http://localhost:8000/api/get_bullets/" + id, { headers: get_header() })
             const danmaku = await danmakuRes.json()
+            const resVideo = await fetch("http://localhost:8000/api/get_video_link/" + data.videoUid, { headers: get_header() })
+            const videoLink = await resVideo.text()
             return (
                 <main className=" flex flex-col items-center gap-4">
                     <div className=" flex w-10/12 gap-4 h-12 justify-between my-8">
@@ -46,7 +48,7 @@ export default async function Page({ params }) {
                         </div>
                         <Author Author={data.author} />
                     </div>
-                    <VideoPlayer VideoUrl={data.videoPath} DanmakuOptions={danmaku} Vid={params.id} />
+                    <VideoPlayer VideoUrl={videoLink} DanmakuOptions={danmaku} Vid={params.id} />
                     <div className='flex w-10/12 justify-between my-6'>
                         <div className=' flex flex-col w-3/4 gap-8'>
                             <LikeBar Vid={id} Likes={data.likes} IsLiked={data.isLiked} Marks={data.marks} IsMarked={data.isMarked} />

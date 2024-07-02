@@ -3,7 +3,7 @@ import Hls from "hls.js"
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation";
 import { WithContext as ReactTags } from 'react-tag-input';
-import { PassVideoFunc, RejectVideoFunc } from "./actions.js"
+import { PassVideoFunc, RejectVideoFunc, GetVideoUrlFunc } from "./actions.js"
 import Modal from 'react-modal';
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -36,7 +36,7 @@ export function CheckVideo_c({ Content, TagList }) {
                 <div className="bar">
                     <div className="title">视频</div>
                     <div className="w-full">
-                        <VideoPlayer Url={"https://customer-f33zs165nr7gyfy4.cloudflarestream.com/6b9e68b07dfee8cc2d116e4c51d6a957/manifest/video.m3u8"} />
+                        <VideoDisplay Uid={i.VideoUid} />
                     </div>
                 </div>
                 <div className="bar">
@@ -80,7 +80,7 @@ function VoteBar({ Avid }) {
             }
         } else {
             var formData = new FormData(reject)
-            if(formData.get("reason")==""){
+            if (formData.get("reason") == "") {
                 alert("请输入原因!")
                 return
             }
@@ -116,9 +116,9 @@ function VoteBar({ Avid }) {
                         </button>
                     </div>
                     <form className="w-full flex items-center justify-center" id="reject">
-                        <textarea className="mx-2 w-full h-20 border" name="reason" maxLength={250}/>
+                        <textarea className="mx-2 w-full h-20 border" name="reason" maxLength={250} />
                     </form>
-                    <button className="text_b self-end" onClick={()=>check(false)}>
+                    <button className="text_b self-end" onClick={() => check(false)}>
                         <div>驳回</div>
                     </button>
                 </div>
@@ -137,6 +137,29 @@ function Tags({ AllTags, Tags }) {
     />
 }
 
+function VideoDisplay({ Uid }) {
+    const [videoLink, setVideoLink] = useState()
+    async function getUrl() {
+        const res = await GetVideoUrlFunc(Uid)
+        if (typeof res == "number") {
+            switch (res) {
+                case 500: alert("服务端出错"); break
+                case 502: alert("视频服务器出错"); break
+                default: alert("未知错误")
+            }
+        } else {
+            setVideoLink(res)
+        }
+    }
+    return(
+        <div className="w-full flex flex-col items-start gap-2">
+            <button className="text_b" onClick={getUrl}>播放</button>
+            {videoLink ? <VideoPlayer Url={videoLink}/>:null}
+        </div>
+
+    )
+}
+
 function VideoPlayer({ Url }) {
     const videoRef = useRef()
     const hls = useRef(new Hls)
@@ -146,7 +169,6 @@ function VideoPlayer({ Url }) {
             hls.current.loadSource(Url)
         })
     })
-    return (
-        <video controls={true} ref={videoRef} />
-    )
+
+    return <video controls={true} ref={videoRef} />
 }

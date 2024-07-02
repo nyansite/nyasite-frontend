@@ -39,7 +39,7 @@ export function Trending({ trending }){
     const [type,setType] = useState(0)
     if(type == 0){
         var content = trending.daily.map(i =>
-            <div className="flex flex-col h-32 mx-1">
+            <div className="flex flex-col h-32 mx-1" key={i.Id}>
                 <a className="h-20 rounded" href={"/video/" + i.Id}>
                     <img src={i.CoverPath} className="h-full rounded" />
                 </a>
@@ -49,7 +49,7 @@ export function Trending({ trending }){
         )
     }else if(type == 1){
         var content = trending.weekly.map(i =>
-            <div className="flex flex-col h-32 mx-1">
+            <div className="flex flex-col h-32 mx-1" key={i.Id}>
                 <a className="h-20 rounded" href={"/video/" + i.Id}>
                     <img src={i.CoverPath} className="h-full rounded" />
                 </a>
@@ -59,7 +59,7 @@ export function Trending({ trending }){
         )
     }else if(type == 2){
         var content = trending.monthly.map(i =>
-            <div className="flex flex-col h-32 mx-1">
+            <div className="flex flex-col h-32 mx-1" key={i.Id}>
                 <a className="h-20 rounded" href={"/video/" + i.Id}>
                     <img src={i.CoverPath} className="h-full rounded" />
                 </a>

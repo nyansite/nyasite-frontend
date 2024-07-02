@@ -2,10 +2,10 @@
 import { headers } from "next/headers";
 
 function get_header() {
-	const headersL = headers();
-	const JheadersList = {};
-	headersL.forEach((v, k) => (JheadersList[k] = v)); //迭代器->JSON
-	return JheadersList;
+    const headersL = headers();
+    const JheadersList = {};
+    headersL.forEach((v, k) => (JheadersList[k] = v)); //迭代器->JSON
+    return JheadersList;
 }
 
 export async function PassVideoFunc(formData) {
@@ -20,12 +20,21 @@ export async function PassVideoFunc(formData) {
 }
 
 export async function RejectVideoFunc(formData) {
-    const res = await fetch('http://localhost:8000/api/reject_video',{
-        method:"POST",
-        body:formData,
-        headers:{
+    const res = await fetch('http://localhost:8000/api/reject_video', {
+        method: "POST",
+        body: formData,
+        headers: {
             cookie: get_header().cookie
         }
     })
     return res.status
+}
+
+export async function GetVideoUrlFunc(uid) {
+    const res = await fetch("http://localhost:8000/api/get_video_link/" + uid, { headers: get_header() })
+    if (res.status == 200) {
+        return await res.text()
+    } else {
+        return res.status
+    }
 }
