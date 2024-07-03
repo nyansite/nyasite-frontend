@@ -25,7 +25,7 @@ import { useRouter } from 'next/navigation'
 
 //UploadVideo
 
-function UploadVideo({ GetVideoUid }) {
+function UploadVideo({ GetVideoUid, GetVideoStauts }) {
     const [uppyShow, setUppyShow] = useState(true)
     const [uppy] = useState(() => new Uppy({
         debug: true, autoProceed: true,
@@ -35,16 +35,20 @@ function UploadVideo({ GetVideoUid }) {
             ],
             maxNumberOfFiles: 1,
         },
-    }).use(Tus,{endpoint:"/api/get_upload_url",chunkSize: 150 * 1024 * 1024,
-        async onAfterResponse(req,res){
-            if(res.getBody() != ""){
-                GetVideoUid(res.getBody())
+    }).use(Tus, {
+        endpoint: "/api/get_upload_url", chunkSize: 150 * 1024 * 1024,
+        async onAfterResponse(req, res) {
+            var url = req.getURL()
+            if (url.includes("upload.videodelivery.net")) {
+                GetVideoUid(url.split("/")[4].split("?")[0])
             }
         }
+    }).on("complete", () => {
+        GetVideoStauts(true)
     }))
     function ChangeUppyShowStatus() {
-        if (uppyShow) {setUppyShow(false)} 
-        else {setUppyShow(true)}
+        if (uppyShow) { setUppyShow(false) }
+        else { setUppyShow(true) }
     }
     return (
         <div className="flex flex-col w-full items-center gap-2">
@@ -181,7 +185,7 @@ function UploadCover({ Token, GetCoverUrl }) {
 export function Post_c({ Token, TagList, CircleList }) {
     //select tags
     const [uploadVideoStauts, setUploadVideoStauts] = useState(false)
-    const [uploadVideoUid,setUploadVideoUid] = useState()
+    const [uploadVideoUid, setUploadVideoUid] = useState("")
     const [tags, setTags] = useState([])
     const router = useRouter()
     const suggestions = TagList.map((tag) => {
@@ -222,8 +226,9 @@ export function Post_c({ Token, TagList, CircleList }) {
         let formData = new FormData(video)
         if (formData.get("title") == "") { alert("请输入标题"); return }
         if (coverUrl == "") { alert("请上传封面"); return }
+        if (!uploadVideoStauts) { alert("正在上传视频"); return }
         formData.append("cover", coverUrl)
-        formData.append("videoUid",uploadVideoUid)
+        formData.append("videoUid", uploadVideoUid)
         tags.forEach((tag) => {
             console.log(tag)
             formData.append("tags", tag.id)
@@ -239,7 +244,7 @@ export function Post_c({ Token, TagList, CircleList }) {
     return (
         <main className="flex flex-col w-full items-center">
             <div className="flex flex-col w-7/12 items-center gap-6">
-                <UploadVideo GetVideoUid={setUploadVideoUid}/>
+                <UploadVideo GetVideoUid={setUploadVideoUid} GetVideoStauts={setUploadVideoStauts} />
                 <UploadCover Token={Token} GetCoverUrl={setCoverUrl} />
                 <form id="video" className="flex flex-col w-full gap-6">
                     <div className="bar">
@@ -271,11 +276,6 @@ export function Post_c({ Token, TagList, CircleList }) {
                         </div>
                     </div>
                 </form>
-                <div className="w-32 flex items-center justify-items-center">
-                        <button className="text_b" onClick={()=>{
-                            console.log(uploadVideoUid);
-                        }}>测试</button>
-                </div>
                 <div className="flex items-start justify-end w-full h-32">
                     <div className="w-32 flex items-center justify-items-center">
                         <button className="text_b" onClick={postVideo}>发布</button>
