@@ -128,3 +128,14 @@ export async function GetCommentReplies(cid){
         return res.status
     }
 }
+
+export async function WithdrawVideoFunc(formData){
+    const res = await fetch("http://localhost:8000/api/withdraw_video",{
+        method:"POST",
+        body:formData,
+        headers:{
+            cookie:get_header().cookie
+        }
+    })
+    return res.status
+}

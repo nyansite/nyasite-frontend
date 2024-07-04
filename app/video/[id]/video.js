@@ -1,7 +1,7 @@
 "use client"
 import { useLayoutEffect, useState, useRef, useEffect } from "react";
 
-import { HandThumbUpIcon,BookmarkIcon } from "@heroicons/react/24/outline";
+import { HandThumbUpIcon, BookmarkIcon,XMarkIcon } from "@heroicons/react/24/outline";
 
 import { NPlayer } from "./nplayer.ts";
 import { Popover } from "nplayer";
@@ -9,7 +9,10 @@ import { Plugin } from "@nplayer/danmaku";
 import Hls from 'hls.js'
 import "./video.css"
 
-import { SubscribeFunc, SendBullet, LikeVideo, MarkVideo } from "./actions.js";
+import Modal from 'react-modal';
+import { useRouter } from "next/navigation.js";
+
+import { SubscribeFunc, SendBullet, LikeVideo, MarkVideo, WithdrawVideoFunc } from "./actions.js";
 
 export function VideoPlayer({ VideoUrl, DanmakuOptions, Vid }) {
     const player = useRef();
@@ -143,14 +146,14 @@ export function LikeBar({ Vid, Likes, IsLiked, Marks, IsMarked }) {
             return
         }
     }
-    async function handleMarkVideo(){
+    async function handleMarkVideo() {
         var formData = new FormData()
-        formData.append("vid",Vid)
+        formData.append("vid", Vid)
         const code = await MarkVideo(formData)
-        if (code == 200){
+        if (code == 200) {
             setIsMarkded(!isMarked)
             return
-        }else{
+        } else {
             alert("收藏失败")
             return
         }
@@ -249,3 +252,54 @@ export function Author({ Author }) {
     )
 }
 
+const modalStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        height: '18rem',
+        width: '80vw'
+    },
+};
+
+export function Withdraw({ Vid }) {
+    const [isOpen, setIsOpen] = useState(false)
+    const router = useRouter()
+    async function withdraw(){
+        var formData = new FormData(input)
+        formData.append("vid",Vid)
+        const resStauts = await WithdrawVideoFunc(formData)
+        if(resStauts == 200){
+            alert("撤回成功")
+            router.push("/")
+        }else{
+            alert("撤回失败")
+        }
+    }
+    return (
+        <>
+            <button className="text_b" onClick={() => setIsOpen(true)} >撤回视频</button>
+            <Modal
+                isOpen={isOpen}
+                onRequestClose={() => setIsOpen(false)}
+                style={modalStyles}
+                ariaHideApp={false}
+            >
+                <div className="flex flex-auto flex-col gap-0">
+                    <button className="h-12 w-12 self-end" onClick={() => setIsOpen(false)}>
+                        <XMarkIcon className="h-10 w-10" />
+                    </button>
+                    <div className="self-center flex flex-auto flex-col items-center w-full gap-2 mx-11">
+                        <form className="flex flex-auto w-full h-full" id="input">
+                            <textarea rows={5} className="w-full border" name="reason" />
+                        </form>
+                        <button className="text_b self-end" onClick={withdraw}>撤回</button>
+                    </div>
+                </div>
+            </Modal>
+        </>
+    )
+}

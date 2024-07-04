@@ -1,7 +1,7 @@
 import { headers } from 'next/headers'
 import { EyeIcon, ClockIcon } from '@heroicons/react/24/outline'
 import { redirect } from "next/navigation";
-import { VideoPlayer, Author, LikeBar, Descrption } from './video.js';
+import { VideoPlayer, Author, LikeBar, Descrption, Withdraw } from './video.js';
 import { GetComments } from './actions.js'
 import { CommentPost, Comments, CommentsEntire } from './comment.js';
 
@@ -54,6 +54,7 @@ export default async function Page({ params }) {
                             <LikeBar Vid={id} Likes={data.likes} IsLiked={data.isLiked} Marks={data.marks} IsMarked={data.isMarked} />
                             <Descrption Desc={data.description} />
                             {userRes.status == 200 ? <CommentPost Vid={id} User={user} /> : null}
+                            {userRes.status == 200 && parseInt(user.level/16) >= 9 ? <Withdraw Vid={id}/>:null }
                             <CommentsDisplay Vid={id} User={user} />
                         </div>
                     </div>

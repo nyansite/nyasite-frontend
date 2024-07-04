@@ -131,7 +131,7 @@ function Name({ NameNow }) {
                     setStep(2)
                     return
                 case 403:
-                    alert("等级不足,请满1级后更改")
+                    alert("等级不足,请到2级后更改")
                     return
                 default:
                     alert("更改用户名失败")
