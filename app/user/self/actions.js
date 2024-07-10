@@ -44,21 +44,11 @@ export async function UploadAvatar(formData) {
 export async function ChangeNameFunc(formData){
 	const res = await fetch("http://localhost:8000/api/change_name",{
 		method:"POST",
-		credentials:'omit',
 		body:formData,
 		headers:{cookie:get_header().cookie},
 	})
 	return res.status
 }
 
-export async function ChangeTimezone(formData){
-	const res = await fetch("http://localhost:8000/api/change_timezone",{
-		method:"POST",
-		credentials:'omit',
-		body:formData,
-		headers:{cookie:get_header().cookie},
-	})
-	return res.status
-}
 
 

@@ -120,7 +120,7 @@ function Name({ NameNow }) {
     const [step, setStep] = useState(0)
     async function ChangeName() {
         if (step == 0) {
-            alert("更改一次用户名需要80经验,确定更改吗(再次点击更改)?")
+            alert("更改一次用户名需要80经验,确定更改吗(再次点击更改来更改昵称)?")
             setStep(1)
         } else if (step == 1) {
             var formData = new FormData(cn)
@@ -141,7 +141,7 @@ function Name({ NameNow }) {
     return (
         <div className="bar items-center">
             <div className="title">昵称</div>
-            <form className=" w-full" id="cn"><input name="username" defaultValue={NameNow} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></form>
+            <form className=" w-full" id="cn"><input name="name" defaultValue={NameNow} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" /></form>
             <button onClick={ChangeName} className={"text_b hover:w-20 " + (step < 2 ? null : "hover:bg-white text-slate-300")} disabled={step > 2}>更改</button>
         </div>
     )
