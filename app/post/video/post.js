@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useRef, useState, useCallback } from "react"
-import { render } from "react-dom"
 import { ArrowsPointingInIcon, ArrowsPointingOutIcon } from "@heroicons/react/24/outline"
 //Uppy
 import Uppy from '@uppy/core'
