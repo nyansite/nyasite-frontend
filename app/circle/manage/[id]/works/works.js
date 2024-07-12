@@ -16,55 +16,54 @@ function TimestampToDate(timestamp) {
 export function Works({ Content, Id, Permission }) {
     if (Content.count == 0) {
         return null
-    } else {
-        const [count,setCount] = useState(Content.count)
-        const [videos, setVideos] = useState(Content.content)
-        async function onChange(current, pageSize) {
-            const res = await GetVideos(Id, current)
-            if (typeof res == "number") {
-                alert("获取作品失败")
-                setVideos(null)
-            } else {
-                setVideos(res.content)
-            }
-        }
-        const showlist = videos.map(i =>
-            <div className="flex flex-auto h-28 w-full gap-2" key={i.Id}>
-                <a className="h-full" href={"/video/" + i.Id}>
-                    <img className="h-full rounded" src={i.CoverPath} />
-                </a>
-                <div className="flex flex-col flex-auto h-full">
-                    <a href={"/video/" + i.Id} className=" w-full">{i.Title}</a>
-                    <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views - 1}</div></div>
-                    <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4" /><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
-                </div>
-                <div className="justify-self-end flex items-center">
-                    <DeleteVideo
-                        Vid={Id}
-                        Videos={videos}
-                        SetVideos={setVideos}
-                        Count={count}
-                        SetCount={setCount}
-                        Display={(i.SelfUpload) || (Permission >= 3)}
-                    />
-                </div>
-            </div>
-        )
-        return (
-            <div className="flex flex-col w-11/12 gap-2">
-                {showlist}
-                {count > 20 ? <Pagination
-                    className="self-center"
-                    showQuickJumper
-                    showSizeChanger
-                    defaultPageSize={20}
-                    defaultCurrent={1}
-                    onChange={onChange}
-                    total={count}
-                /> : null}
-            </div>
-        )
     }
+    const [count, setCount] = useState(Content.count)
+    const [videos, setVideos] = useState(Content.content)
+    async function onChange(current, pageSize) {
+        const res = await GetVideos(Id, current)
+        if (typeof res == "number") {
+            alert("获取作品失败")
+            setVideos(null)
+        } else {
+            setVideos(res.content)
+        }
+    }
+    const showlist = videos.map(i =>
+        <div className="flex flex-auto h-28 w-full gap-2" key={i.Id}>
+            <a className="h-full" href={"/video/" + i.Id}>
+                <img className="h-full rounded" src={i.CoverPath} />
+            </a>
+            <div className="flex flex-col flex-auto h-full">
+                <a href={"/video/" + i.Id} className=" w-full">{i.Title}</a>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views - 1}</div></div>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4" /><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
+            </div>
+            <div className="justify-self-end flex items-center">
+                <DeleteVideo
+                    Vid={Id}
+                    Videos={videos}
+                    SetVideos={setVideos}
+                    Count={count}
+                    SetCount={setCount}
+                    Display={(i.SelfUpload) || (Permission >= 3)}
+                />
+            </div>
+        </div>
+    )
+    return (
+        <div className="flex flex-col w-11/12 gap-2">
+            {showlist}
+            {count > 20 ? <Pagination
+                className="self-center"
+                showQuickJumper
+                showSizeChanger
+                defaultPageSize={20}
+                defaultCurrent={1}
+                onChange={onChange}
+                total={count}
+            /> : null}
+        </div>
+    )
 }
 
 function DeleteVideo({ Vid, Videos, SetVideos, Count, SetCount, Display }) {

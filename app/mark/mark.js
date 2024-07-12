@@ -25,7 +25,7 @@ export function MarkVideoEntire({ Content }) {
     }
     return(
         <div className=" flex flex-col items-center justify-center w-full">
-            <HistoryVideos Content={content}/>
+            <MarkVideo Content={content}/>
             <Pagination
                 showQuickJumper
                 showSizeChanger

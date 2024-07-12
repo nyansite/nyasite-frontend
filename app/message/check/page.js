@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { Reason } from "./check.js"
+import { InboxIcon } from "@heroicons/react/24/outline";
 
 function get_header() {
     const headersL = headers();
