@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { entireTags } from "./tag.js"
 
-export default function SearchInput() {
+function SearchInput() {
 	const searchParams = useSearchParams()
 	const Text = (searchParams.has("text") ? searchParams.get("text") : "")
 	const Tags = (searchParams.has("tags") ? searchParams.get("tags").split(';') : [])
@@ -105,4 +105,12 @@ export default function SearchInput() {
 			</div>
 		</div>
 	);
+}
+
+export function Search(){
+	return(
+		<Suspense>
+			<SearchInput/>
+		</Suspense>
+	)
 }

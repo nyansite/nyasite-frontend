@@ -3,9 +3,6 @@ import { useRouter, usePathname } from "next/navigation"
 import { useEffect } from "react"
 export default function Refresh() {
     const pathname = usePathname()
-    if (pathname == "/login" && pathname == "/register") {
-        return null
-    }
     const router = useRouter()
     useEffect(() => {
         const refresh = async () => {
@@ -17,7 +14,10 @@ export default function Refresh() {
                     router.replace("/login")
             }
         }
-        refresh()
+        if (!(pathname == "/login" && pathname == "/register")) {
+            refresh()
+        }
     }, [])
+
     return <main></main>
 }

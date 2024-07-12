@@ -3,7 +3,7 @@ import Image from "next/image";
 import { headers } from 'next/headers'
 import { Inter } from "next/font/google";
 import { ChatBubbleLeftRightIcon, ArchiveBoxIcon, CloudArrowUpIcon, BellAlertIcon } from "@heroicons/react/24/outline";
-import SearchInputInner from "./SearchInput.js";
+import { Search } from "./SearchInput.js";
 import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from "next/dist/shared/lib/constants";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -39,7 +39,7 @@ export default async function RootLayout({ children }) {
 						</a>
 					</div>
 					<div>
-						<SearchInputInner />
+						<Search />
 					</div>
 					<div className=" whitespace-nowrap flex items-center overflow-hidden">
 						<a className="img_b" href="/message/video">
@@ -63,9 +63,9 @@ export default async function RootLayout({ children }) {
 					<div>
 						<span className="me-1">喵站 Nyansite | Copyright @ 2023 - 现在</span>
 						<a href="https://github.com/flyingsnoopy" target="_blank">flyingsnoopy</a>
-						, 
+						,
 						<a href="https://github.com/tksmly" target="_blank">tksmly</a>
-						, 
+						,
 						<a href="https://github.com/Vincent-the-gamer" target="_blank">Vincent-the-gamer</a>
 						.
 					</div>

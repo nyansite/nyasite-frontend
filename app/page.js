@@ -43,7 +43,7 @@ async function VideoDisplay() {
 			</a>
 			<a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
 			<div className="flex flex-auto w-full text-gray-400 items-center">
-				<a src={"/circle/" + i.Author.Id} className="truncate mr-1">{i.Author.Name}</a>
+				<a href={"/circle/" + i.Author.Id} className="truncate mr-1">{i.Author.Name}</a>
 				<PlayCircleIcon className="h-3 w-3" /><div className="truncate">{i.Views}</div>
 			</div>
 		</div>

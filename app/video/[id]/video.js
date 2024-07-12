@@ -243,9 +243,9 @@ export function Author({ Author }) {
     }
     return (
         <div className=" flex justify-start items-center h-full gap-2">
-            <img src={Author.Avatar} className=" h-full" />
+            <a className=" h-full" href={"/circle/"+Author.Id}><img src={Author.Avatar} className=" h-full" /></a>
             <div className="flex flex-col justify-between flex-nowrap h-full">
-                <a className="flex justify-start w-full text-xl">{Author.Name}</a>
+                <a className="flex justify-start w-full text-xl" href={"/circle/"+Author.Id}>{Author.Name}</a>
                 {subscribeDisplay}
             </div>
         </div>

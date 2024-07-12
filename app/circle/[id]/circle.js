@@ -103,40 +103,8 @@ function Information({ Content }) {
     )
 }
 
-function Works({ Content, Id }) {
-    if (Content.count == 0) {
-        return null
-    } else if (Content.count <= 20) {
-        const showList = Content.content.map(i =>
-            <div className="flex flex-col w-52 gap-1">
-                <a className=" w-full rounded" href={"/video/" + i.Id}>
-                    <img src={i.CoverPath} className="w-full rounded" />
-                </a>
-                <a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
-                <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views - 1}</div></div>
-                <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4" /><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
-            </div>
-        )
-        return (
-            <div className="flex flex-auto w-full flex-col" >
-                <div className="flex flex-auto w-full flex-col">
-                    <div className="justify-self-start items-start font-semibold text-xl">视频</div>
-                </div>
-                <div className="flex flex-auto w-full gap-12">
-                    <div className="flex justify-start items-start">
-                        <div className="flex flex-col gap-2">
-                            <button className="text_b w-32">播放量排序</button>
-                            <button className="text_b w-32">时间排序</button>
-                        </div>
-                    </div>
-                    <div className="flex flex-wrap gap-4" style={{ width: "70rem" }}>
-                        {showList}
-                    </div>
-                </div>
-            </div>
-        )
-    } else if (Content.count > 20) {
-        const [videos, setVideos] = useState(Content.content)
+function WorksDisplay({Content,Id}){
+    const [videos, setVideos] = useState(Content.content)
         async function onChange(current, pageSize) {
             const res = await GetVideos(Id, current, 0)
             if (typeof res == "number") {
@@ -147,7 +115,7 @@ function Works({ Content, Id }) {
             }
         }
         const showList = videos.map(i =>
-            <div className="flex flex-col w-52 gap-1">
+            <div className="flex flex-col w-52 gap-1" key={i.Id}>
                 <a className=" w-full rounded" href={"/video/" + i.Id}>
                     <img src={i.CoverPath} className="w-full rounded" />
                 </a>
@@ -183,12 +151,48 @@ function Works({ Content, Id }) {
                 />
             </div>
         )
+}
+
+function Works({ Content, Id }) {
+    if (Content.count == 0) {
+        return null
+    } else if (Content.count <= 20) {
+        const showList = Content.content.map(i =>
+            <div className="flex flex-col w-52 gap-1" key={i.Id}>
+                <a className=" w-full rounded" href={"/video/" + i.Id}>
+                    <img src={i.CoverPath} className="w-full rounded" />
+                </a>
+                <a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views - 1}</div></div>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4" /><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
+            </div>
+        )
+        return (
+            <div className="flex flex-auto w-full flex-col" >
+                <div className="flex flex-auto w-full flex-col">
+                    <div className="justify-self-start items-start font-semibold text-xl">视频</div>
+                </div>
+                <div className="flex flex-auto w-full gap-12">
+                    <div className="flex justify-start items-start">
+                        <div className="flex flex-col gap-2">
+                            <button className="text_b w-32">播放量排序</button>
+                            <button className="text_b w-32">时间排序</button>
+                        </div>
+                    </div>
+                    <div className="flex flex-wrap gap-4" style={{ width: "70rem" }}>
+                        {showList}
+                    </div>
+                </div>
+            </div>
+        )
+    } else if (Content.count > 20) {
+        return <WorksDisplay Content={Content} Id={Id}/>
     }
 }
 
 function Members({ Content }) {
     const showList = Content.members.map(i =>
-        <div className="flex items-center h-16 gap-2">
+        <div className="flex items-center h-16 gap-2" key={i.Name}>
             <img src={i.Avatar} className="h-full rounded-full" />
             <div>{i.Name}</div>
         </div>
