@@ -13,10 +13,7 @@ function TimestampToDate(timestamp) {
     return date.toLocaleDateString()
 }
 
-export function Works({ Content, Id, Permission }) {
-    if (Content.count == 0) {
-        return null
-    }
+function WorksDisplay({Content ,Id,Permission}){
     const [count, setCount] = useState(Content.count)
     const [videos, setVideos] = useState(Content.content)
     async function onChange(current, pageSize) {
@@ -64,6 +61,15 @@ export function Works({ Content, Id, Permission }) {
             /> : null}
         </div>
     )
+}
+
+export function Works({ Content, Id, Permission }) {
+    if (Content.count == 0) {
+        return null
+    }else{
+        return <WorksDisplay Content={Content} Id={Id} Permission={Permission}/>
+    }
+    
 }
 
 function DeleteVideo({ Vid, Videos, SetVideos, Count, SetCount, Display }) {
