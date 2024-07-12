@@ -70,7 +70,7 @@ function SearchInput() {
 		</button>
 	));
 	return (
-		<div className="flex items-start justify-start gap-2 rounded-lg bg-crystal h-12" style={{ width: "40vw" }}>
+		<div className="flex items-start justify-start gap-2 rounded-lg bg-slate-200 h-12" style={{ width: "40vw" }}>
 			<div className=" flex gap-2 w-full mx-1">
 				<div className=" flex self-start gap-2">{tagsShow}</div>
 				<div className=" flex flex-col items-start w-full">

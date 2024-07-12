@@ -23,12 +23,6 @@ body {
 	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
-header {
-	color: rgb(var(--foreground-rgb));
-	background-color: var(--bg);
-}
-
-
 
 
 @layer components {
@@ -37,7 +31,7 @@ header {
 	}
 
 	.img_b {
-		@apply flex flex-auto gap-2 items-center justify-center duration-500 rounded-xl mx-4 h-14 w-14 hover:bg-crystal hover:w-28;
+		@apply flex flex-auto gap-2 items-center justify-center duration-500 bg-white rounded-xl border border-white mx-4 h-14 w-14 hover:bg-[#bfbfbf] hover:w-28;
 	}
 	.bar {
         @apply flex justify-items-start text-xl gap-2 w-full items-start;
