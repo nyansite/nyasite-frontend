@@ -13,7 +13,7 @@ export default async function Page() {
 		headers: get_header(),
 	});
 	if (res.status == 200) {
-		return<main></main>
+		redirect("/");
 	} else if (res.status == 401) {
 		return <Reg_c />;
 	} else {
