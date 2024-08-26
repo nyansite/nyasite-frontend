@@ -153,7 +153,6 @@ function Logout(){
     const router = useRouter()
     const logout = async () => {
 		let response = await fetch("/api/logout", {
-			method: "POST",
 			credentials: "include",
 		});
 		if(response.status == 200){
