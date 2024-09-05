@@ -67,6 +67,10 @@ export default function Reg_c() {
 						<label className="title">重复密码</label>
 						<div className="w-full"><input name="passwdCheck" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" autoComplete="off" required /></div>
 					</div>
+					<div className="bar">
+						<label className="title">邀请码</label>
+						<div className="w-full"><input name="key" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" required/></div>
+					</div>
 					<button className=" self-end text_b">注册</button>
 				</form>
 			</div>
