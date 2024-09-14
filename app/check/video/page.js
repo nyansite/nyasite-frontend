@@ -26,7 +26,7 @@ export default async function Page() {
                         <div className="navigation-unit bg-slate-200 rounded-tr-md">
                             <div className="  text-lg">视频审核</div>
                         </div>
-                        <a className=" navigation-unit hover:bg-[#bfbfbf] hover:border-b-[#bfbfbf] rounded-br-md" href="/check/video">
+                        <a className=" navigation-unit hover:bg-[#bfbfbf] hover:border-b-[#bfbfbf] rounded-br-md" href="/check/circle">
                             <div className=" text-lg">社团审核</div>
                         </a>
                     </div>
