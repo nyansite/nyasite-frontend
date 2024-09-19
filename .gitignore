@@ -37,3 +37,6 @@ tsconfig.json
 
 #debug
 debug.log
+
+#vscode
+.vscode
