@@ -17,7 +17,7 @@ export default async function Page() {
             return (
                 <main className=" w-full flex justify-between border border-white gap-20">
                     <div className=" w-1/6 flex flex-col rounded-r-md">
-                        <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf] rounded-tr-md" href="">
+                        <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf] rounded-tr-md" href="/message/video">
                             <div className=" text-lg">新视频</div>
                         </a>
                         <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf]" href="/message/circle">
@@ -85,7 +85,7 @@ export default async function Page() {
             return (
                 <main className=" w-full flex justify-between border border-white gap-20">
                     <div className=" w-1/6 flex flex-col rounded-r-md">
-                        <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf] rounded-tr-md" href="">
+                        <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf] rounded-tr-md" href="/message/video">
                             <div className=" text-lg">新视频</div>
                         </a>
                         <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf]" href="/message/circle">

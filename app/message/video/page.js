@@ -30,7 +30,7 @@ export default async function Page() {
                         <a className=" navigation-unit hover:bg-[#bfbfbf]" href="/message/circle">
                             <div className=" text-lg">社团事务</div>
                         </a>
-                        <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-b-[#bfbfbf] rounded-br-md" href={"/message/check"}>
+                        <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-b-[#bfbfbf] rounded-br-md" href="/message/check">
                             <div className="text-lg">审核</div>
                         </a>
                     </div>
