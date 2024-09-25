@@ -15,9 +15,22 @@ export default async function Page() {
         const data = await res.json()
         if (data.messages == null) {
             return (
-                <div className=" flex flex-auto items-center justify-center w-full h-28">
-                    <div className="flex items-center gap-3 text-gray-300"><InboxIcon className=" h-12 w-12" /><div className="text-5xl">没有审核事件</div></div>
-                </div>
+                <main className=" w-full flex justify-between border border-white gap-20">
+                    <div className=" w-1/6 flex flex-col rounded-r-md">
+                        <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf] rounded-tr-md" href="">
+                            <div className=" text-lg">新视频</div>
+                        </a>
+                        <a className="navigation-unit hover:bg-[#bfbfbf] hover:border-[#bfbfbf]" href="/message/circle">
+                            <div className=" text-lg">社团事务</div>
+                        </a>
+                        <div className="navigation-unit bg-slate-200 rounded-br-md">
+                            <div className="text-lg">审核</div>
+                        </div>
+                    </div>
+                    <div className=" flex flex-auto items-center justify-center w-full h-28">
+                        <div className="flex items-center gap-3 text-gray-300"><InboxIcon className=" h-12 w-12" /><div className="text-5xl">没有审核事件</div></div>
+                    </div>
+                </main>
             )
         } else {
             const display = data.messages.map((i) => {
