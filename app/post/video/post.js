@@ -38,7 +38,8 @@ function UploadVideo({ GetVideoUid, GetVideoStauts }) {
         endpoint: "/api/get_upload_url", chunkSize: 150 * 1024 * 1024,
         async onAfterResponse(req, res) {
             var url = req.getURL()
-            if (url.includes("upload.videodelivery.net")) {
+            if (url.includes("upload.")) {
+                console.log(url.split("/")[4].split("?")[0])
                 GetVideoUid(url.split("/")[4].split("?")[0])
             }
         }
