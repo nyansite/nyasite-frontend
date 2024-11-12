@@ -128,13 +128,17 @@ function VoteBar({ Avid }) {
 }
 
 function Tags({ AllTags, Tags }) {
-    const tagsDisplay = Tags.map(function (i) {
-        return { id: String(i), text: AllTags.find(tag => tag.Id == i).Text }
-    })
-    return <ReactTags
-        tags={tagsDisplay}
-        readOnly={true}
-    />
+    if (Tags != null) {
+        const tagsDisplay = Tags.map(function (i) {
+            return { id: String(i), text: AllTags.find(tag => tag.Id == i).Text }
+        })
+        return <ReactTags
+            tags={tagsDisplay}
+            readOnly={true}
+        />
+    } else {
+        return <></>
+    }
 }
 
 function VideoDisplay({ Uid }) {
@@ -151,10 +155,10 @@ function VideoDisplay({ Uid }) {
             setVideoLink(res)
         }
     }
-    return(
+    return (
         <div className="w-full flex flex-col items-start gap-2">
             <button className="text_b" onClick={getUrl}>播放</button>
-            {videoLink ? <VideoPlayer Url={videoLink}/>:null}
+            {videoLink ? <VideoPlayer Url={videoLink} /> : null}
         </div>
 
     )
