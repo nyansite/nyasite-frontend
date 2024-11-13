@@ -259,7 +259,7 @@ function ExpandComment({ Cid, User }) {
         Origin: null,
         UserShow: null,
     })
-    const [text, setText] = useState()
+    const [text, setText] = useState("")
     const [newText, setNewText] = useState(null)
     const [crid, setCrid] = useState()
     //这个添加追评有bug就是只会显示最后一条提交的追评，这个版本就先咕了，下个版本再修改
