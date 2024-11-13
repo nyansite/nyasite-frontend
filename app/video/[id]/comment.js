@@ -182,15 +182,20 @@ function EmojiBar({ fmct }) {
 
 export function CommentPost({ Vid, User }) {
     async function handlePostComment() {
-        var formData = new FormData()
-        formData.append("vid", Vid)
-        formData.append("text", text)
-        const res = await SendComment(formData)
-        if (typeof res == "number") {
-            alert("发送评论出错")
+        if (!str.replace(/\s/g, '').length) {
+            alert("发送评论不能为空")
         } else {
-            setSendText(text)
-            setCid(Number(res))
+            var formData = new FormData()
+            formData.append("vid", Vid)
+            formData.append("text", text)
+            const res = await SendComment(formData)
+            if (typeof res == "number") {
+                alert("发送评论出错")
+            } else {
+                setSendText(text)
+                setCid(Number(res))
+                setText("")
+            }
         }
     }
     const [cid, setCid] = useState()
