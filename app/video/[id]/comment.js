@@ -181,8 +181,11 @@ function EmojiBar({ fmct }) {
 }
 
 export function CommentPost({ Vid, User }) {
+    const [cid, setCid] = useState()
+    const [text, setText] = useState("")
+    const [sendText, setSendText] = useState("")
     async function handlePostComment() {
-        if (!str.replace(/\s/g, '').length) {
+        if (!text.replace(/\s/g, '').length) {
             alert("发送评论不能为空")
         } else {
             var formData = new FormData()
@@ -198,9 +201,6 @@ export function CommentPost({ Vid, User }) {
             }
         }
     }
-    const [cid, setCid] = useState()
-    const [text, setText] = useState("")
-    const [sendText, setSendText] = useState("")
     return (
         <div className=" w-full flex flex-col items-center gap-3">
             <MdEditor
@@ -275,7 +275,7 @@ function ExpandComment({ Cid, User }) {
             if (typeof res == "number") {
                 alert("发送评论出错")
             } else {
-                setNewText("")
+                setText("")
                 setCrid(Number(res))
             }
         }
