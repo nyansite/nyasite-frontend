@@ -259,22 +259,25 @@ function ExpandComment({ Cid, User }) {
         Origin: null,
         UserShow: null,
     })
+    const [text, setText] = useState()
     const [newText, setNewText] = useState(null)
     const [crid, setCrid] = useState()
+    //这个添加追评有bug就是只会显示最后一条提交的追评，这个版本就先咕了，下个版本再修改
     async function PostComment() {
-        var formData = new FormData(comment)
-        for (var pair of formData.entries()) {
-            if (pair[0] == "text") {
-                setNewText(pair[1])
-                console.log(pair[1])
-            }
-        }
-        formData.append("cid", Cid)
-        const res = await SendCommentReply(formData)
-        if (typeof res == "number") {
-            alert("发送评论出错")
+        if (!text.replace(/\s/g, '').length) {
+            alert("评论不能为空")
         } else {
-            setCrid(Number(res))
+            var formData = new FormData()
+            formData.append("text", text)
+            formData.append("cid", Cid)
+            setNewText(text)
+            const res = await SendCommentReply(formData)
+            if (typeof res == "number") {
+                alert("发送评论出错")
+            } else {
+                setNewText("")
+                setCrid(Number(res))
+            }
         }
     }
     async function OpenCommentFunc() {
@@ -315,7 +318,7 @@ function ExpandComment({ Cid, User }) {
                             <div className=" text-gray-500">{Content.Origin ? TimestampToDate(Content.Origin.CreatedAt) : null}</div>
                             <form id="comment" className=" flex flex-auto gap-2">
                                 <div className=" w-12">回复</div>
-                                <textarea name="text" maxLength={300} rows={4} className="w-full border border-gray-400  px-2 py-1 text-gray-700" autoComplete="invaild" />
+                                <textarea value={text} onChange={e => setText(e.target.value)} name="text" maxLength={300} rows={4} className="w-full border border-gray-400  px-2 py-1 text-gray-700" autoComplete="invaild" />
                             </form>
                             <button className="text_b self-end" onClick={PostComment}>回复</button>
                         </div>
