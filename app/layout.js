@@ -4,6 +4,7 @@ import { headers } from 'next/headers'
 import { Inter } from "next/font/google";
 import { ChatBubbleLeftRightIcon, ArchiveBoxIcon, CloudArrowUpIcon, BellAlertIcon } from "@heroicons/react/24/outline";
 import { Search } from "./SearchInput.js";
+import Refresh from "./Refresh.js"
 import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from "next/dist/shared/lib/constants";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -59,6 +60,7 @@ export default async function RootLayout({ children }) {
 				<main className=" flex-auto">
 					{children}
 				</main>
+				<Refresh/>
 				<footer className=" h-12 w-full flex flex-col justify-center items-center">
 					<div>
 						<span className="me-1">喵站 Nyansite | Copyright @ 2023 - 现在</span>

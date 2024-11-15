@@ -2,7 +2,6 @@ import { SidebarRight } from "./Sidebar";
 import { headers } from "next/headers";
 import { ArrowLeftIcon, ArrowRightIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
 
-import Refresh from "./Refresh.js"
 import { Poster, Trending } from "./index.js";
 
 function get_header() {
@@ -27,7 +26,6 @@ export default async function Home() {
 					{/*<VideoDisplay />*/}
 				</div>
 				<SidebarRight />
-				<Refresh />
 			</div>
 		</main>
 	);
