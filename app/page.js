@@ -23,7 +23,7 @@ export default async function Home() {
 						<Poster Max={2} />
 						{/*<Trending trending={trendingData} />*/}
 					</div>
-					{/*<VideoDisplay />*/}
+					<VideoDisplay />
 				</div>
 				<SidebarRight />
 			</div>
@@ -31,7 +31,7 @@ export default async function Home() {
 	);
 }
 
-/*async function VideoDisplay() {
+async function VideoDisplay() {
 	const res = await fetch("http://localhost:8000/api/get_all_videos", { headers: get_header() })
 	const data = await res.json()
 	var content = data.result.map(i =>
@@ -51,4 +51,4 @@ export default async function Home() {
 			{content}
 		</div>
 	)
-}*/
+}
