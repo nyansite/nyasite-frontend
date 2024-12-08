@@ -54,7 +54,7 @@ export default function Login_c() {
 					/>
 					<div className="flex justify-between">
 						<a href="/register">注册账户</a>
-						<a href="">重置密码</a>
+						<a href="/reset-pwd">重置密码</a>
 					</div>
 					<div className="flex justify-center p-5">
 						<button type="submit">
