@@ -1,9 +1,11 @@
 "use client"
 import { useState } from "react";
 import { GetVerCodeHandle, ResetPwdHandle } from "./actions";
+import { useRouter } from "next/navigation"
 import { useTimer } from "react-timer-hook"
 
 export default function ResetPwd() {
+    const router = useRouter()
     const time = new Date();
     const {
         totalSeconds,
@@ -35,6 +37,7 @@ export default function ResetPwd() {
         const res = await ResetPwdHandle(formData)
         if ((typeof res == "boolean") && res) {
             alert("更改成功")
+            router.replace("/login")
         } else {
             switch (res) {
                 case "expired":
