@@ -19,8 +19,10 @@ export async function GetVerCodeHandle(formData) {
         var result = res.text()
         if(!isNaN(parseFloat(result))){
             return parseInt(result)
-        }else{
+        }else if (result == "UserIsNotExisted"){
             return result
+        }else{
+            return true
         }
     }
 }
