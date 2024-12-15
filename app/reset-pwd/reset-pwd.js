@@ -58,12 +58,12 @@ export default function ResetPwd() {
                     </div>
                     <div className="bar">
                         <label className="title">密码</label>
-                        <div className="w-full"><input name="pwd" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" minLength="6" autoComplete="off" required /></div>
+                        <div className="w-full"><input name="pwd" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" minLength="6" autoComplete="off"/></div>
                     </div>
                     <div className="bar">
                         <label className="title">验证码</label>
                         <div className="w-full">
-                            <input name="verCode" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" required />
+                            <input name="verCode" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off"/>
                         </div>
                         <button className={"text_b w-44 " + ((totalSeconds == 0) ? null : "text-gray-300")} onClick={getVerCodeInner}>
                             {(totalSeconds == 0) ? "获取验证码" : totalSeconds + "s后再发送"}
