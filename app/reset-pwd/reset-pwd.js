@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { GetVerCode, ResetPwd } from "./actions";
+import { GetVerCodeHandle, ResetPwdHandle } from "./actions";
 import { useTimer } from "react-timer-hook"
 
 export default function ResetPwd() {
@@ -16,7 +16,7 @@ export default function ResetPwd() {
             var formData = new FormData(rq)
             setWarning("")
             const time = new Date()
-            const res = GetVerCode(formData)
+            const res = GetVerCodeHandle(formData)
             if ((typeof res == "boolean") && res) {
                 time.setSeconds(time.getSeconds() + 60)
                 restart(time)
@@ -30,7 +30,7 @@ export default function ResetPwd() {
     }
     async function resetPwdInner() {
         var formData = new FormData(rq)
-        const res = ResetPwd(formData)
+        const res = ResetPwdHandle(formData)
         if ((typeof res == "boolean") && res) {
             alert("更改成功")
         } else {

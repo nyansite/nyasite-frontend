@@ -8,7 +8,7 @@ function get_header() {
 	return JheadersList;
 }
 
-export async function GetVerCode(formData) {
+export async function GetVerCodeHandle(formData) {
     const res = await fetch("http://localhost:8000/api/get_ver_code_reset_pwd", {
         method:"POST",
         body:formData,
@@ -25,7 +25,7 @@ export async function GetVerCode(formData) {
     }
 }
 
-export async function ResetPwd(formData) {
+export async function ResetPwdHandle(formData) {
     const res = await fetch("http://localhost:8000/api/reset_pwd",{
         method:"POST",
         body:formData,
