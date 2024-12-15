@@ -54,16 +54,16 @@ export default function ResetPwd() {
                 <form className="flex flex-col w-3/4 gap-6 p-10" id="rq">
                     <div className="bar">
                         <label className="title">邮箱</label>
-                        <div className="w-full"><input name="email" maxLength={15} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="email" autoComplete="off" required /></div>
+                        <div className="w-full"><input name="email" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="email" autoComplete="off" required /></div>
                     </div>
                     <div className="bar">
                         <label className="title">密码</label>
-                        <div className="w-full"><input name="pwd" maxLength={15} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" minLength="6" autoComplete="off" required /></div>
+                        <div className="w-full"><input name="pwd" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" minLength="6" autoComplete="off" required /></div>
                     </div>
                     <div className="bar">
                         <label className="title">验证码</label>
                         <div className="w-full">
-                            <input name="verCode" maxLength={15} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" required />
+                            <input name="verCode" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off" required />
                         </div>
                         <button className={"text_b w-44 " + ((totalSeconds == 0) ? null : "text-gray-300")} onClick={getVerCodeInner}>
                             {(totalSeconds == 0) ? "获取验证码" : totalSeconds + "s后再发送"}
