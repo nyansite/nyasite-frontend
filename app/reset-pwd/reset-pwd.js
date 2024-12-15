@@ -11,7 +11,8 @@ export default function ResetPwd() {
     } = useTimer({ time });
     console.log(totalSeconds)
     const [warning, setWarning] = useState("")
-    async function getVerCodeInner() {
+    async function getVerCodeInner(event) {
+        event.preventDefault();
         if (totalSeconds <= 0) {
             var formData = new FormData(rq)
             setWarning("")
@@ -28,7 +29,8 @@ export default function ResetPwd() {
             }
         }
     }
-    async function resetPwdInner() {
+    async function resetPwdInner(event) {
+        event.preventDefault();
         var formData = new FormData(rq)
         const res = ResetPwdHandle(formData)
         if ((typeof res == "boolean") && res) {
@@ -65,12 +67,12 @@ export default function ResetPwd() {
                         <div className="w-full">
                             <input name="verCode" className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="off"/>
                         </div>
-                        <button className={"text_b w-44 " + ((totalSeconds == 0) ? null : "text-gray-300")} onClick={getVerCodeInner}>
+                        <button className={"text_b w-44 " + ((totalSeconds == 0) ? null : "text-gray-300")} onClick={e => getVerCodeInner(e)}>
                             {(totalSeconds == 0) ? "获取验证码" : totalSeconds + "s后再发送"}
                         </button>
                     </div>
                     <div className="bar text-red-500">{warning}</div>
-                    <button className=" self-end text_b" onClick={resetPwdInner}>重置密码</button>
+                    <button className=" self-end text_b" onClick={e => resetPwdInner(e)}>重置密码</button>
                 </form>
             </div>
         </main>
