@@ -3,7 +3,7 @@ import { useState } from "react";
 import { GetVerCode, ResetPwd } from "./actions";
 import { useTimer } from "react-timer-hook"
 
-export default function getVerCodeInner() {
+export default function ResetPwd() {
     const time = new Date();
     const {
         totalSeconds,
@@ -70,7 +70,7 @@ export default function getVerCodeInner() {
                         </button>
                     </div>
                     <div className="bar text-red-500">{warning}</div>
-                    <button className=" self-end text_b">重置密码</button>
+                    <button className=" self-end text_b" onClick={resetPwdInner}>重置密码</button>
                 </form>
             </div>
         </main>
