@@ -58,7 +58,7 @@ export default function getVerCodeInner() {
                     </div>
                     <div className="bar">
                         <label className="title">密码</label>
-                        <div className="w-full"><input name="pwd" maxLength={15} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" autoComplete="off" required /></div>
+                        <div className="w-full"><input name="pwd" maxLength={15} className="w-full border border-gray-400  px-2 py-1 text-gray-700" type="password" minLength="6" autoComplete="off" required /></div>
                     </div>
                     <div className="bar">
                         <label className="title">验证码</label>
