@@ -14,7 +14,7 @@ export default function Refresh() {
                     router.replace("/login")
             }
         }
-        if (!(pathname == "/login" || pathname == "/register")) {
+        if (!(pathname == "/login" || pathname == "/register" || pathname == "/reset-pwd")) {
             refresh()
         }
     }, [])
