@@ -110,7 +110,6 @@ export function Invitation({ Permission, CircleId }) {
                         <form className="h-full flex items-center gap-2" id="chooseKind">
                             <label>选择职位</label>
                             <select name="kind">
-                                <option value={1}>普通成员</option>
                                 <option value={2}>创作者</option>
                                 {Permission == "4" ? <option value={3}>管理</option> : null}
                             </select>

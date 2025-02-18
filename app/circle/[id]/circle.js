@@ -16,6 +16,10 @@ function TimestampToDate(timestamp) {
     return date.toLocaleDateString()
 }
 
+function AgencyMark(){
+    return <div className=" bg-slate-400 border-slate-400 border-2 rounded text-slate-100">社团被代理</div>
+}
+
 export function Circle_c({ Content, VideoInitialDisplay }) {
     const [position, setPosition] = useState(0)
     return (
@@ -25,6 +29,7 @@ export function Circle_c({ Content, VideoInitialDisplay }) {
                     <div className="flex flex-auto justify-start items-end h-full gap-4">
                         <img className="h-12 w-12 rounded-full" src={Content.avatar} />
                         <div>{Content.name}</div>
+                        <div>{Content.agency ? <AgencyMark/> : null}</div>
                     </div>
                     <Subscribe Cid={Content.id} Relation={Content.relation} />
                 </div>

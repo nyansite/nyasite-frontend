@@ -26,7 +26,7 @@ export default async function Page({ params }) {
                 var membersDisplay = members.others.map((i) => {
                     switch (i.Permission) {
                         case 1:
-                            var permissionDisplay = "普通成员"; break
+                            var permissionDisplay = "代理"; break
                         case 2:
                             var permissionDisplay = "创作者"; break
                         case 3:

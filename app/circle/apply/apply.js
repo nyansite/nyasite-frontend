@@ -36,6 +36,9 @@ export function Apply_c({ Token }) {
         }else if (formData.get("type") == null){
             alert("没有选择类别")
             return
+        }else if (formData.get("agency") == null){
+            alert("没有选择是否代为管理社团")
+            return
         }else if(avatarUrl == ""){
             alert("没有输入头像")
             return
@@ -60,7 +63,7 @@ export function Apply_c({ Token }) {
             <form className=" w-full flex flex-col gap-6" id="application">
                 <div className="bar items-center">
                     <div className="title">社团名称</div>
-                    <input name="name" maxLength={25} className="w-3/4 border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="invaild"/>
+                    <input name="name" maxLength={25} className="w-3/4 border border-gray-400  px-2 py-1 text-gray-700" type="text" autoComplete="invaild" required/>
                 </div>
                 <div className="bar">
                     <div className="title">简介</div>
@@ -82,8 +85,15 @@ export function Apply_c({ Token }) {
                     </div>
                 </div>
                 <div className="bar items-center">
+                    <div className="title">代为管理社团</div>
+                    <input id="yes" name="agency" value={true} type="radio" required/>
+                    <label>是</label>
+                    <input id="no" name="agency" value={false} type="radio"/>
+                    <label>否</label>
+                </div>
+                <div className="bar items-center">
                     <div className="title">类型</div>
-                    <input id="video" name="type" value="video" type="checkbox" />
+                    <input id="video" name="type" value="video" type="checkbox" required/>
                     <label for="video">视频</label>
                     <input id="music" name="type" value="music" type="checkbox" />
                     <label for="music">音乐</label>
