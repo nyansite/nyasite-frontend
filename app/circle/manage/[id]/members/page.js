@@ -74,7 +74,7 @@ export default async function Page({ params }) {
                                     <div className="text-lg text-gray-500 truncate">{members.self.Name}</div>
                                 </div>
                                 <div className="flex items-center h-full gap-2">
-                                    {permission == "4" || permission == "3" ? null : <Quit Cid={id}/>}
+                                    {permission == "4" || permission == "1" ? null : <Quit Cid={id}/>}
                                 </div>
                             </div>
                         </div>
