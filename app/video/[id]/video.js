@@ -1,7 +1,7 @@
 "use client"
 import { useLayoutEffect, useState, useRef, useEffect } from "react";
 
-import { HandThumbUpIcon, BookmarkIcon,XMarkIcon } from "@heroicons/react/24/outline";
+import { HandThumbUpIcon, BookmarkIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import { NPlayer } from "./nplayer.ts";
 import { Popover } from "nplayer";
@@ -243,9 +243,9 @@ export function Author({ Author }) {
     }
     return (
         <div className=" flex justify-start items-center h-full gap-2">
-            <a className=" h-full" href={"/circle/"+Author.Id}><img src={Author.Avatar} className=" h-full" /></a>
+            <a className=" h-full" href={"/circle/" + Author.Id}><img src={Author.Avatar} className=" h-full" /></a>
             <div className="flex flex-col justify-between flex-nowrap h-full">
-                <a className="flex justify-start w-full text-xl" href={"/circle/"+Author.Id}>{Author.Name}</a>
+                <a className="flex justify-start w-full text-xl" href={"/circle/" + Author.Id}>{Author.Name}</a>
                 {subscribeDisplay}
             </div>
         </div>
@@ -265,17 +265,28 @@ const modalStyles = {
     },
 };
 
+export function Tags({ tags }) {
+    const tagsItems = tags.map(i => 
+        <a href={"/search?tags="+i.text+";&text="} className="border" key={i.id}>
+            <div className=" m-1">{i.text}</div>
+        </a>
+    )
+    return <div className=" flex justify-items-center h-8 items-center gap-2 w-full">
+        {tagsItems}
+    </div>
+}
+
 export function Withdraw({ Vid }) {
     const [isOpen, setIsOpen] = useState(false)
     const router = useRouter()
-    async function withdraw(){
+    async function withdraw() {
         var formData = new FormData(input)
-        formData.append("vid",Vid)
+        formData.append("vid", Vid)
         const resStauts = await WithdrawVideoFunc(formData)
-        if(resStauts == 200){
+        if (resStauts == 200) {
             alert("撤回成功")
             router.push("/")
-        }else{
+        } else {
             alert("撤回失败")
         }
     }
