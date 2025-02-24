@@ -35,7 +35,7 @@ export default async function Page() {
         var messages = data.messages.map((i) => {
             switch (i.Kind) {
                 case 0:
-                    return <div className="h-9 flex flex-auto items-center text-lg" key={i.Id}><div>{i.ReciverName + " 加入 " + i.CircleName}</div></div>
+                    return <div className="h-9 flex flex-auto items-center text-lg" key={i.Id}><div>{i.ReciverName + " 关注 " + i.CircleName}</div></div>
                 case 3:
                 case 4:
                 case 5:
