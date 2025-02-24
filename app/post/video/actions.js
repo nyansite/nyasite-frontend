@@ -9,7 +9,7 @@ function get_header() {
 }
 
 export async function UploadCoverFunc(formData) {
-	const res = await fetch('https://picui.cn/api/v1/upload', {
+	const res = await fetch('https://www.helloimg.com/api/v1/upload', {
         method: 'POST',
         credentials: 'omit',
         body: formData,

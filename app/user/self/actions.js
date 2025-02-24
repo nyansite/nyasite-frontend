@@ -9,13 +9,13 @@ function get_header() {
 }
 
 export async function UploadAvatar(formData) {
-	const resPICUItoken = await fetch("http://localhost:8000/api/get_PICUI_token", { headers:{cookie:get_header().cookie} })
-	if (resPICUItoken.status != 200) {
+	const resHELLOIMGtoken = await fetch("http://localhost:8000/api/get_HELLOIMG_token", { headers:{cookie:get_header().cookie} })
+	if (resHELLOIMGtoken.status != 200) {
 		alert("获取图床token出错")
 	}
-	const token = await resPICUItoken.text()
+	const token = await resHELLOIMGtoken.text()
 	formData.append("token", token)
-	const res = await fetch('https://picui.cn/api/v1/upload', {
+	const res = await fetch('https://www.helloimg.com/api/v1/upload', {
         method: 'POST',
         credentials: 'omit',
         body: formData,

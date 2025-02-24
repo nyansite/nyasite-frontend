@@ -18,22 +18,22 @@ export default async function Page() {
 	switch (res.status) {
 		case 200:
 			const list = await res.json();
-			const resPICUItoken = await fetch("http://localhost:8000/api/get_PICUI_token", { headers: get_header() })
+			const resHELLOIMGtoken = await fetch("http://localhost:8000/api/get_HELLOIMG_token", { headers: get_header() })
 			const resTagList = await fetch("http://localhost:8000/api/taglist", { headers: get_header() })
 			if (resTagList.status != 200) {
 				return (
 					<a href="/post/video">获取标签列表出现错误</a>
 				)
-			} else if (resPICUItoken.status != 200) {
+			} else if (resHELLOIMGtoken.status != 200) {
 				return (
 					<a href="/post/video">获取图床token出现错误</a>
 				)
 			} else {
-				const PICUItoken = await resPICUItoken.text()
+				const HELLOIMGtoken = await resHELLOIMGtoken.text()
 				const taglistJSON = await resTagList.json()
 				return (
 					<main>
-						<Post_c Token={PICUItoken} TagList={taglistJSON.results} CircleList={list.circles} />
+						<Post_c Token={HELLOIMGtoken} TagList={taglistJSON.results} CircleList={list.circles} />
 					</main>
 				)
 			}
