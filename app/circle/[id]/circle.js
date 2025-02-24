@@ -168,7 +168,7 @@ function Works({ Content, Id }) {
                     <img src={i.CoverPath} className="w-full rounded" />
                 </a>
                 <a className=" w-full" href={"/video/" + i.Id}>{i.Title}</a>
-                <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views - 1}</div></div>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views}</div></div>
                 <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4" /><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
             </div>
         )

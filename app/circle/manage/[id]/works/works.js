@@ -32,7 +32,7 @@ function WorksDisplay({Content ,Id,Permission}){
             </a>
             <div className="flex flex-col flex-auto h-full">
                 <a href={"/video/" + i.Id} className=" w-full">{i.Title}</a>
-                <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views - 1}</div></div>
+                <div className="flex gap-1 w-full text-gray-400 items-center"><PlayCircleIcon className="h-4 w-4" /><div className=" w-full truncate">{i.Views}</div></div>
                 <div className="flex gap-1 w-full text-gray-400 items-center"><ClockIcon className="h-4 w-4" /><div className=" w-full truncate">{TimestampToDate(i.CreatedAt)}</div></div>
             </div>
             <div className="justify-self-end flex items-center">
