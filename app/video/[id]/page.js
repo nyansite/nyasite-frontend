@@ -33,7 +33,8 @@ export default async function Page({ params }) {
             const resVideo = await fetch("http://localhost:8000/api/get_video_link/" + data.videoUid, { headers: get_header() })
             const videoLink = await resVideo.text()
             const resTags = await fetch("http://localhost:8000/api/get_video_tags/"+id ,{ headers: get_header()})
-            const tags = await resTags.json()
+            let tags
+            if (resTags.status == 200){tags = await resTags.json()}
             return (
                 <main className=" flex flex-col items-center gap-4">
                     <div className=" flex w-10/12 gap-4 h-12 justify-between my-8">
@@ -54,7 +55,7 @@ export default async function Page({ params }) {
                     <div className='flex w-10/12 justify-between my-6'>
                         <div className=' flex flex-col w-3/4 gap-8'>
                             <LikeBar Vid={id} Likes={data.likes} IsLiked={data.isLiked} Marks={data.marks} IsMarked={data.isMarked} />
-                            <Tags tags={tags.tags}/>
+                            {resTags.status == 200 ? <Tags tags={tags.tags}/>: null}
                             <Descrption Desc={data.description} />
                             {userRes.status == 200 ? <CommentPost Vid={id} User={user} /> : null}
                             {userRes.status == 200 && parseInt(user.level/16) >= 9 ? <Withdraw Vid={id}/>:null }
