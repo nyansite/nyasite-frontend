@@ -9,7 +9,7 @@ function get_header() {
 }
 
 export async function UploadAvatarFunc(formData) {
-	const res = await fetch('https://www.helloimg.com/api/v1upload', {
+	const res = await fetch('https://www.helloimg.com/api/v1/upload', {
         method: 'POST',
         credentials: 'omit',
         body: formData,
